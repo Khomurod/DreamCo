@@ -41,8 +41,6 @@
             color: #2563EB; /* Blue-600 */
         }
 
-        /* REMOVED: All .search-tab styles are gone. */
-
     </style>
 
     <!-- User-provided script (Required by Travelpayouts) -->
@@ -118,28 +116,24 @@
             </div>
         </section>
 
-        <!-- ========== NEW TRAVELPAYOUTS WIDGET SECTION ========== -->
-        <!-- This block is where you will paste your code from Travelpayouts. -->
-        <!-- The negative margin pulls it up to overlap the hero section slightly. -->
+        <!-- ========== TRAVELPAYOUTS WIDGET SECTION ========== -->
         <section class="relative z-20 -mt-24">
             <div class="container mx-auto px-4 max-w-5xl">
                 
                 <!-- 
-                  FIX: Removed padding (p-4) and added overflow-hidden.
-                  This makes the white card "shrink-wrap" the widget and
-                  forces the widget's corners to match the card's rounded shape.
+                  Container for the Travelpayouts Widget.
+                  - bg-white: Makes the background white.
+                  - shadow-2xl: Adds the floating shadow effect.
+                  - rounded-2xl: Matches the rounding of other elements.
+                  - w-full mx-auto: Centers it and makes it responsive.
+                  - overflow-hidden: Crucial for clipping the widget to the rounded corners.
+                  - NO PADDING: Ensures the widget fills the container edge-to-edge.
                 -->
                 <div id="travelpayouts-widget-container" class="bg-white shadow-2xl rounded-2xl w-full mx-auto overflow-hidden">
                     
-                    <!-- 
-                    ***************************************************
-                    * *
-                    * TRAVELPAYOUTS WIDGET SCRIPT PLACED HERE     *
-                    * *
-                    ***************************************************
-                    -->
+                    <!-- TRAVELPAYOUTS WIDGET SCRIPT -->
                     <script async src="https://tpwdg.com/content?currency=uzs&trs=468304&shmarker=679985&show_hotels=true&powered_by=true&locale=ru&searchUrl=www.aviasales.ru%2Fsearch&primary_override=%2332a8dd&color_button=%2332a8dd&color_icons=%2332a8dd&dark=%23262626&light=%23FFFFFF&secondary=%23FFFFFF&special=%23C4C4C4&color_focused=%2332a8dd&border_radius=0&plain=false&promo_id=7879&campaign_id=100" charset="utf-8"></script>
-
+                    <!-- END TRAVELPAYOUTS WIDGET SCRIPT -->
 
                 </div>
             </div>
@@ -147,7 +141,6 @@
 
         
         <!-- ========== SERVICES SECTION ========== -->
-        <!-- Added pt-16 to give space from the search block above -->
         <section id="services" class="pt-16 md:pt-32 pb-20 md:pb-32 bg-white">
             <div class="container mx-auto px-4 text-center">
                 <span class="text-blue-600 font-semibold uppercase" data-lang-key="servicesTitle">Our Services</span>
@@ -184,7 +177,7 @@
         
         
         <!-- ========== DESTINATIONS SECTION ========== -->
-        <section id="destinations" class="py-20 md:py-32 bg-gray-100"> <!-- Body bg is gray-100 now -->
+        <section id="destinations" class="py-20 md:py-32 bg-gray-100">
             <div class="container mx-auto px-4">
                 <span class="text-blue-600 font-semibold uppercase block text-center" data-lang-key="destTitle">Top Selling</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-center mt-2 mb-12" data-lang-key="destHeading">Popular Destinations</h2>
@@ -683,7 +676,8 @@
 
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                    // FIX: Check if entry and entry.target exist before accessing properties
+                    if (entry && entry.target && entry.isIntersecting && entry.intersectionRatio > 0.5) { 
                         const id = entry.target.id;
                         navLinksBottom.forEach(link => {
                             link.classList.remove('active', 'text-blue-600', 'font-bold');
@@ -705,7 +699,10 @@
             }, { threshold: 0.5 }); // 50% of the section must be visible
 
             sections.forEach(section => {
-                observer.observe(section);
+                 // FIX: Check if section exists before observing
+                 if (section) {
+                    observer.observe(section);
+                 }
             });
         });
         
