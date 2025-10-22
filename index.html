@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Page Title -->
-    <title>DreamCo Travel Agency - Sizning keyingi sarguzashtingiz</title>
+    <!-- Page Title (Will be updated by JS) -->
+    <title>DreamCo Travel Agency</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,7 +13,8 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Playfair Display for headings, Inter for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/lucide.min.js" onload="initLucideIcons()"></script>
@@ -21,94 +22,138 @@
     <style>
         body { 
             font-family: 'Inter', sans-serif; 
-            -webkit-font-smoothing: antialiased; /* Smoother fonts on WebKit */
-            -moz-osx-font-smoothing: grayscale; /* Smoother fonts on Firefox */
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale; 
+            background-color: #f5f5f4; /* stone-100 */
+            color: #303030; /* Dark Charcoal */
         }
-        /* Full viewport height hero */
-        .hero-section { min-height: 100vh; display: flex; align-items: center; } 
-        /* Styling for the header when scrolled */
-        .header-scrolled {
-            background-color: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07); /* Softer shadow */
-            padding-top: 0.75rem; /* Slightly reduced padding */
-            padding-bottom: 0.75rem;
+        /* Define heading font */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
         }
+        /* Custom Teal color */
+        .text-teal { color: #00798C; }
+        .bg-teal { background-color: #00798C; }
+        .hover\:bg-teal-dark:hover { background-color: #005f6e; } /* Darker teal for hover */
+        .border-teal { border-color: #00798C; }
+        .ring-teal:focus { --tw-ring-color: #00798C; }
+
+        /* Custom Sand color */
+        .bg-sand { background-color: #EDE7D9; }
+        .bg-light-sand { background-color: #f5f5f4; } /* stone-100 */
+
+        /* Custom Charcoal color */
+        .text-charcoal { color: #303030; }
+        .bg-charcoal { background-color: #303030; }
+
+
+        .hero-section { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; } 
         
-        /* Styles for the active language button INSIDE dropdown */
-        .lang-dropdown-btn.active {
-            font-weight: 700; /* Bold */
-            color: #2563EB; /* Blue-600 */
-            background-color: #EFF6FF; /* Blue-50 */
+        /* Header Styling */
+        #header { transition: all 0.3s ease-in-out; }
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(10px); 
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding-top: 0.5rem; 
+            padding-bottom: 0.5rem;
         }
-        /* Style for active button in bottom nav */
-        .bottom-nav-link.active {
-            color: #2563EB; /* Blue-600 */
+        .header-scrolled .nav-link { color: #303030; } /* Charcoal text */
+        .header-scrolled .nav-link:hover { color: #00798C; } /* Teal hover */
+        .header-scrolled #logo-container { color: #303030; } /* Charcoal logo text/container */
+        .header-scrolled #lang-globe-button { color: #4b5563; } /* gray-600 */
+        .header-scrolled #lang-globe-button:hover { color: #00798C; } /* Teal hover */
+        
+        /* Language Dropdown */
+        .lang-dropdown-btn.active { font-weight: 600; color: #00798C; background-color: #e0f2fe; /* sky-100 */}
+        
+        /* Bottom Nav Active State */
+        .bottom-nav-link.active > span { font-weight: 600; color: #00798C; }
+        .bottom-nav-link.active > img { /* Teal filter */
+            filter: brightness(0) saturate(100%) invert(35%) sepia(98%) saturate(1450%) hue-rotate(155deg) brightness(95%) contrast(101%);
         }
-        /* Subtle text shadow for better readability on images */
+
         .text-shadow { text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+
+        .bottom-nav-link { /* Ensure vertical centering */
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            text-align: center; flex-grow: 1; padding-top: 0.375rem; padding-bottom: 0.25rem;
+        }
+        .bottom-nav-link > img { margin-bottom: 0.125rem; }
+
+        /* Card Styling */
+        .content-card {
+            background-color: white; border-radius: 0.75rem; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden; /* Ensure image corners are clipped */
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+         /* Style date input placeholder color */
+        input[type="date"]:not(:valid) { color: #9ca3af; }
+        input[type="date"] { color: #303030; }
+
+        /* Angled Section Divider (Example using clip-path) */
+        .angled-top {
+            clip-path: polygon(0 0, 100% 4%, 100% 100%, 0% 100%);
+            margin-top: -4%; /* Adjust overlap based on angle */
+            padding-top: 6%; /* Add padding to compensate for clipped area */
+        }
+         .angled-bottom {
+             clip-path: polygon(0 0, 100% 0, 100% 96%, 0% 100%);
+             padding-bottom: 6%; 
+             margin-bottom: -4%; 
+         }
 
     </style>
 
-    <!-- User-provided script (Required by Travelpayouts) -->
+    <!-- Travelpayouts Helper Script -->
     <script data-noptimize="1" data-cfasync="false" data-wpfc-render="false">
-      (function () {
-         var script = document.createElement("script");
-         script.async = 1;
-         script.src = 'https://emrldco.com/NDY4MzA0.js?t=468304';
-         document.head.appendChild(script);
-       })();
+      (function () { var script = document.createElement("script"); script.async = 1; script.src = 'https://emrldco.com/NDY4MzA0.js?t=468304'; document.head.appendChild(script); })();
     </script>
 </head>
-<body class="bg-slate-50 text-gray-800 pb-16 md:pb-0"> <!-- Use softer slate-50 -->
+<body class="bg-light-sand text-charcoal pb-16 md:pb-0"> 
 
     
     <!-- ========== HEADER ========== -->
-    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 p-4 md:p-6">
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 p-6 md:p-8"> 
         <div class="container mx-auto px-4 flex justify-between items-center">
             
-            <!-- Logo -->
-            <a href="#home" class="flex items-center space-x-2 text-2xl font-extrabold text-white transition-colors duration-300" id="logo-text">
-                <img src="https://i.postimg.cc/N0try4Lt/images.png" alt="DreamCo Travel Agency Logo" class="h-10 w-auto">
+            <a href="#home" class="flex items-center space-x-2 text-2xl font-extrabold text-white transition-colors duration-300" id="logo-container">
+                <img src="https://i.postimg.cc/63BwFBhW/bf5230f7-ea09-4a86-92d7-f1de75b77307-removalai-preview.png" alt="DreamCo Travel Agency Logo" 
+                     id="header-logo" class="w-auto transition-all duration-300 ease-in-out h-20"> 
             </a>
             
-            <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" id="nav-link-1" data-lang-key="navHome">Home</a>
-                <a href="#services" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" id="nav-link-2" data-lang-key="navServices">Services</a>
-                <a href="#destinations" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" id="nav-link-3" data-lang-key="navDestinations">Destinations</a>
-                <a href="#about" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" id="nav-link-4" data-lang-key="navAbout">About</a>
-                <a href="#contact" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" id="nav-link-5" data-lang-key="navContact">Contact</a>
+                <a href="#home" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navHome"></a>
+                <a href="#services" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navServices"></a>
+                <a href="#destinations" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navDestinations"></a>
+                <a href="#about" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navAbout"></a>
+                <a href="#contact" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navContact"></a>
             </nav>
             
             <div class="flex items-center space-x-4">
-                <!-- CTA Button (Desktop) -->
-                <a href="#contact" class="hidden md:inline-block bg-white text-blue-600 font-bold py-2.5 px-5 rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-md transform hover:scale-105" id="nav-cta" data-lang-key="navQuote">
-                    Get a Quote
-                </a>
+                <a href="#contact" class="hidden md:inline-block bg-white text-teal font-bold py-2.5 px-5 rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-md transform hover:scale-105" id="nav-cta" data-lang-key="navQuote"></a>
 
-                 <!-- NEW: Globe Language Selector -->
-                <div class="relative" id="language-selector">
-                    <!-- Globe Button - UPDATED with SVG -->
-                    <button id="lang-globe-button" type="button" class="lang-globe-btn text-gray-300 hover:text-white focus:outline-none transition-colors duration-300 p-2 rounded-full hover:bg-white/10">
-                        <!-- Replaced Lucide icon with inline SVG -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 block"> <!-- Use block display -->
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="2" y1="12" x2="22" y2="12"></line>
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                 <div class="relative" id="language-selector">
+                    <button id="lang-globe-button" type="button" class="lang-globe-btn text-gray-300 hover:text-white focus:outline-none transition-colors duration-300 p-2 rounded-full hover:bg-white/10 focus:ring-2 focus:ring-white/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 block"> 
+                            <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                         </svg>
-                        <span class="sr-only">Select Language</span>
+                        <span class="sr-only" data-lang-key="selectLang"></span>
                     </button>
-                    <!-- Language Dropdown -->
-                    <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-28 bg-white rounded-md shadow-lg py-1 z-[60]"> <!-- Increased z-index -->
-                        <button onclick="selectLanguage('ru')" data-lang-btn="ru" class="lang-dropdown-btn text-left w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 transition-colors">
+                    <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 z-[60]"> 
+                        <button onclick="selectLanguage('ru')" data-lang-btn="ru" class="lang-dropdown-btn text-left w-full px-4 py-2 text-sm text-gray-700 hover:bg-sky-50 transition-colors">
                             Русский
                         </button>
-                        <button onclick="selectLanguage('uz')" data-lang-btn="uz" class="lang-dropdown-btn text-left w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 transition-colors">
+                        <button onclick="selectLanguage('uz')" data-lang-btn="uz" class="lang-dropdown-btn text-left w-full px-4 py-2 text-sm text-gray-700 hover:bg-sky-50 transition-colors">
                             O'zbekcha
                         </button>
                     </div>
                 </div>
-                <!-- End Globe Language Selector -->
             </div>
         </div>
     </header>
@@ -116,161 +161,130 @@
     <main>
         
         <!-- ========== HERO SECTION ========== -->
-        <section id="home" class="hero-section relative text-center text-white p-4 overflow-hidden">
+        <section id="home" class="hero-section relative text-white p-4">
             
-            <!-- Background Image -->
             <img src="https://i.postimg.cc/xTRKKBDT/Getty-Images-1267262818.avif" alt="Scenic tropical beach view" class="absolute inset-0 w-full h-full object-cover z-0">
-            <!-- Dimming Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-black/30 z-0"></div> 
+            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent z-0"></div> 
             
-            <!-- Main Content Container (Centered Vertically and Horizontally) -->
-            <div class="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center h-full pt-16 md:pt-0"> <!-- Added padding top for mobile -->
+            <div class="relative z-10 container mx-auto px-4 flex flex-col items-start justify-center h-full text-left pt-24 md:pt-0 max-w-7xl"> 
                 
                 <!-- Main Text Box -->
-                <div class="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 mb-8 md:mb-10 max-w-3xl w-full text-shadow shadow-xl">
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight" data-lang-key="heroTitle">
-                        Discover Your Next Adventure
-                    </h1>
-                    <p class="text-lg md:text-xl text-gray-100 mb-8 max-w-xl mx-auto leading-relaxed" data-lang-key="heroSubtitle">
-                        We curate personalized, unforgettable travel experiences just for you. Let's plan your dream trip.
-                    </p>
-                    <a href="#destinations" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 text-lg rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg transform hover:scale-105" data-lang-key="heroButton">
-                        Start Exploring
-                    </a>
+                <div class="max-w-xl md:max-w-2xl mb-8 md:mb-10 text-shadow">
+                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold mb-5 leading-tight" data-lang-key="heroTitle"></h1>
+                    <p class="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed" data-lang-key="heroSubtitle"></p>
+                    <a href="#destinations" class="inline-block bg-teal text-white font-semibold py-3 px-8 text-lg rounded-lg hover:bg-teal-dark transition-all duration-300 shadow-lg transform hover:scale-105" data-lang-key="heroButton"></a>
                 </div>
 
                 <!-- Travelpayouts Widget Container -->
-                 <div id="travelpayouts-widget-container" class="bg-white/90 backdrop-blur-md rounded-2xl w-full max-w-4xl overflow-hidden shadow-2xl mt-4 md:mt-0"> 
+                 <div id="travelpayouts-widget-container" class="bg-white/95 backdrop-blur-lg rounded-xl w-full max-w-4xl overflow-hidden shadow-2xl mt-4 md:mt-2"> 
                     <!-- TRAVELPAYOUTS WIDGET SCRIPT -->
-                    <script async src="https://tpwdg.com/content?currency=uzs&trs=468304&shmarker=679985&show_hotels=true&powered_by=true&locale=ru&searchUrl=www.aviasales.ru%2Fsearch&primary_override=%2332a8dd&color_button=%2332a8dd&color_icons=%2332a8dd&dark=%23262626&light=%23FFFFFF&secondary=%23FFFFFF&special=%23C4C4C4&color_focused=%2332a8dd&border_radius=0&plain=false&promo_id=7879&campaign_id=100" charset="utf-8"></script>
-                    <!-- END TRAVELPAYOUTS WIDGET SCRIPT -->
+                    <script async src="https://tpwdg.com/content?currency=uzs&trs=468304&shmarker=679985&show_hotels=true&powered_by=true&locale=ru&searchUrl=www.aviasales.ru%2Fsearch&primary_override=%2300798C&color_button=%2300798C&color_icons=%2300798C&dark=%23303030&light=%23FFFFFF&secondary=%23f5f5f4&special=%23C4C4C4&color_focused=%2300798C&border_radius=8&plain=false&promo_id=7879&campaign_id=100" charset="utf-8"></script> <!-- Updated colors and radius -->
                 </div>
             </div>
         </section>
 
         
         <!-- ========== SERVICES SECTION ========== -->
-        <section id="services" class="py-24 md:py-32 bg-white"> 
+        <section id="services" class="py-24 md:py-32 bg-white angled-bottom"> 
             <div class="container mx-auto px-4 text-center">
-                <span class="text-blue-600 font-semibold uppercase tracking-wider text-sm" data-lang-key="servicesTitle">Our Services</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-16" data-lang-key="servicesHeading">What We Offer</h2>
+                <span class="text-teal font-semibold uppercase tracking-wider text-sm" data-lang-key="servicesTitle"></span>
+                <h2 class="text-3xl md:text-5xl font-bold mt-2 mb-16 text-charcoal" data-lang-key="servicesHeading"></h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
                     
-                    <!-- Service Card 1 -->
-                    <div class="bg-slate-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i data-lucide="plane" class="w-8 h-8"></i></div>
-                        <h3 class="text-xl font-semibold mb-3" data-lang-key="service1Title">Airline Tickets</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed" data-lang-key="service1Desc">Access to the best deals and flexible booking options worldwide.</p>
+                    <div class="text-center p-6 md:p-8">
+                        <div class="bg-teal/10 text-teal w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i data-lucide="plane" class="w-9 h-9"></i></div>
+                        <h3 class="text-xl font-semibold mb-3 text-charcoal" data-lang-key="service1Title"></h3>
+                        <p class="text-gray-600 text-sm leading-relaxed" data-lang-key="service1Desc"></p>
                     </div>
-                    
-                    <!-- Service Card 2 -->
-                    <div class="bg-slate-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i data-lucide="bed-double" class="w-8 h-8"></i></div>
-                        <h3 class="text-xl font-semibold mb-3" data-lang-key="service2Title">Hotel Bookings</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed" data-lang-key="service2Desc">Handpicked hotels from cozy boutiques to luxury resorts.</p>
+                    <div class="text-center p-6 md:p-8">
+                        <div class="bg-teal/10 text-teal w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i data-lucide="bed-double" class="w-9 h-9"></i></div>
+                        <h3 class="text-xl font-semibold mb-3 text-charcoal" data-lang-key="service2Title"></h3>
+                        <p class="text-gray-600 text-sm leading-relaxed" data-lang-key="service2Desc"></p>
                     </div>
-                    
-                    <!-- Service Card 3 -->
-                    <div class="bg-slate-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i data-lucide="map" class="w-8 h-8"></i></div>
-                        <h3 class="text-xl font-semibold mb-3" data-lang-key="service3Title">Custom Tours</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed" data-lang-key="service3Desc">Tailor-made itineraries based on your unique interests and budget.</p>
+                    <div class="text-center p-6 md:p-8">
+                        <div class="bg-teal/10 text-teal w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i data-lucide="map" class="w-9 h-9"></i></div>
+                        <h3 class="text-xl font-semibold mb-3 text-charcoal" data-lang-key="service3Title"></h3>
+                        <p class="text-gray-600 text-sm leading-relaxed" data-lang-key="service3Desc"></p>
                     </div>
-                    
-                    <!-- Service Card 4 -->
-                    <div class="bg-slate-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i data-lucide="stamp" class="w-8 h-8"></i></div>
-                        <h3 class="text-xl font-semibold mb-3" data-lang-key="service4Title">Visa Support</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed" data-lang-key="service4Desc">Hassle-free visa application and processing assistance.</p>
+                    <div class="text-center p-6 md:p-8">
+                        <div class="bg-teal/10 text-teal w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i data-lucide="stamp" class="w-9 h-9"></i></div>
+                        <h3 class="text-xl font-semibold mb-3 text-charcoal" data-lang-key="service4Title"></h3>
+                        <p class="text-gray-600 text-sm leading-relaxed" data-lang-key="service4Desc"></p>
                     </div>
-                    
                 </div>
             </div>
         </section>
-        
         
         <!-- ========== DESTINATIONS SECTION ========== -->
-        <section id="destinations" class="py-24 md:py-32 bg-slate-50"> 
+        <section id="destinations" class="py-24 md:py-32 bg-light-sand angled-top angled-bottom"> 
             <div class="container mx-auto px-4">
-                <span class="text-blue-600 font-semibold uppercase tracking-wider text-sm block text-center" data-lang-key="destTitle">Top Selling</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-center mt-2 mb-16" data-lang-key="destHeading">Popular Destinations</h2>
+                <span class="text-teal font-semibold uppercase tracking-wider text-sm block text-center" data-lang-key="destTitle"></span>
+                <h2 class="text-3xl md:text-5xl font-bold text-center mt-2 mb-16 text-charcoal" data-lang-key="destHeading"></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
                     
-                    <!-- Destination Card 1 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:scale-[1.03]">
-                        <img src="https://i.postimg.cc/W4fF9PXT/be58b45467e405834a6582f6f245f750.jpg" alt="Dubai skyline" class="w-full h-60 object-cover">
+                    <div class="content-card">
+                        <img src="https://i.postimg.cc/W4fF9PXT/be58b45467e405834a6582f6f245f750.jpg" alt="Dubai skyline" class="w-full h-64 object-cover">
                         <div class="p-6">
-                            <span class="text-xs text-gray-500 uppercase tracking-wider font-medium" data-lang-key="dest1Country">United Arab Emirates</span>
-                            <h3 class="text-2xl font-bold mt-1 mb-3" data-lang-key="dest1City">Dubai</h3>
-                            <p class="text-gray-600 mb-5 text-sm leading-relaxed" data-lang-key="dest1Desc">Experience the future with stunning architecture and luxury shopping.</p>
-                            <a href="#contact" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 group text-sm" data-lang-key="bookNow">
-                                Book Now 
+                            <span class="text-xs text-gray-500 uppercase tracking-wider font-medium" data-lang-key="dest1Country"></span>
+                            <h3 class="text-2xl font-bold text-charcoal mt-1 mb-3" data-lang-key="dest1City"></h3>
+                            <p class="text-gray-600 mb-5 text-sm leading-relaxed" data-lang-key="dest1Desc"></p>
+                            <a href="#contact" class="inline-flex items-center text-teal font-semibold hover:text-teal-dark group text-sm" data-lang-key="bookNow"> 
                                 <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"></i>
                             </a>
                         </div>
                     </div>
-                    
-                    <!-- Destination Card 2 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:scale-[1.03]">
-                        <img src="https://i.postimg.cc/4x6jbf4w/domina-coral-bay-03.jpg" alt="Sharm el-Sheikh beach" class="w-full h-60 object-cover">
+                    <div class="content-card">
+                        <img src="https://i.postimg.cc/4x6jbf4w/domina-coral-bay-03.jpg" alt="Sharm el-Sheikh beach" class="w-full h-64 object-cover">
                          <div class="p-6">
-                            <span class="text-xs text-gray-500 uppercase tracking-wider font-medium" data-lang-key="dest2Country">Egypt</span>
-                            <h3 class="text-2xl font-bold mt-1 mb-3" data-lang-key="dest2City">Sharm el-Sheikh</h3>
-                            <p class="text-gray-600 mb-5 text-sm leading-relaxed" data-lang-key="dest2Desc">Discover ancient wonders and vibrant coral reefs by the Red Sea.</p>
-                             <a href="#contact" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 group text-sm" data-lang-key="bookNow">
-                                Book Now 
+                            <span class="text-xs text-gray-500 uppercase tracking-wider font-medium" data-lang-key="dest2Country"></span>
+                            <h3 class="text-2xl font-bold text-charcoal mt-1 mb-3" data-lang-key="dest2City"></h3>
+                            <p class="text-gray-600 mb-5 text-sm leading-relaxed" data-lang-key="dest2Desc"></p>
+                             <a href="#contact" class="inline-flex items-center text-teal font-semibold hover:text-teal-dark group text-sm" data-lang-key="bookNow"> 
                                 <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"></i>
                             </a>
                         </div>
                     </div>
-                    
-                    <!-- Destination Card 3 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:scale-[1.03]">
-                        <img src="https://i.postimg.cc/dVVVgx77/nyachang-foto-shutterstock-2048x1152.webp" alt="Nha Trang coast" class="w-full h-60 object-cover">
+                    <div class="content-card">
+                        <img src="https://i.postimg.cc/dVVVgx77/nyachang-foto-shutterstock-2048x1152.webp" alt="Nha Trang coast" class="w-full h-64 object-cover">
                         <div class="p-6">
-                            <span class="text-xs text-gray-500 uppercase tracking-wider font-medium" data-lang-key="dest3Country">Vietnam</span>
-                            <h3 class="text-2xl font-bold mt-1 mb-3" data-lang-key="dest3City">Nha Trang</h3>
-                            <p class="text-gray-600 mb-5 text-sm leading-relaxed" data-lang-key="dest3Desc">Relax on pristine beaches and explore lush tropical islands.</p>
-                             <a href="#contact" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 group text-sm" data-lang-key="bookNow">
-                                Book Now 
+                            <span class="text-xs text-gray-500 uppercase tracking-wider font-medium" data-lang-key="dest3Country"></span>
+                            <h3 class="text-2xl font-bold text-charcoal mt-1 mb-3" data-lang-key="dest3City"></h3>
+                            <p class="text-gray-600 mb-5 text-sm leading-relaxed" data-lang-key="dest3Desc"></p>
+                             <a href="#contact" class="inline-flex items-center text-teal font-semibold hover:text-teal-dark group text-sm" data-lang-key="bookNow"> 
                                 <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"></i>
                             </a>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </section>
         
-        
         <!-- ========== ABOUT SECTION ========== -->
-        <section id="about" class="py-24 md:py-32 bg-white">
+        <section id="about" class="py-24 md:py-32 bg-white angled-top angled-bottom">
             <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
                 <div class="pr-0 md:pr-10 order-2 md:order-1">
-                    <span class="text-blue-600 font-semibold uppercase tracking-wider text-sm" data-lang-key="aboutTitle">Why Choose Us</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6" data-lang-key="aboutHeading">Your Trusted Travel Partner</h2>
-                    <p class="text-gray-600 text-lg mb-10 leading-relaxed" data-lang-key="aboutDesc">
-                        With over 8 years of experience, we are dedicated to crafting the perfect journey for you. Our mission is to make travel accessible, comfortable, and truly memorable. We handle all the details so you can focus on making memories.
-                    </p>
+                    <span class="text-teal font-semibold uppercase tracking-wider text-sm" data-lang-key="aboutTitle"></span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-charcoal mt-2 mb-6" data-lang-key="aboutHeading"></h2>
+                    <p class="text-gray-600 text-lg mb-10 leading-relaxed" data-lang-key="aboutDesc"></p>
                     <ul class="space-y-6">
                         <li class="flex items-start">
-                            <div class="bg-blue-100 text-blue-600 w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1 shadow-sm"><i data-lucide="award" class="w-5 h-5"></i></div>
+                            <div class="bg-teal/10 text-teal w-10 h-10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0 mt-0.5 shadow-sm"><i data-lucide="award" class="w-5 h-5"></i></div>
                             <div>
-                                <h4 class="font-semibold text-lg mb-1" data-lang-key="aboutPoint1">8+ Years of Expertise</h4>
+                                <h4 class="font-semibold text-lg mb-1 text-charcoal" data-lang-key="aboutPoint1"></h4>
                                 <p class="text-gray-500 text-sm leading-relaxed">Deep knowledge in crafting perfect trips.</p>
                             </div>
                         </li>
                         <li class="flex items-start">
-                           <div class="bg-blue-100 text-blue-600 w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1 shadow-sm"><i data-lucide="user-check" class="w-5 h-5"></i></div>
+                           <div class="bg-teal/10 text-teal w-10 h-10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0 mt-0.5 shadow-sm"><i data-lucide="user-check" class="w-5 h-5"></i></div>
                             <div>
-                                <h4 class="font-semibold text-lg mb-1" data-lang-key="aboutPoint2">Personalized Service</h4>
+                                <h4 class="font-semibold text-lg mb-1 text-charcoal" data-lang-key="aboutPoint2"></h4>
                                 <p class="text-gray-500 text-sm leading-relaxed">Dedicated support tailored to your needs.</p>
                            </div>
                         </li>
                         <li class="flex items-start">
-                           <div class="bg-blue-100 text-blue-600 w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1 shadow-sm"><i data-lucide="tag" class="w-5 h-5"></i></div>
+                           <div class="bg-teal/10 text-teal w-10 h-10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0 mt-0.5 shadow-sm"><i data-lucide="tag" class="w-5 h-5"></i></div>
                            <div>
-                                <h4 class="font-semibold text-lg mb-1" data-lang-key="aboutPoint3">Best Price Guarantee</h4>
+                                <h4 class="font-semibold text-lg mb-1 text-charcoal" data-lang-key="aboutPoint3"></h4>
                                 <p class="text-gray-500 text-sm leading-relaxed">Competitive pricing for your dream vacation.</p>
                            </div>
                         </li>
@@ -282,507 +296,5 @@
             </div>
         </section>
         
-        
         <!-- ========== TESTIMONIALS SECTION ========== -->
-        <section id="testimonials" class="py-24 md:py-32 bg-slate-50">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" data-lang-key="testimonialHeading">What Our Clients Say</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-                    
-                    <!-- Testimonial Card 1 -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg relative transition-shadow duration-300 hover:shadow-xl flex flex-col">
-                        <div class="absolute top-0 left-8 -mt-6 bg-blue-500 text-white rounded-full p-3 shadow-md">
-                           <i data-lucide="quote" class="w-6 h-6 fill-current text-white"></i>
-                        </div>
-                        <p class="text-gray-600 italic text-md mb-6 pt-8 leading-relaxed flex-grow" data-lang-key="testimonial1Text">"The trip to Dubai was perfectly organized..."</p>
-                        <div class="flex items-center border-t border-gray-100 pt-5 mt-auto">
-                            <img src="https://i.postimg.cc/3RFM836z/li-traveler-touring-beach-pdp.webp" alt="Aziza S." class="w-12 h-12 rounded-full mr-4 object-cover shadow-sm flex-shrink-0">
-                            <h4 class="font-semibold text-md" data-lang-key="testimonial1Name">Aziza S. & Family</h4>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial Card 2 -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg relative transition-shadow duration-300 hover:shadow-xl flex flex-col">
-                         <div class="absolute top-0 left-8 -mt-6 bg-blue-500 text-white rounded-full p-3 shadow-md">
-                           <i data-lucide="quote" class="w-6 h-6 fill-current text-white"></i>
-                        </div>
-                        <p class="text-gray-600 italic text-md mb-6 pt-8 leading-relaxed flex-grow" data-lang-key="testimonial2Text">"We took a last-minute tour to Egypt, and it was a great value!..."</p>
-                         <div class="flex items-center border-t border-gray-100 pt-5 mt-auto">
-                            <img src="https://i.postimg.cc/PxhcFBJs/scale-1200.jpg" alt="Rustam K." class="w-12 h-12 rounded-full mr-4 object-cover shadow-sm flex-shrink-0">
-                            <h4 class="font-semibold text-md" data-lang-key="testimonial2Name">Rustam K.</h4>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial Card 3 -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg relative transition-shadow duration-300 hover:shadow-xl flex flex-col">
-                         <div class="absolute top-0 left-8 -mt-6 bg-blue-500 text-white rounded-full p-3 shadow-md">
-                           <i data-lucide="quote" class="w-6 h-6 fill-current text-white"></i>
-                        </div>
-                        <p class="text-gray-600 italic text-md mb-6 pt-8 leading-relaxed flex-grow" data-lang-key="testimonial3Text">"I love their custom tours. I've seen so many unusual places..."</p>
-                         <div class="flex items-center border-t border-gray-100 pt-5 mt-auto">
-                            <img src="https://i.postimg.cc/d0cSLz8T/a0nro22epgggc00w48swk44o0.jpg" alt="Olga V." class="w-12 h-12 rounded-full mr-4 object-cover shadow-sm flex-shrink-0">
-                            <h4 class="font-semibold text-md" data-lang-key="testimonial3Name">Olga V.</h4>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
         
-        
-        <!-- ========== CONTACT SECTION ========== -->
-        <section id="contact" class="py-24 md:py-32 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto text-center mb-16">
-                    <span class="text-blue-600 font-semibold uppercase tracking-wider text-sm" data-lang-key="contactTitle">Get in Touch</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mt-2" data-lang-key="contactHeading">Plan Your Dream Trip Today</h2>
-                    <p class="text-gray-600 text-lg mt-4 max-w-2xl mx-auto leading-relaxed" data-lang-key="contactDesc">
-                        Ready to book or have questions? Fill out the form below or contact us directly. Our team is excited to help you plan your next unforgettable journey.
-                    </p>
-                </div>
-                <div class="max-w-4xl mx-auto bg-slate-50 p-8 md:p-12 rounded-xl shadow-xl overflow-hidden">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
-                        
-                        <!-- Contact Info -->
-                        <div class="space-y-6">
-                            <h3 class="text-2xl font-bold mb-4" data-lang-key="contactInfoHeading">Contact Information</h3>
-                            <!-- NOTE: Add your real contact info here -->
-                            <a href="tel:+998971234567" class="flex items-center group">
-                                <i data-lucide="phone" class="w-5 h-5 text-blue-600 mr-3 flex-shrink-0"></i>
-                                <span class="text-gray-700 group-hover:text-blue-600 transition">+998 (97) 123-45-67</span>
-                            </a>
-                            <a href="mailto:info@dreamco.com" class="flex items-center group">
-                                <i data-lucide="mail" class="w-5 h-5 text-blue-600 mr-3 flex-shrink-0"></i>
-                                <span class="text-gray-700 group-hover:text-blue-600 transition">info@dreamco.com</span>
-                            </a>
-                            <div class="flex items-start">
-                                <i data-lucide="map-pin" class="w-5 h-5 text-blue-600 mr-3 flex-shrink-0 mt-1"></i>
-                                <span class="text-gray-700" data-lang-key="contactAddress">123 Travel St, Tashkent, Uzbekistan</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Contact Form -->
-                        <!-- NOTE: Add your Formspree URL to the 'action' attribute -->
-                        <form action="https://formspree.io/f/YOUR_UNIQUE_FORM_ID" method="POST" class="space-y-5">
-                            
-                            <div>
-                                <label for="name" class="sr-only" data-lang-key="formName">Your Name *</label>
-                                <input type="text" id="name" name="name" required class="w-full p-3.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 text-sm" data-lang-placeholder="phName">
-                            </div>
-                            
-                            <div>
-                                <label for="phone" class="sr-only" data-lang-key="formPhone">Your Phone *</label>
-                                <input type="tel" id="phone" name="phone" required class="w-full p-3.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 text-sm" data-lang-placeholder="phPhone">
-                            </div>
-                            
-                            <div>
-                                <label for="email" class="sr-only" data-lang-key="formEmail">Your Email</label>
-                                <input type="email" id="email" name="email" class="w-full p-3.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 text-sm" data-lang-placeholder="phEmail">
-                            </div>
-
-                            <div>
-                                <label for="destination" class="sr-only" data-lang-key="formDestination">Desired Destination</label>
-                                <select id="destination" name="destination" class="w-full p-3.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-500 text-sm appearance-none" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 20 20%27 fill=%27none%27 stroke=%27%236b7280%27 stroke-width=%271.5%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpath d=%27M6 8l4 4 4-4%27/%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.25em 1.25em;">
-                                    <option value="" data-lang-key="formDestOption0">Select a destination</option>
-                                    <option value="Dubai, UAE" data-lang-key="formDestOption1" class="text-gray-900">Dubai, UAE</option>
-                                    <option value="Sharm el-Sheikh, Egypt" data-lang-key="formDestOption2" class="text-gray-900">Sharm el-Sheikh, Egypt</option>
-                                    <option value="Nha Trang, Vietnam" data-lang-key="formDestOption3" class="text-gray-900">Nha Trang, Vietnam</option>
-                                    <option value="Istanbul, Turkey" data-lang-key="formDestOption4" class="text-gray-900">Istanbul, Turkey</option>
-                                    <option value="Other" data-lang-key="formDestOption5" class="text-gray-900">Other (specify below)</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label for="date" class="sr-only" data-lang-key="formDate">Approximate Date</label>
-                                <input type="date" id="date" name="date" class="w-full p-3.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-500 text-sm" min="2024-01-01" placeholder="Approximate Date">
-                            </div>
-                            
-                            <div>
-                                <label for="message" class="sr-only" data-lang-key="formMessage">Additional Information</label>
-                                <textarea id="message" name="message" rows="4" class="w-full p-3.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 text-sm" data-lang-placeholder="phMessage"></textarea>
-                            </div>
-                            
-                            <div>
-                                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-8 text-md rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg transform hover:scale-[1.02]" data-lang-key="formButton">
-                                    Send Booking Request
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    
-    <!-- ========== FOOTER ========== -->
-    <footer class="bg-gray-800 text-gray-300 py-16">
-        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-10">
-            <div class="md:col-span-2 lg:col-span-1">
-                <a href="#home" class="flex items-center space-x-2 text-2xl font-extrabold text-white mb-4">
-                    <!-- YOUR LOGO -->
-                    <img src="https://i.postimg.cc/N0try4Lt/images.png" alt="DreamCo Travel Agency Footer Logo" class="h-10 w-auto">
-                </a>
-                <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="footerDesc">Crafting your unforgettable travel stories. Your adventure starts here.</p>
-            </div>
-            
-            <div class="lg:col-start-2">
-                <h5 class="font-semibold text-white text-md mb-4 uppercase tracking-wider" data-lang-key="footerLinks">Quick Links</h5>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#services" class="hover:text-white transition text-gray-400 hover:text-white" data-lang-key="navServices">Services</a></li>
-                    <li><a href="#destinations" class="hover:text-white transition text-gray-400 hover:text-white" data-lang-key="navDestinations">Destinations</a></li>
-                    <li><a href="#about" class="hover:text-white transition text-gray-400 hover:text-white" data-lang-key="navAbout">About Us</a></li>
-                    <li><a href="#contact" class="hover:text-white transition text-gray-400 hover:text-white" data-lang-key="navContact">Contact</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h5 class="font-semibold text-white text-md mb-4 uppercase tracking-wider" data-lang-key="footerContact">Contact Us</h5>
-                <!-- NOTE: Add your real contact info here -->
-                <ul class="space-y-2 text-sm text-gray-400">
-                    <li data-lang-key="contactAddress">123 Travel St, Tashkent</li>
-                    <li>+998 (97) 123-45-67</li>
-                    <li>info@dreamco.com</li>
-                </ul>
-            </div>
-            
-            <div>
-                <h5 class="font-semibold text-white text-md mb-4 uppercase tracking-wider" data-lang-key="footerFollow">Follow Us</h5>
-                <div class="flex space-x-3">
-                    <a href="#" class="w-9 h-9 bg-gray-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4 text-white"></i></a>
-                    <a href="#" class="w-9 h-9 bg-gray-700 hover:bg-sky-500 rounded-full flex items-center justify-center transition" aria-label="Twitter"><i data-lucide="twitter" class="w-4 h-4 text-white"></i></a>
-                    <a href="#" class="w-9 h-9 bg-gray-700 hover:bg-pink-600 rounded-full flex items-center justify-center transition" aria-label="Instagram"><i data-lucide="instagram" class="w-4 h-4 text-white"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="container mx-auto px-4 text-center text-gray-500 border-t border-gray-700 mt-12 pt-8 text-xs" data-lang-key="footerRights">
-            © 2025 DreamCo Travel Agency. All rights reserved.
-        </div>
-    </footer>
-    
-    
-    <!-- ========== MOBILE BOTTOM NAVIGATION (WITH CUSTOM ICONS) ========== -->
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-100 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
-        <div class="flex justify-around items-stretch max-w-xl mx-auto h-16"> <!-- Use items-stretch -->
-            <!-- Nav Item 1: Home -->
-            <a href="#home" class="bottom-nav-link flex flex-col items-center justify-center text-gray-600 hover:text-blue-600 w-full pt-1.5 pb-1" data-nav-section="home"> <!-- Adjusted padding -->
-                <img src="https://i.postimg.cc/KzggWvq2/home.png" alt="" class="w-5 h-5 mb-0.5"> <!-- Added alt="" for decorative images -->
-                <span class="text-xs font-medium" data-lang-key="navHome">Home</span>
-            </a>
-            <!-- Nav Item 2: Services -->
-            <a href="#services" class="bottom-nav-link flex flex-col items-center justify-center text-gray-600 hover:text-blue-600 w-full pt-1.5 pb-1" data-nav-section="services"> 
-                <img src="https://i.postimg.cc/pVC2HMgS/tourist.png" alt="" class="w-5 h-5 mb-0.5">
-                <span class="text-xs font-medium" data-lang-key="navServices">Services</span>
-            </a>
-            <!-- Nav Item 3: Destinations -->
-            <a href="#destinations" class="bottom-nav-link flex flex-col items-center justify-center text-gray-600 hover:text-blue-600 w-full pt-1.5 pb-1" data-nav-section="destinations"> 
-                <img src="https://i.postimg.cc/7LSktF1H/plane.png" alt="" class="w-5 h-5 mb-0.5">
-                <span class="text-xs font-medium" data-lang-key="navDestinations">Destinations</span>
-            </a>
-            <!-- Nav Item 4: About -->
-            <a href="#about" class="bottom-nav-link flex flex-col items-center justify-center text-gray-600 hover:text-blue-600 w-full pt-1.5 pb-1" data-nav-section="about"> 
-                <img src="https://i.postimg.cc/DwXkm9Mq/information-button.png" alt="" class="w-5 h-5 mb-0.5">
-                <span class="text-xs font-medium" data-lang-key="navAbout">About</span>
-            </a>
-            <!-- Nav Item 5: Contact (Main CTA) -->
-            <a href="#contact" class="bottom-nav-link flex flex-col items-center justify-center text-blue-600 hover:text-blue-700 w-full pt-1.5 pb-1" data-nav-section="contact"> 
-                <img src="https://i.postimg.cc/QC9S035p/calculatoe.png" alt="" class="w-5 h-5 mb-0.5">
-                <span class="text-xs font-bold" data-lang-key="navQuote">Get a Quote</span>
-            </a>
-        </div>
-    </nav>
-
-    
-    <!-- ========== JAVASCRIPT LOGIC ========== -->
-    <script>
-        // --- TEXT TRANSLATIONS ---
-        const translations = {
-            "ru": { /* ... Your Russian Translations ... */ 
-                "title": "DreamCo Travel Agency - Ваше следующее приключение", "navHome": "Главная", "navServices": "Услуги", "navDestinations": "Направления", "navAbout": "О нас", "navContact": "Контакты", "navQuote": "Расчет", "heroTitle": "Откройте свое следующее приключение", "heroSubtitle": "Мы создаем персонализированные, незабываемые путешествия специально для вас. Давайте спланируем поездку вашей мечты.", "heroButton": "Начать исследование", "servicesTitle": "Наши услуги", "servicesHeading": "Что мы предлагаем", "service1Title": "Авиабилеты", "service1Desc": "Доступ к лучшим предложениям и гибким вариантам бронирования по всему миру.", "service2Title": "Бронирование отелей", "service2Desc": "Тщательно отобранные отели от уютных бутиков до роскошных курортов.", "service3Title": "Индивидуальные туры", "service3Desc": "Индивидуальные маршруты, основанные на ваших уникальных интересах и бюджете.", "service4Title": "Визовая поддержка", "service4Desc": "Помощь в оформлении виз и обработке документов без лишних хлопот.", "destTitle": "Лидеры продаж", "destHeading": "Популярные направления", "dest1Country": "Объединенные Арабские Эмираты", "dest1City": "Дубай", "dest1Desc": "Ощутите будущее благодаря потрясающей архитектуре и роскошному шопингу.", "dest2Country": "Египет", "dest2City": "Шарм-эль-Шейх", "dest2Desc": "Откройте для себя древние чудеса и яркие коралловые рифы у Красного моря.", "dest3Country": "Вьетнам", "dest3City": "Нячанг", "dest3Desc": "Отдохните на нетронутых пляжах и исследуйте пышные тропические острова.", "bookNow": "Забронировать", "aboutTitle": "Почему мы", "aboutHeading": "Ваш надежный партнер", "aboutDesc": "Имея более 8 лет опыта, мы стремимся создать для вас идеальное путешествие. Наша миссия - сделать путешествия доступными, комфортными и по-настоящему запоминающимися. Мы берем на себя все детали, чтобы вы могли сосредоточиться на создании воспоминаний.", "aboutPoint1": "8+ лет опыта", "aboutPoint2": "Персональный сервис", "aboutPoint3": "Гарантия лучшей цены", "testimonialHeading": "Что говорят наши клиенты", "testimonial1Text": "\"Поездка в Дубай была организована идеально. Большое спасибо DreamCo Travel Agency! Все было на высшем уровне: отель, экскурсии, трансферы. Мы еще вернемся!\"", "testimonial1Name": "Азиза С. и семья", "testimonial2Text": "\"Взяли горящий тур в Египет, и это было очень выгодно! Отель соответствовал описанию, море фантастическое. Настоятельно рекомендую.\"", "testimonial2Name": "Рустам К.", "testimonial3Text": "\"Обожаю их авторские туры. Увидела столько необычных мест, которых нет в путеводителях. Спасибо за профессионализм и индивидуальный подход!\"", "testimonial3Name": "Ольга В.", "contactTitle": "Свяжитесь с нами", "contactHeading": "Спланируйте поездку мечты сегодня", "contactInfoHeading": "Контактная информация", "contactDesc": "Готовы бронировать или есть вопросы? Заполните форму ниже или свяжитесь с нами напрямую. Наша команда с радостью поможет вам спланировать ваше следующее незабываемое путешествие.", "contactAddress": "ул. Саёхат, 123, Ташкент, Узбекистан", "formName": "Ваше имя *", "formPhone": "Ваш телефон *", "formEmail": "Ваш Email", "formDestination": "Желаемое направление", "formDate": "Примерная дата", "formMessage": "Дополнительная информация", "formButton": "Отправить заявку", "formDestOption0": "Выберите направление", "formDestOption1": "Дубай, ОАЭ", "formDestOption2": "Шарм-эль-Шейх, Египет", "formDestOption3": "Нячанг, Вьетнам", "formDestOption4": "Стамбул, Турция", "formDestOption5": "Другое (укажите ниже)", "phName": "Ваше имя", "phPhone": "Ваш телефон", "phEmail": "Ваш Email", "phMessage": "Сообщение (путешественники, бюджет...)", "footerDesc": "Создаем ваши незабываемые истории путешествий. Ваше приключение начинается здесь.", "footerLinks": "Ссылки", "footerContact": "Контакты", "footerFollow": "Следите за нами", "footerRights": "© 2025 DreamCo Travel Agency. Все права защищены."
-            },
-            "uz": { /* ... Your Uzbek Translations ... */ 
-                "title": "DreamCo Travel Agency - Sizning keyingi sarguzashtingiz", "navHome": "Bosh sahifa", "navServices": "Xizmatlar", "navDestinations": "Yo'nalishlar", "navAbout": "Biz haqimizda", "navContact": "Aloqa", "navQuote": "Narx olish", "heroTitle": "Keyingi sarguzashtingizni kashf eting", "heroSubtitle": "Biz siz uchun shaxsiylashtirilgan, unutilmas sayohat tajribalarini yaratamiz. Keling, orzuingizdagi sayohatni rejalashtiramiz.", "heroButton": "O'rganishni boshlash", "servicesTitle": "Bizning xizmatlarimiz", "servicesHeading": "Biz taklif qilamiz", "service1Title": "Aviachiptalar", "service1Desc": "Dunyo bo'ylab eng yaxshi takliflar va moslashuvchan bron qilish imkoniyatlari.", "service2Title": "Mehmonxonalar", "service2Desc": "Shinam butiklardan hashamatli kurortlargacha sinchkovlik bilan tanlangan mehmonxonalar.", "service3Title": "Individual turlar", "service3Desc": "Sizning noyob qiziqishlaringiz va byudjetingiz asosida tayyorlangan marshrutlar.", "service4Title": "Viza yordami", "service4Desc": "Viza olish uchun ariza berish va hujjatlarni rasmiylashtirishda muammosiz yordam.", "destTitle": "Eng ko'p sotiladigan", "destHeading": "Ommabop yo'nalishlar", "dest1Country": "Birlashgan Arab Amirliklari", "dest1City": "Dubay", "dest1Desc": "Ajoyib arxitektura va hashamatli xaridlar bilan kelajakni his eting.", "dest2Country": "Misr", "dest2City": "Sharm al-Shayx", "dest2Desc": "Qizil dengiz bo'yidagi qadimiy mo''jizalar va jonli marjon riflarini kashf eting.", "dest3Country": "Vetnam", "dest3City": "Nha Trang", "dest3Desc": "Totilmagan plyajlarda dam oling va yam-yashil tropik orollarni o'rganing.", "bookNow": "Bron qilish", "aboutTitle": "Nega bizni tanlaysiz", "aboutHeading": "Sizning ishonchli hamkoringiz", "aboutDesc": "8 yildan ortiq tajribaga ega bo'lgan holda, biz siz uchun mukammal sayohatni yaratishga bag'ishlanganmiz. Bizning vazifamiz sayohatni hamyonbop, qulay va haqiqatan ham unutilmas qilishdir. Xotiralar yaratishga e'tibor qaratishingiz uchun biz barcha tafsilotlarni hal qilamiz.", "aboutPoint1": "8+ yillik tajriba", "aboutPoint2": "Shaxsiy xizmat", "aboutPoint3": "Eng yaxshi narx kafolati", "testimonialHeading": "Mijozlarimiz nima deydi", "testimonial1Text": "\"Dubayga sayohat a'lo darajada tashkil etilgan. DreamCo Travel Agency'ga katta rahmat! Hammasi yuqori darajada edi: mehmonxona, ekskursiyalar, transferlar. Yana qaytamiz!\"", "testimonial1Name": "Aziza S. va oilasi", "testimonial2Text": "\"Misrga so'nggi daqiqada tur oldik va bu juda foydali bo'ldi! Mehmonxona tavsifga mos edi, dengiz ajoyib. Tavsiya qilaman.\"", "testimonial2Name": "Rustam K.", "testimonial3Text": "\"Ularning individual turlarini yaxshi ko'raman. Yo'lboshchilarda yo'q bo'lgan ko'plab g'ayrioddiy joylarni ko'rdim. Professionallik va individual yondashuv uchun rahmat!\"", "testimonial3Name": "Olga V.", "contactTitle": "Aloqada bo'ling", "contactHeading": "Orzuingizdagi sayohatni bugun rejalashtiring", "contactInfoHeading": "Aloqa ma'lumotlari", "contactDesc": "Bron qilishga tayyormisiz yoki savollaringiz bormi? Quyidagi shaklni to'ldiring yoki biz bilan bevosita bog'laning. Jamoamiz sizning keyingi unutilmas sayohatingizni rejalashtirishda yordam berishdan mamnun.", "contactAddress": "Sayohat ko'chasi, 123, Toshkent, O'zbekiston", "formName": "Ismingiz *", "formPhone": "Telefoningiz *", "formEmail": "Sizning Email", "formDestination": "Sayohat manzili", "formDate": "Taxminiy sana", "formMessage": "Qo'shimcha ma'lumot", "formButton": "So'rov yuborish", "formDestOption0": "Yo'nalishni tanlang", "formDestOption1": "Dubay, BAA", "formDestOption2": "Sharm al-Shayx, Misr", "formDestOption3": "Nha Trang, Vetnam", "formDestOption4": "Istanbul, Turkiya", "formDestOption5": "Boshqa (pastda ko'rsating)", "phName": "Ismingiz", "phPhone": "Telefoningiz", "phEmail": "Sizning Email", "phMessage": "Xabar (sayohatchilar, byudjet...)", "footerDesc": "Sizning unutilmas sayohat hikoyalaringizni yaratamiz. Sizning sarguzashtingiz shu yerdan boshlanadi.", "footerLinks": "Havolalar", "footerContact": "Aloqa", "footerFollow": "Bizni kuzatib boring", "footerRights": "© 2025 DreamCo Travel Agency. Barcha huquqlar himoyalangan."
-            }
-        };
-
-        // --- LANGUAGE CHANGER & SAVER FUNCTION ---
-        function selectLanguage(lang) {
-            changeLanguage(lang); // Update the UI
-            try { 
-                localStorage.setItem('preferredLang', lang); // Save the preference
-            } catch (e) {
-                 console.warn("Could not save language preference to localStorage:", e);
-            }
-        }
-
-        // --- CORE LANGUAGE UPDATE FUNCTION ---
-        function changeLanguage(lang) {
-            // Check if language exists and update HTML lang attribute
-            if (!translations[lang]) {
-                console.warn("Language not found:", lang); 
-                return;
-            }
-            document.documentElement.lang = lang;
-
-            // Update text content for elements with data-lang-key
-            document.querySelectorAll('[data-lang-key]').forEach(el => {
-                const key = el.dataset.langKey;
-                const translation = translations[lang][key];
-                if (translation !== undefined) {
-                    el.innerText = translation;
-                } else {
-                    console.warn(`Translation key "${key}" not found for language "${lang}"`);
-                }
-            });
-
-            // Update placeholder text for elements with data-lang-placeholder
-            document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
-                const key = el.dataset.langPlaceholder;
-                const translation = translations[lang][key];
-                 if (translation !== undefined) {
-                    el.placeholder = translation;
-                } else {
-                     console.warn(`Placeholder key "${key}" not found for language "${lang}"`);
-                }
-                 // Special handling for date input placeholder color
-                 el.classList.toggle('text-gray-500', el.type === 'date' && !el.value);
-            });
-            
-            // Update page title
-            if (translations[lang].title) {
-                document.title = translations[lang].title;
-            }
-
-            // Update "active" state for language buttons in DROPDOWN
-             const currentLang = document.documentElement.lang; 
-             document.querySelectorAll('#lang-dropdown .lang-dropdown-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.langBtn === currentLang);
-             });
-
-             // Close dropdown after selection
-             const dropdown = document.getElementById('lang-dropdown');
-             if (dropdown) dropdown.classList.add('hidden');
-        }
-
-        // --- ROBUST ICON INITIALIZATION ---
-        function initLucideIcons() {
-            setTimeout(() => { // Small delay can help ensure Lucide script is fully processed
-                if (typeof lucide !== 'undefined') {
-                    try {
-                        lucide.createIcons();
-                        // console.log("Lucide icons initialized."); // Optional: uncomment for debugging
-                    } catch (e) {
-                        console.error("Error creating Lucide icons:", e);
-                    }
-                } else {
-                    console.warn("Lucide library not ready, will retry icon initialization...");
-                    // Retry mechanism if Lucide is still not ready
-                    let retries = 5;
-                    const intervalId = setInterval(() => {
-                        if (typeof lucide !== 'undefined') {
-                             clearInterval(intervalId);
-                             initLucideIcons(); // Call itself again
-                        } else if (--retries === 0) {
-                            clearInterval(intervalId);
-                            console.error("Lucide failed to load after multiple retries.");
-                        }
-                    }, 300); // Increased interval
-                }
-            }, 100); // Increased initial delay
-        }
-        
-
-        // --- ALL INITIALIZATION CODE ---
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- SET INITIAL LANGUAGE ---
-             const savedLang = localStorage.getItem('preferredLang');
-             // Default to 'uz' if no valid language is saved
-             const initialLang = savedLang && translations[savedLang] ? savedLang : 'uz'; 
-             changeLanguage(initialLang); 
-
-             // --- GLOBE LANGUAGE DROPDOWN LOGIC ---
-             const globeButton = document.getElementById('lang-globe-button');
-             const langDropdown = document.getElementById('lang-dropdown');
-             const languageSelector = document.getElementById('language-selector'); // Parent container
-
-             if (globeButton && langDropdown && languageSelector) {
-                 globeButton.addEventListener('click', (event) => {
-                     event.stopPropagation(); 
-                     langDropdown.classList.toggle('hidden');
-                     // Ensure icons are created if dropdown opens, needed if Lucide loads late
-                     if (!langDropdown.classList.contains('hidden')) {
-                         initLucideIcons(); 
-                     }
-                 });
-
-                 // Close dropdown if clicking outside of it
-                 document.addEventListener('click', (event) => {
-                    // Check if the click target is outside the language selector entirely
-                    if (!languageSelector.contains(event.target)) {
-                         langDropdown.classList.add('hidden');
-                    }
-                 });
-
-                  // Add event listeners to dropdown buttons using the selectLanguage function
-                 langDropdown.querySelectorAll('.lang-dropdown-btn').forEach(button => {
-                    button.addEventListener('click', () => {
-                        const lang = button.getAttribute('data-lang-btn');
-                        selectLanguage(lang); // Use selectLanguage to change and save
-                    });
-                 });
-
-             } else {
-                  console.error("Language selector elements not found (globeButton, langDropdown, or language-selector).");
-             }
-             // --- END GLOBE LANGUAGE DROPDOWN LOGIC ---
-        
-            // --- HEADER STYLE ON SCROLL ---
-            const header = document.getElementById('header');
-            const logoText = document.getElementById('logo-text');
-            const navLinks = document.querySelectorAll('header nav a.nav-link'); 
-            const navCta = document.getElementById('nav-cta');
-            const langGlobeBtn = document.getElementById('lang-globe-button'); // Reference the globe button for color change
-
-            const checkScroll = () => {
-                 if (!header || !logoText || !navCta || !langGlobeBtn) {
-                      console.warn("Header elements missing for scroll effect.");
-                      return; 
-                 }
-
-                 const isScrolled = window.scrollY > 50;
-                 header.classList.toggle('header-scrolled', isScrolled);
-                 logoText.classList.toggle('text-white', !isScrolled);
-                 logoText.classList.toggle('text-gray-800', isScrolled);
-                 
-                 navLinks.forEach(link => {
-                     link.classList.toggle('text-white', !isScrolled);
-                     link.classList.toggle('hover:text-gray-200', !isScrolled);
-                     link.classList.toggle('text-gray-800', isScrolled);
-                     link.classList.toggle('hover:text-blue-600', isScrolled);
-                 });
-                 
-                 navCta.classList.toggle('bg-white', !isScrolled);
-                 navCta.classList.toggle('text-blue-600', !isScrolled);
-                 navCta.classList.toggle('hover:bg-gray-100', !isScrolled);
-                 navCta.classList.toggle('bg-blue-600', isScrolled);
-                 navCta.classList.toggle('text-white', isScrolled);
-                 navCta.classList.toggle('hover:bg-blue-700', isScrolled);
-                 
-                 // Toggle globe icon color
-                 langGlobeBtn.classList.toggle('text-gray-300', !isScrolled);
-                 langGlobeBtn.classList.toggle('hover:text-white', !isScrolled);
-                 langGlobeBtn.classList.toggle('text-gray-500', isScrolled); 
-                 langGlobeBtn.classList.toggle('hover:text-gray-700', isScrolled);
-            };
-            
-            // Debounce scroll listener for performance
-            let scrollTimeout;
-            window.addEventListener('scroll', () => {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(checkScroll, 15); // Slightly longer debounce
-            });
-            checkScroll(); // Run once on load
-
-
-            // --- ACTIVE LINK HIGHLIGHTING FOR BOTTOM NAV ---
-            const sections = document.querySelectorAll('main section[id]'); 
-            const navLinksBottom = document.querySelectorAll('.bottom-nav-link');
-
-            if (sections.length > 0 && navLinksBottom.length > 0) {
-                const observerOptions = {
-                    root: null, 
-                    rootMargin: '0px 0px -50% 0px', // Adjusted margin: Trigger when section enters top half
-                    threshold: 0 
-                };
-
-                let currentActiveSectionId = null; // Track currently "active" section
-
-                const observer = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                         // Consider section active if it's intersecting and near the top
-                         if (entry.isIntersecting && entry.boundingClientRect.top < window.innerHeight / 2) {
-                             currentActiveSectionId = entry.target.id;
-                         }
-                    });
-
-                    // Update nav links based on the determined active section
-                    navLinksBottom.forEach(link => {
-                        const sectionId = link.dataset.navSection;
-                        const isActive = sectionId === currentActiveSectionId;
-
-                        link.classList.toggle('active', isActive);
-                        link.classList.toggle('text-blue-600', isActive || sectionId === 'contact'); 
-                        link.classList.toggle('text-gray-600', !isActive && sectionId !== 'contact'); 
-                        
-                        // Font weight logic
-                        const isContactLink = sectionId === 'contact';
-                        link.classList.toggle('font-bold', isActive && !isContactLink); // Bold if active AND not contact
-                        link.classList.toggle('font-medium', !isActive || isContactLink); // Medium otherwise or if contact
-                        
-                        // Ensure contact link specifically only gets bold if its section is active
-                        if (isContactLink) {
-                             link.classList.toggle('font-bold', isActive);
-                        }
-                    });
-
-                }, observerOptions);
-
-                sections.forEach(section => {
-                    if (section && section.id) { 
-                        observer.observe(section);
-                    } else {
-                         console.warn("Section missing ID, cannot be observed for nav highlighting:", section);
-                    }
-                });
-                
-                // --- SMOOTH SCROLL FOR ALL INTERNAL LINKS ---
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
-                        const targetId = this.getAttribute('href');
-                        // Only prevent default if it's a valid internal anchor
-                        if (targetId && targetId.startsWith('#') && targetId.length > 1) { 
-                            e.preventDefault();
-                            const targetElement = document.querySelector(targetId);
-
-                            if (targetElement) {
-                                // Calculate offset considering dynamic header height
-                                const headerHeight = document.getElementById('header')?.offsetHeight || 64; // Fallback height
-                                const elementPosition = targetElement.getBoundingClientRect().top;
-                                const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20; // 20px buffer
-
-                                window.scrollTo({
-                                    top: offsetPosition < 0 ? 0 : offsetPosition, // Don't scroll above top
-                                    behavior: 'smooth'
-                                });
-                                 // Close language dropdown if open when clicking a link
-                                 document.getElementById('lang-dropdown')?.classList.add('hidden');
-                            } else {
-                                 console.warn(`Smooth scroll target not found: ${targetId}`);
-                            }
-                        }
-                    });
-                });
-
-
-            } else {
-                 console.warn("Could not find sections with IDs or bottom navigation links for observer.");
-            }
-
-            // --- Initialize Date Input Placeholders ---
-            document.querySelectorAll('input[type="date"]').forEach(el => {
-                el.classList.toggle('text-gray-500', !el.value);
-                // Add listener to update color on change
-                 el.addEventListener('change', () => {
-                     el.classList.toggle('text-gray-500', !el.value);
-                 });
-             });
-
-        }); // End DOMContentLoaded
-        
-    </script>
-
-</body>
-</html>
-
-
