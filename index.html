@@ -36,12 +36,18 @@
         .header-scrolled .lang-btn.active {
             color: #2563EB; /* Blue-600 */
         }
-        .mobile-menu .lang-btn.active {
-             color: #2563EB; /* Blue-600 */
+        /* Style for active button in new bottom nav */
+        .bottom-nav-link.active {
+            color: #2563EB; /* Blue-600 */
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<!-- 
+  CHANGE: Added padding-bottom (pb-16) for mobile to prevent
+  the new sticky bottom nav from covering content.
+  md:pb-0 removes this padding on desktop.
+-->
+<body class="bg-gray-50 text-gray-800 pb-16 md:pb-0">
 
     
     <!-- ========== HEADER ========== -->
@@ -69,39 +75,21 @@
                     Get a Quote
                 </a>
 
-                <!-- Language Switcher (Desktop) -->
-                <div id="lang-switcher-desktop" class="hidden md:flex items-center space-x-2 ml-6 text-gray-300">
+                <!-- 
+                  CHANGE: Language Switcher (Now visible on all sizes)
+                  Removed 'hidden' and 'md:flex'
+                -->
+                <div id="lang-switcher-desktop" class="flex items-center space-x-2 ml-4 text-gray-300">
                     <button onclick="changeLanguage('ru')" class="lang-btn" data-lang-btn="ru" id="lang-ru-desktop">RU</button>
                     <span>|</span>
                     <button onclick="changeLanguage('uz')" class="lang-btn" data-lang-btn="uz" id="lang-uz-desktop">UZ</button>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-white ml-4" aria-label="Open menu">
-                    <i data-lucide="menu" class="w-7 h-7"></i>
-                </button>
+                <!-- 
+                  CHANGE: Mobile Menu Button and Panel
+                  The entire hamburger menu and its dropdown panel have been removed.
+                -->
             </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-xl rounded-lg mx-4 mt-4 mobile-menu">
-            <nav class="flex flex-col p-4 space-y-2">
-                <a href="#home" class="text-gray-800 hover:bg-blue-50 rounded-lg p-3 font-medium" data-lang-key="navHome">Home</a>
-                <a href="#services" class="text-gray-800 hover:bg-blue-50 rounded-lg p-3 font-medium" data-lang-key="navServices">Services</a>
-                <a href="#destinations" class="text-gray-800 hover:bg-blue-50 rounded-lg p-3 font-medium" data-lang-key="navDestinations">Destinations</a>
-                <a href="#about" class="text-gray-800 hover:bg-blue-50 rounded-lg p-3 font-medium" data-lang-key="navAbout">About</a>
-                <a href="#contact" class="text-gray-800 hover:bg-blue-50 rounded-lg p-3 font-medium" data-lang-key="navContact">Contact</a>
-                <a href="#contact" class="bg-blue-600 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition mt-2" data-lang-key="navQuote">
-                    Get a Quote
-                </a>
-                
-                <!-- Language Switcher (Mobile) -->
-                <div id="lang-switcher-mobile" class="flex justify-center space-x-4 pt-4 mt-4 border-t border-gray-100 text-gray-700">
-                    <button onclick="changeLanguage('ru')" class="lang-btn font-medium hover:text-blue-600" data-lang-btn="ru" id="lang-ru-mobile">RU</button>
-                    <span>|</span>
-                    <button onclick="changeLanguage('uz')" class="lang-btn font-medium hover:text-blue-600" data-lang-btn="uz" id="lang-uz-mobile">UZ</button>
-                </div>
-            </nav>
         </div>
     </header>
 
@@ -233,7 +221,7 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang-key="testimonialHeading">What Our Clients Say</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial1Text">"The trip to Dubai was perfectly organized..."</p><div class="flex items-center"><img src="https://i.postimg.cc/3RFM836z/li-traveler-touring-beach-pdp.webp" alt="Aziza S." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial1Name">Aziza S. & Family</h4></div></div>
-                    <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial2Text">"We took a last-minute tour to Egypt, and it was a great value!..."</p><div class="flex items-center"><img src="https://i.postimg.cc/PxhcFBJs/scale-1200.jpg" alt="Rustam K." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial2Name">Rustam K.</h4></div></div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial2Text">"We took a last-minute tour to Egypt, and it was a great value!..."</p<div class="flex items-center"><img src="https://i.postimg.cc/PxhcFBJs/scale-1200.jpg" alt="Rustam K." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial2Name">Rustam K.</h4></div></div>
                     <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial3Text">"I love their custom tours. I've seen so many unusual places..."</p><div class="flex items-center"><img src="https://i.postimg.cc/d0cSLz8T/a0nro22epgggc00w48swk44o0.jpg" alt="Olga V." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial3Name">Olga V.</h4></div></div>
                 </div>
             </div>
@@ -361,6 +349,42 @@
     </footer>
     
     
+    <!-- 
+      ========== NEW MOBILE BOTTOM NAVIGATION ==========
+      This is the new "best practice" mobile navigation.
+      It only appears on small screens (md:hidden).
+    -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+        <div class="flex justify-around items-center max-w-xl mx-auto h-16">
+            <!-- Nav Item 1: Home -->
+            <a href="#home" class="bottom-nav-link flex flex-col items-center justify-center text-gray-600 hover:text-blue-600 w-full" data-nav-section="home">
+                <i data-lucide="home" class="w-5 h-5"></i>
+                <span class="text-xs font-medium" data-lang-key="navHome">Home</span>
+            </a>
+            <!-- Nav Item 2: Services -->
+            <a href="#services" class="bottom-nav-link flex flex-col items-center justify-center text-gray-600 hover:text-blue-600 w-full" data-nav-section="services">
+                <i data-lucide="briefcase" class="w-5 h-5"></i>
+                <span class="text-xs font-medium" data-lang-key="navServices">Services</span>
+            </a>
+            <!-- Nav Item 3: Destinations -->
+            <a href="#destinations" class="bottom-nav-link flex flex-col items-center justify-center text-gray-600 hover:text-blue-600 w-full" data-nav-section="destinations">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                <span class="text-xs font-medium" data-lang-key="navDestinations">Destinations</span>
+            </a>
+            <!-- Nav Item 4: About -->
+            <a href="#about" class="bottom-nav-link flex flex-col items-center justify-center text-gray-600 hover:text-blue-600 w-full" data-nav-section="about">
+                <i data-lucide="users" class="w-5 h-5"></i>
+                <span class="text-xs font-medium" data-lang-key="navAbout">About</span>
+            </a>
+            <!-- Nav Item 5: Contact (Main CTA) -->
+            <a href="#contact" class="bottom-nav-link flex flex-col items-center justify-center text-blue-600 hover:text-blue-700 w-full" data-nav-section="contact">
+                <i data-lucide="send" class="w-5 h-5"></i>
+                <span class="text-xs font-bold" data-lang-key="navQuote">Get a Quote</span>
+            </a>
+        </div>
+    </nav>
+
+    
     <!-- ========== JAVASCRIPT LOGIC ========== -->
     <script>
         // --- TEXT TRANSLATIONS ---
@@ -375,7 +399,7 @@
                 "navDestinations": "Направления",
                 "navAbout": "О нас",
                 "navContact": "Контакты",
-                "navQuote": "Получить расчет",
+                "navQuote": "Расчет",
                 "heroTitle": "Откройте свое следующее приключение",
                 "heroSubtitle": "Мы создаем персонализированные, незабываемые путешествия специально для вас. Давайте спланируем поездку вашей мечты.",
                 "heroButton": "Начать исследование",
@@ -554,12 +578,6 @@
                     btn.classList.add('active');
                 }
             });
-            
-            // 5. Close mobile menu on language selection
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu) {
-                mobileMenu.classList.add('hidden');
-            }
         }
 
         // --- ROBUST ICON INITIALIZATION ---
@@ -585,23 +603,6 @@
             // The site will load in Uzbek by default.
             changeLanguage('uz');
         
-            // --- MOBILE MENU TOGGLE ---
-            const menuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            if (menuButton && mobileMenu) {
-                menuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-                
-                // Close mobile menu when a nav link is clicked
-                mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileMenu.classList.add('hidden');
-                    });
-                });
-            }
-
             // --- HEADER STYLE ON SCROLL ---
             const header = document.getElementById('header');
             const logoText = document.getElementById('logo-text');
@@ -611,10 +612,9 @@
                 document.getElementById('nav-link-5')
             ];
             const navCta = document.getElementById('nav-cta');
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
             const langSwitcherDesktop = document.getElementById('lang-switcher-desktop');
 
-            if (header && logoText && navCta && mobileMenuButton && langSwitcherDesktop) {
+            if (header && logoText && navCta && langSwitcherDesktop) {
                 window.addEventListener('scroll', () => {
                     if (window.scrollY > 50) {
                         header.classList.add('header-scrolled');
@@ -628,8 +628,6 @@
                         });
                         navCta.classList.remove('bg-white', 'text-blue-600', 'hover:bg-gray-100');
                         navCta.classList.add('bg-blue-600', 'text-white', 'hover:bg-blue-700');
-                        mobileMenuButton.classList.remove('text-white');
-                        mobileMenuButton.classList.add('text-gray-800');
                         langSwitcherDesktop.classList.remove('text-gray-300');
                         langSwitcherDesktop.classList.add('text-gray-500');
                     } else {
@@ -644,13 +642,42 @@
                         });
                         navCta.classList.add('bg-white', 'text-blue-600', 'hover:bg-gray-100');
                         navCta.classList.remove('bg-blue-600', 'text-white', 'hover:bg-blue-700');
-                        mobileMenuButton.classList.add('text-white');
-                        mobileMenuButton.classList.remove('text-gray-800');
                         langSwitcherDesktop.classList.add('text-gray-300');
                         langSwitcherDesktop.classList.remove('text-gray-500');
                     }
                 });
             }
+            
+            // --- ACTIVE LINK HIGHLIGHTING FOR BOTTOM NAV ---
+            const sections = document.querySelectorAll('main section');
+            const navLinksBottom = document.querySelectorAll('.bottom-nav-link');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                        const id = entry.target.id;
+                        navLinksBottom.forEach(link => {
+                            link.classList.remove('active', 'text-blue-600', 'font-bold');
+                            link.classList.add('text-gray-600');
+                            if (link.dataset.navSection === id) {
+                                link.classList.add('active', 'text-blue-600');
+                                // Special style for the quote button
+                                if(id !== 'contact') {
+                                    link.classList.add('font-bold');
+                                }
+                            }
+                            // Keep quote button always blue
+                            if(link.dataset.navSection === 'contact') {
+                                link.classList.add('text-blue-600');
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.5 }); // 50% of the section must be visible
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
         });
         
     </script>
