@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- The <title> will also be set by JavaScript --><title>TravelCo - Your Next Adventure</title>
     
-    <!-- Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Page Title -->
+    <title>DreamCo Travel Agency - Sizning keyingi sarguzashtingiz</title>
     
-    <!-- Google Font: Inter --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     
-    <!-- Lucide Icons CDN --><!-- 
-      FIX: Added an 'onload' event listener.
-      This is the most robust way to ensure the 'lucide' object is defined
-      before we *ever* try to call initLucideIcons().
-    --><script src="https://unpkg.com/lucide@latest/dist/lucide.min.js" onload="initLucideIcons()"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/lucide.min.js" onload="initLucideIcons()"></script>
     
     <style>
         body { font-family: 'Inter', sans-serif; }
@@ -42,18 +43,19 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- ========== HEADER ========== --><header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 p-6">
+    
+    <!-- ========== HEADER ========== -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 p-6">
         <div class="container mx-auto px-4 flex justify-between items-center">
             
-            <!-- Logo Placeholder --><a href="#" class="flex items-center space-x-2 text-2xl font-extrabold text-white" id="logo-text">
-                <!-- 
-                  NOTE: ADD YOUR LOGO HERE 
-                  Replace this <i> and <span> with your <img> tag
-                  e.g. <img src="your-logo.png" alt="TravelCo" class="w-32">
-                --><!-- FIX: Replaced icon and text with your logo --><img src="https://i.postimg.cc/N0try4Lt/images.png" alt="DreamCo Travel Agency" class="h-10 w-auto">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-2 text-2xl font-extrabold text-white" id="logo-text">
+                <!-- YOUR LOGO -->
+                <img src="https://i.postimg.cc/N0try4Lt/images.png" alt="DreamCo Travel Agency" class="h-10 w-auto">
             </a>
             
-            <!-- Desktop Navigation --><nav class="hidden md:flex items-center space-x-8">
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8">
                 <a href="#home" class="text-white hover:text-gray-200 font-medium transition" id="nav-link-1" data-lang-key="navHome">Home</a>
                 <a href="#services" class="text-white hover:text-gray-200 font-medium transition" id="nav-link-2" data-lang-key="navServices">Services</a>
                 <a href="#destinations" class="text-white hover:text-gray-200 font-medium transition" id="nav-link-3" data-lang-key="navDestinations">Destinations</a>
@@ -62,23 +64,27 @@
             </nav>
             
             <div class="flex items-center">
-                <!-- Call to Action Button --><a href="#contact" class="hidden md:inline-block bg-white text-blue-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition shadow-md" id="nav-cta" data-lang-key="navQuote">
+                <!-- CTA Button (Desktop) -->
+                <a href="#contact" class="hidden md:inline-block bg-white text-blue-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition shadow-md" id="nav-cta" data-lang-key="navQuote">
                     Get a Quote
                 </a>
 
-                <!-- ========== LANGUAGE SWITCHER (Desktop) ========== --><div id="lang-switcher-desktop" class="hidden md:flex items-center space-x-2 ml-6 text-gray-300">
+                <!-- Language Switcher (Desktop) -->
+                <div id="lang-switcher-desktop" class="hidden md:flex items-center space-x-2 ml-6 text-gray-300">
                     <button onclick="changeLanguage('ru')" class="lang-btn" data-lang-btn="ru" id="lang-ru-desktop">RU</button>
                     <span>|</span>
                     <button onclick="changeLanguage('uz')" class="lang-btn" data-lang-btn="uz" id="lang-uz-desktop">UZ</button>
                 </div>
 
-                <!-- Mobile Menu Button --><!-- FIX: Replaced inline SVG with data-lucide for consistent loading --><button id="mobile-menu-button" class="md:hidden text-white ml-4" aria-label="Open menu">
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-white ml-4" aria-label="Open menu">
                     <i data-lucide="menu" class="w-7 h-7"></i>
                 </button>
             </div>
         </div>
         
-        <!-- Mobile Menu (Hidden by default) --><div id="mobile-menu" class="hidden md:hidden bg-white shadow-xl rounded-lg mx-4 mt-4 mobile-menu">
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-xl rounded-lg mx-4 mt-4 mobile-menu">
             <nav class="flex flex-col p-4 space-y-2">
                 <a href="#home" class="text-gray-800 hover:bg-blue-50 rounded-lg p-3 font-medium" data-lang-key="navHome">Home</a>
                 <a href="#services" class="text-gray-800 hover:bg-blue-50 rounded-lg p-3 font-medium" data-lang-key="navServices">Services</a>
@@ -89,7 +95,8 @@
                     Get a Quote
                 </a>
                 
-                <!-- ========== LANGUAGE SWITCHER (Mobile) ========== --><div id="lang-switcher-mobile" class="flex justify-center space-x-4 pt-4 mt-4 border-t border-gray-100 text-gray-700">
+                <!-- Language Switcher (Mobile) -->
+                <div id="lang-switcher-mobile" class="flex justify-center space-x-4 pt-4 mt-4 border-t border-gray-100 text-gray-700">
                     <button onclick="changeLanguage('ru')" class="lang-btn font-medium hover:text-blue-600" data-lang-btn="ru" id="lang-ru-mobile">RU</button>
                     <span>|</span>
                     <button onclick="changeLanguage('uz')" class="lang-btn font-medium hover:text-blue-600" data-lang-btn="uz" id="lang-uz-mobile">UZ</button>
@@ -99,15 +106,20 @@
     </header>
 
     <main>
-        <!-- ========== HERO SECTION ========== --><section id="home" class="hero-section relative flex items-center justify-center text-center text-white p-4">
-            <div class="absolute inset-0 bg-black opacity-50"></div>
+        
+        <!-- ========== HERO SECTION ========== -->
+        <section id="home" class="hero-section relative flex items-center justify-center text-center text-white p-4">
+            
+            <!-- Dimming Overlay -->
+            <div class="absolute inset-0 bg-black opacity-60"></div> 
             <img src="https://i.postimg.cc/xTRKKBDT/Getty-Images-1267262818.avif" alt="DreamCo Travel Agency Hero" class="absolute inset-0 w-full h-full object-cover">
             
-            <div class="relative z-10 max-w-3xl">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight shadow-text" data-lang-key="heroTitle">
+            <!-- Frosted Glass Text Box -->
+            <div class="relative z-10 max-w-3xl bg-black/30 backdrop-blur-md rounded-2xl p-8 md:p-12">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight" data-lang-key="heroTitle">
                     Discover Your Next Adventure
                 </h1>
-                <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-xl mx-auto" data-lang-key="heroSubtitle">
+                <p class="text-lg md:text-xl text-gray-100 mb-10 max-w-xl mx-auto" data-lang-key="heroSubtitle">
                     We curate personalized, unforgettable travel experiences just for you. Let's plan your dream trip.
                 </p>
                 <a href="#destinations" class="bg-blue-600 text-white font-bold py-4 px-10 text-lg rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg transform hover:scale-105" data-lang-key="heroButton">
@@ -116,7 +128,9 @@
             </div>
         </section>
 
-        <!-- ========== SERVICES SECTION ========== --><section id="services" class="py-20 md:py-32 bg-white">
+        
+        <!-- ========== SERVICES SECTION ========== -->
+        <section id="services" class="py-20 md:py-32 bg-white">
             <div class="container mx-auto px-4 text-center">
                 <span class="text-blue-600 font-semibold uppercase" data-lang-key="servicesTitle">Our Services</span>
                 <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-12" data-lang-key="servicesHeading">What We Offer</h2>
@@ -150,7 +164,9 @@
             </div>
         </section>
         
-        <!-- ========== POPULAR DESTINATIONS ========== --><section id="destinations" class="py-20 md:py-32 bg-gray-50">
+        
+        <!-- ========== DESTINATIONS SECTION ========== -->
+        <section id="destinations" class="py-20 md:py-32 bg-gray-50">
             <div class="container mx-auto px-4">
                 <span class="text-blue-600 font-semibold uppercase block text-center" data-lang-key="destTitle">Top Selling</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-center mt-2 mb-12" data-lang-key="destHeading">Popular Destinations</h2>
@@ -190,7 +206,9 @@
             </div>
         </section>
         
-        <!-- ========== WHY CHOOSE US (ABOUT) ========== --><section id="about" class="py-20 md:py-32 bg-white">
+        
+        <!-- ========== ABOUT SECTION ========== -->
+        <section id="about" class="py-20 md:py-32 bg-white">
             <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div class="pr-0 md:pr-10">
                     <span class="text-blue-600 font-semibold uppercase" data-lang-key="aboutTitle">Why Choose Us</span>
@@ -208,7 +226,9 @@
             </div>
         </section>
         
-        <!-- ========== TESTIMONIALS ========== --><section id="testimonials" class="py-20 md:py-32 bg-gray-50">
+        
+        <!-- ========== TESTIMONIALS SECTION ========== -->
+        <section id="testimonials" class="py-20 md:py-32 bg-gray-50">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang-key="testimonialHeading">What Our Clients Say</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -219,28 +239,31 @@
             </div>
         </section>
         
-        <!-- ========== CONTACT SECTION ========== --><section id="contact" class="py-20 md:py-32 bg-white">
+        
+        <!-- ========== CONTACT SECTION ========== -->
+        <section id="contact" class="py-20 md:py-32 bg-white">
             <div class="container mx-auto px-4">
                 <div class="max-w-6xl mx-auto bg-gray-50 p-8 md:p-12 rounded-xl shadow-2xl overflow-hidden">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                         
-                        <!-- Contact Info --><div>
+                        <!-- Contact Info -->
+                        <div>
                             <span class="text-blue-600 font-semibold uppercase" data-lang-key="contactTitle">Get in Touch</span>
                             <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6" data-lang-key="contactHeading">Plan Your Dream Trip</h2>
                             <p class="text-gray-600 text-lg mb-8" data-lang-key="contactDesc">
                                 Have questions or ready to book? Fill out the form or contact us directly. Our team is excited to help you plan your next unforgettable journey.
                             </p>
                             <div class="space-y-4">
-                                <!-- Contact info is static, but you could add data-lang-keys if needed --><a href="tel:+998971234567" class="flex items-center group"><i data-lucide="phone" class="w-5 h-5 text-blue-600 mr-3"></i><span class="text-gray-700 group-hover:text-blue-600">+998 (97) 123-45-67</span></a>
-                                <a href="mailto:info@travelco.com" class="flex items-center group"><i data-lucide="mail" class="w-5 h-5 text-blue-600 mr-3"></i><span class="text-gray-700 group-hover:text-blue-600">info@travelco.com</span></a>
+                                <!-- NOTE: Add your real contact info here -->
+                                <a href="tel:+998971234567" class="flex items-center group"><i data-lucide="phone" class="w-5 h-5 text-blue-600 mr-3"></i><span class="text-gray-700 group-hover:text-blue-600">+998 (97) 123-45-67</span></a>
+                                <a href="mailto:info@travelco.com" class="flex items-center group"><i data-lucide="mail" class="w-5 h-5 text-blue-600 mr-3"></i><span class="text-gray-700 group-hover:text-blue-600">info@dreamco.com</span></a>
                                 <div class="flex items-center"><i data-lucide="map-pin" class="w-5 h-5 text-blue-600 mr-3"></i><span class="text-gray-700" data-lang-key="contactAddress">123 Travel St, Tashkent, Uzbekistan</span></div>
                             </div>
                         </div>
                         
-                        <!-- 
-                          FORM ACTION
-                          Go to formspree.io to create a new form and get your unique URL.
-                        --><form action="https://formspree.io/f/YOUR_UNIQUE_FORM_ID" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Contact Form -->
+                        <!-- NOTE: Add your Formspree URL to the 'action' attribute -->
+                        <form action="https://formspree.io/f/YOUR_UNIQUE_FORM_ID" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             
                             <div>
                                 <label for="name" class="block text-sm font-medium text-gray-700 mb-1" data-lang-key="formName">Your Name *</label>
@@ -291,11 +314,14 @@
         </section>
     </main>
     
-    <!-- ========== FOOTER ========== --><footer class="bg-gray-800 text-gray-300 py-16">
+    
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-gray-800 text-gray-300 py-16">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
                 <a href="#" class="flex items-center space-x-2 text-2xl font-extrabold text-white mb-4">
-                    <!-- FIX: Replaced icon and text with your logo --><img src="https://i.postimg.cc/N0try4Lt/images.png" alt="DreamCo Travel Agency" class="h-10 w-auto">
+                    <!-- YOUR LOGO -->
+                    <img src="https://i.postimg.cc/N0try4Lt/images.png" alt="DreamCo Travel Agency" class="h-10 w-auto">
                 </a>
                 <p class="text-gray-400" data-lang-key="footerDesc">Crafting your unforgettable travel stories. Your adventure starts here.</p>
             </div>
@@ -312,10 +338,11 @@
             
             <div>
                 <h5 class="font-bold text-white text-lg mb-4" data-lang-key="footerContact">Contact Us</h5>
+                <!-- NOTE: Add your real contact info here -->
                 <ul class="space-y-2 text-gray-400">
                     <li data-lang-key="contactAddress">123 Travel St, Tashkent</li>
                     <li>+998 (97) 123-45-67</li>
-                    <li>info@travelco.com</li>
+                    <li>info@dreamco.com</li>
                 </ul>
             </div>
             
@@ -329,15 +356,13 @@
             </div>
         </div>
         <div class="container mx-auto px-4 text-center text-gray-500 border-t border-gray-700 mt-12 pt-8" data-lang-key="footerRights">
-            © 2025 TravelCo. All rights reserved.
+            © 2025 DreamCo Travel Agency. All rights reserved.
         </div>
     </footer>
     
-    <!-- 
-      ================================================================
-      PAGE SCRIPT - HANDLES LANGUAGE, MENU, AND HEADER SCROLL
-      ================================================================
-    --><script>
+    
+    <!-- ========== JAVASCRIPT LOGIC ========== -->
+    <script>
         // --- TEXT TRANSLATIONS ---
         // NOTE: You must fill this out with your own accurate translations.
         // Placed at the top to ensure it is initialized before any function calls.
@@ -538,8 +563,7 @@
         }
 
         // --- ROBUST ICON INITIALIZATION ---
-        // FIX: This function is now called by the 'onload' event on the script tag.
-        // This guarantees 'lucide' is defined.
+        // This function is called by the 'onload' event on the script tag.
         function initLucideIcons() {
             if (typeof lucide !== 'undefined') {
                 try {
@@ -558,13 +582,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             
             // --- SET INITIAL LANGUAGE ---
+            // The site will load in Uzbek by default.
             changeLanguage('uz');
         
-            // --- INITIALIZE LUCIDE ICONS ---
-            // This is now handled by the `onload` attribute on the <script> tag in the <head>.
-            // We leave this commented out as a reminder.
-            // initLucideIcons();
-
             // --- MOBILE MENU TOGGLE ---
             const menuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
