@@ -40,14 +40,22 @@
         .bottom-nav-link.active {
             color: #2563EB; /* Blue-600 */
         }
+
+        /* REMOVED: All .search-tab styles are gone. */
+
     </style>
+
+    <!-- User-provided script -->
+    <script data-noptimize="1" data-cfasync="false" data-wpfc-render="false">
+      (function () {
+         var script = document.createElement("script");
+         script.async = 1;
+         script.src = 'https://emrldco.com/NDY4MzA0.js?t=468304';
+         document.head.appendChild(script);
+       })();
+    </script>
 </head>
-<!-- 
-  CHANGE: Added padding-bottom (pb-16) for mobile to prevent
-  the new sticky bottom nav from covering content.
-  md:pb-0 removes this padding on desktop.
--->
-<body class="bg-gray-50 text-gray-800 pb-16 md:pb-0">
+<body class="bg-gray-100 text-gray-800 pb-16 md:pb-0">
 
     
     <!-- ========== HEADER ========== -->
@@ -56,7 +64,6 @@
             
             <!-- Logo -->
             <a href="#" class="flex items-center space-x-2 text-2xl font-extrabold text-white" id="logo-text">
-                <!-- YOUR LOGO -->
                 <img src="https://i.postimg.cc/N0try4Lt/images.png" alt="DreamCo Travel Agency" class="h-10 w-auto">
             </a>
             
@@ -94,23 +101,56 @@
             <div class="absolute inset-0 bg-black opacity-60"></div> 
             <img src="https://i.postimg.cc/xTRKKBDT/Getty-Images-1267262818.avif" alt="DreamCo Travel Agency Hero" class="absolute inset-0 w-full h-full object-cover">
             
-            <!-- Frosted Glass Text Box -->
-            <div class="relative z-10 max-w-3xl bg-black/30 backdrop-blur-md rounded-2xl p-8 md:p-12">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight" data-lang-key="heroTitle">
-                    Discover Your Next Adventure
-                </h1>
-                <p class="text-lg md:text-xl text-gray-100 mb-10 max-w-xl mx-auto" data-lang-key="heroSubtitle">
-                    We curate personalized, unforgettable travel experiences just for you. Let's plan your dream trip.
-                </p>
-                <a href="#destinations" class="bg-blue-600 text-white font-bold py-4 px-10 text-lg rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg transform hover:scale-105" data-lang-key="heroButton">
-                    Start Exploring
-                </a>
+            <!-- Main Content Container -->
+            <div class="relative z-10 max-w-5xl w-full">
+                <!-- Frosted Glass Text Box -->
+                <div class="bg-black/30 backdrop-blur-md rounded-2xl p-8 md:p-12">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight" data-lang-key="heroTitle">
+                        Discover Your Next Adventure
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-100 mb-10 max-w-xl mx-auto" data-lang-key="heroSubtitle">
+                        We curate personalized, unforgettable travel experiences just for you. Let's plan your dream trip.
+                    </p>
+                    <a href="#destinations" class="bg-blue-600 text-white font-bold py-4 px-10 text-lg rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg transform hover:scale-105" data-lang-key="heroButton">
+                        Start Exploring
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== NEW TRAVELPAYOUTS WIDGET SECTION ========== -->
+        <!-- This block is where you will paste your code from Travelpayouts. -->
+        <!-- The negative margin pulls it up to overlap the hero section slightly. -->
+        <section class="relative z-20 -mt-24">
+            <div class="container mx-auto px-4 max-w-5xl">
+                
+                <!-- 
+                  Your Travelpayouts widget will go in here.
+                  It might create its own white background, or you
+                  can add `bg-white shadow-2xl rounded-2xl p-4` to this div.
+                  Start by just pasting the code.
+                -->
+                <div id="travelpayouts-widget-container" class="bg-white shadow-2xl rounded-2xl p-4 w-full mx-auto">
+                    
+                    <!-- 
+                    ***************************************************
+                    * *
+                    * PASTE YOUR TRAVELPAYOUTS WIDGET CODE HERE    *
+                    * *
+                    ***************************************************
+                    -->
+                    
+                    <!-- You might get one for Flights and one for Hotels. -->
+                    <!-- You can just paste them one after the other. -->
+
+                </div>
             </div>
         </section>
 
         
         <!-- ========== SERVICES SECTION ========== -->
-        <section id="services" class="py-20 md:py-32 bg-white">
+        <!-- Added pt-16 to give space from the search block above -->
+        <section id="services" class="pt-16 md:pt-32 pb-20 md:pb-32 bg-white">
             <div class="container mx-auto px-4 text-center">
                 <span class="text-blue-600 font-semibold uppercase" data-lang-key="servicesTitle">Our Services</span>
                 <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-12" data-lang-key="servicesHeading">What We Offer</h2>
@@ -146,7 +186,7 @@
         
         
         <!-- ========== DESTINATIONS SECTION ========== -->
-        <section id="destinations" class="py-20 md:py-32 bg-gray-50">
+        <section id="destinations" class="py-20 md:py-32 bg-gray-100"> <!-- Body bg is gray-100 now -->
             <div class="container mx-auto px-4">
                 <span class="text-blue-600 font-semibold uppercase block text-center" data-lang-key="destTitle">Top Selling</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-center mt-2 mb-12" data-lang-key="destHeading">Popular Destinations</h2>
@@ -208,14 +248,11 @@
         
         
         <!-- ========== TESTIMONIALS SECTION ========== -->
-        <section id="testimonials" class="py-20 md:py-32 bg-gray-50">
+        <section id="testimonials" class="py-20 md:py-32 bg-gray-100">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang-key="testimonialHeading">What Our Clients Say</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial1Text">"The trip to Dubai was perfectly organized..."</p><div class="flex items-center"><img src="https://i.postimg.cc/3RFM836z/li-traveler-touring-beach-pdp.webp" alt="Aziza S." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial1Name">Aziza S. & Family</h4></div></div>
-                    <!-- 
-                      This is the corrected line:
-                    -->
                     <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial2Text">"We took a last-minute tour to Egypt, and it was a great value!..."</p><div class="flex items-center"><img src="https://i.postimg.cc/PxhcFBJs/scale-1200.jpg" alt="Rustam K." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial2Name">Rustam K.</h4></div></div>
                     <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial3Text">"I love their custom tours. I've seen so many unusual places..."</p><div class="flex items-center"><img src="https://i.postimg.cc/d0cSLz8T/a0nro22epgggc00w48swk44o0.jpg" alt="Olga V." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial3Name">Olga V.</h4></div></div>
                 </div>
@@ -226,7 +263,7 @@
         <!-- ========== CONTACT SECTION ========== -->
         <section id="contact" class="py-20 md:py-32 bg-white">
             <div class="container mx-auto px-4">
-                <div class="max-w-6xl mx-auto bg-gray-50 p-8 md:p-12 rounded-xl shadow-2xl overflow-hidden">
+                <div class="max-w-6xl mx-auto bg-gray-100 p-8 md:p-12 rounded-xl shadow-2xl overflow-hidden">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                         
                         <!-- Contact Info -->
@@ -344,11 +381,7 @@
     </footer>
     
     
-    <!-- 
-      ========== MOBILE BOTTOM NAVIGATION (WITH CUSTOM ICONS) ==========
-      This is the new "best practice" mobile navigation.
-      It only appears on small screens (md:hidden).
-    -->
+    <!-- ========== MOBILE BOTTOM NAVIGATION (WITH CUSTOM ICONS) ========== -->
     <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
         <div class="flex justify-around items-center max-w-xl mx-auto h-16">
             <!-- Nav Item 1: Home -->
@@ -383,11 +416,10 @@
     <!-- ========== JAVASCRIPT LOGIC ========== -->
     <script>
         // --- TEXT TRANSLATIONS ---
-        // NOTE: You must fill this out with your own accurate translations.
         // Placed at the top to ensure it is initialized before any function calls.
         const translations = {
             "ru": {
-                // NOTE: These are machine-translated. You should replace them with accurate translations.
+                // NOTE: Add your accurate translations here
                 "title": "DreamCo Travel Agency - Ваше следующее приключение",
                 "navHome": "Главная",
                 "navServices": "Услуги",
@@ -398,6 +430,8 @@
                 "heroTitle": "Откройте свое следующее приключение",
                 "heroSubtitle": "Мы создаем персонализированные, незабываемые путешествия специально для вас. Давайте спланируем поездку вашей мечты.",
                 "heroButton": "Начать исследование",
+                
+                // REMOVED: Amadeus search translations
                 "servicesTitle": "Наши услуги",
                 "servicesHeading": "Что мы предлагаем",
                 "service1Title": "Авиабилеты",
@@ -461,7 +495,7 @@
                 "footerRights": "© 2025 DreamCo Travel Agency. Все права защищены."
             },
             "uz": {
-                // NOTE: These are machine-translated. You should replace them with accurate translations.
+                // NOTE: Add your accurate translations here
                 "title": "DreamCo Travel Agency - Sizning keyingi sarguzashtingiz",
                 "navHome": "Bosh sahifa",
                 "navServices": "Xizmatlar",
@@ -472,6 +506,8 @@
                 "heroTitle": "Keyingi sarguzashtingizni kashf eting",
                 "heroSubtitle": "Biz siz uchun shaxsiylashtirilgan, unutilmas sayohat tajribalarini yaratamiz. Keling, orzuingizdagi sayohatni rejalashtiramiz.",
                 "heroButton": "O'rganishni boshlash",
+                
+                // REMOVED: Amadeus search translations
                 "servicesTitle": "Bizning xizmatlarimiz",
                 "servicesHeading": "Biz taklif qilamiz",
                 "service1Title": "Aviachiptalar",
@@ -576,7 +612,6 @@
         }
 
         // --- ROBUST ICON INITIALIZATION ---
-        // This function is called by the 'onload' event on the script tag.
         function initLucideIcons() {
             if (typeof lucide !== 'undefined') {
                 try {
@@ -589,13 +624,14 @@
                 console.error("initLucideIcons was called, but 'lucide' is still not defined.");
             }
         }
+        
+        // --- REMOVED: All Amadeus-related JS (showSearchTab, handleFlightSearch, etc.) ---
 
 
         // --- ALL INITIALIZATION CODE ---
         document.addEventListener('DOMContentLoaded', () => {
             
             // --- SET INITIAL LANGUAGE ---
-            // The site will load in Uzbek by default.
             changeLanguage('uz');
         
             // --- HEADER STYLE ON SCROLL ---
@@ -679,4 +715,5 @@
 
 </body>
 </html>
+
 
