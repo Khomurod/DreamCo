@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- The <title> will also be set by JavaScript --><title>TravelCo - Your Next Adventure</title>
+    
+    <!-- Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Font: Inter --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN --><!-- 
+      FIX: Added an 'onload' event listener.
+      This is the most robust way to ensure the 'lucide' object is defined
+      before we *ever* try to call initLucideIcons().
+    --><script src="https://unpkg.com/lucide@latest/dist/lucide.min.js" onload="initLucideIcons()"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-section { height: 90vh; min-height: 600px; }
+        .header-scrolled {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        
+        /* Styles for the active language button */
+        .lang-btn.active {
+            font-weight: 800;
+            color: white; /* For header */
+        }
+        .header-scrolled .lang-btn.active {
+            color: #2563EB; /* Blue-600 */
+        }
+        .mobile-menu .lang-btn.active {
+             color: #2563EB; /* Blue-600 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- ========== HEADER ========== --><header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 p-6">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            
+            <!-- Logo Placeholder --><a href="#" class="flex items-center space-x-2 text-2xl font-extrabold text-white" id="logo-text">
+                <!-- 
+                  NOTE: ADD YOUR LOGO HERE 
+                  Replace this <i> and <span> with your <img> tag
+                  e.g. <img src="your-logo.png" alt="TravelCo" class="w-32">
+                --><!-- FIX: Replaced icon and text with your logo --><img src="https://i.postimg.cc/N0try4Lt/images.png" alt="DreamCo Travel Agency" class="h-10 w-auto">
+            </a>
+            
+            <!-- Desktop Navigation --><nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-white hover:text-gray-200 font-medium transition" id="nav-link-1" data-lang-key="navHome">Home</a>
+                <a href="#services" class="text-white hover:text-gray-200 font-medium transition" id="nav-link-2" data-lang-key="navServices">Services</a>
+                <a href="#destinations" class="text-white hover:text-gray-200 font-medium transition" id="nav-link-3" data-lang-key="navDestinations">Destinations</a>
+                <a href="#about" class="text-white hover:text-gray-200 font-medium transition" id="nav-link-4" data-lang-key="navAbout">About</a>
+                <a href="#contact" class="text-white hover:text-gray-200 font-medium transition" id="nav-link-5" data-lang-key="navContact">Contact</a>
+            </nav>
+            
+            <div class="flex items-center">
+                <!-- Call to Action Button --><a href="#contact" class="hidden md:inline-block bg-white text-blue-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition shadow-md" id="nav-cta" data-lang-key="navQuote">
+                    Get a Quote
+                </a>
+
+                <!-- ========== LANGUAGE SWITCHER (Desktop) ========== --><div id="lang-switcher-desktop" class="hidden md:flex items-center space-x-2 ml-6 text-gray-300">
+                    <button onclick="changeLanguage('ru')" class="lang-btn" data-lang-btn="ru" id="lang-ru-desktop">RU</button>
+                    <span>|</span>
+                    <button onclick="changeLanguage('uz')" class="lang-btn" data-lang-btn="uz" id="lang-uz-desktop">UZ</button>
+                </div>
+
+                <!-- Mobile Menu Button --><!-- FIX: Replaced inline SVG with data-lucide for consistent loading --><button id="mobile-menu-button" class="md:hidden text-white ml-4" aria-label="Open menu">
+                    <i data-lucide="menu" class="w-7 h-7"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu (Hidden by default) --><div id="mobile-menu" class="hidden md:hidden bg-white shadow-xl rounded-lg mx-4 mt-4 mobile-menu">
+            <nav class="flex flex-col p-4 space-y-2">
+                <a href="#home" class="text-gray-800 hover:bg-blue-50 rounded-lg p-3 font-medium" data-lang-key="navHome">Home</a>
+                <a href="#services" class="text-gray-800 hover:bg-blue-50 rounded-lg p-3 font-medium" data-lang-key="navServices">Services</a>
+                <a href="#destinations" class="text-gray-800 hover:bg-blue-50 rounded-lg p-3 font-medium" data-lang-key="navDestinations">Destinations</a>
+                <a href="#about" class="text-gray-800 hover:bg-blue-50 rounded-lg p-3 font-medium" data-lang-key="navAbout">About</a>
+                <a href="#contact" class="text-gray-800 hover:bg-blue-50 rounded-lg p-3 font-medium" data-lang-key="navContact">Contact</a>
+                <a href="#contact" class="bg-blue-600 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition mt-2" data-lang-key="navQuote">
+                    Get a Quote
+                </a>
+                
+                <!-- ========== LANGUAGE SWITCHER (Mobile) ========== --><div id="lang-switcher-mobile" class="flex justify-center space-x-4 pt-4 mt-4 border-t border-gray-100 text-gray-700">
+                    <button onclick="changeLanguage('ru')" class="lang-btn font-medium hover:text-blue-600" data-lang-btn="ru" id="lang-ru-mobile">RU</button>
+                    <span>|</span>
+                    <button onclick="changeLanguage('uz')" class="lang-btn font-medium hover:text-blue-600" data-lang-btn="uz" id="lang-uz-mobile">UZ</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ========== HERO SECTION ========== --><section id="home" class="hero-section relative flex items-center justify-center text-center text-white p-4">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <img src="https://i.postimg.cc/xTRKKBDT/Getty-Images-1267262818.avif" alt="DreamCo Travel Agency Hero" class="absolute inset-0 w-full h-full object-cover">
+            
+            <div class="relative z-10 max-w-3xl">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight shadow-text" data-lang-key="heroTitle">
+                    Discover Your Next Adventure
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-xl mx-auto" data-lang-key="heroSubtitle">
+                    We curate personalized, unforgettable travel experiences just for you. Let's plan your dream trip.
+                </p>
+                <a href="#destinations" class="bg-blue-600 text-white font-bold py-4 px-10 text-lg rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg transform hover:scale-105" data-lang-key="heroButton">
+                    Start Exploring
+                </a>
+            </div>
+        </section>
+
+        <!-- ========== SERVICES SECTION ========== --><section id="services" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-4 text-center">
+                <span class="text-blue-600 font-semibold uppercase" data-lang-key="servicesTitle">Our Services</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-12" data-lang-key="servicesHeading">What We Offer</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="plane"></i></div>
+                        <h3 class="text-xl font-bold mb-3" data-lang-key="service1Title">Airline Tickets</h3>
+                        <p class="text-gray-600" data-lang-key="service1Desc">Access to the best deals and flexible booking options worldwide.</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="bed-double"></i></div>
+                        <h3 class="text-xl font-bold mb-3" data-lang-key="service2Title">Hotel Bookings</h3>
+                        <p class="text-gray-600" data-lang-key="service2Desc">Handpicked hotels from cozy boutiques to luxury resorts.</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="map"></i></div>
+                        <h3 class="text-xl font-bold mb-3" data-lang-key="service3Title">Custom Tours</h3>
+                        <p class="text-gray-600" data-lang-key="service3Desc">Tailor-made itineraries based on your unique interests and budget.</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="stamp"></i></div>
+                        <h3 class="text-xl font-bold mb-3" data-lang-key="service4Title">Visa Support</h3>
+                        <p class="text-gray-600" data-lang-key="service4Desc">Hassle-free visa application and processing assistance.</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        
+        <!-- ========== POPULAR DESTINATIONS ========== --><section id="destinations" class="py-20 md:py-32 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <span class="text-blue-600 font-semibold uppercase block text-center" data-lang-key="destTitle">Top Selling</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-center mt-2 mb-12" data-lang-key="destHeading">Popular Destinations</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                        <img src="https://i.postimg.cc/W4fF9PXT/be58b45467e405834a6582f6f245f750.jpg" alt="Dubai" class="w-full h-60 object-cover">
+                        <div class="p-6">
+                            <span class="text-sm text-gray-500" data-lang-key="dest1Country">United Arab Emirates</span>
+                            <h3 class="text-2xl font-bold mt-1 mb-2" data-lang-key="dest1City">Dubai</h3>
+                            <p class="text-gray-600 mb-4" data-lang-key="dest1Desc">Experience the future with stunning architecture and luxury shopping.</p>
+                            <a href="#contact" class="text-blue-600 font-semibold hover:text-blue-800" data-lang-key="bookNow">Book Now &rarr;</a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                        <img src="https://i.postimg.cc/4x6jbf4w/domina-coral-bay-03.jpg" alt="Sharm el-Sheikh" class="w-full h-60 object-cover">
+                        <div class="p-6">
+                            <span class="text-sm text-gray-500" data-lang-key="dest2Country">Egypt</span>
+                            <h3 class="text-2xl font-bold mt-1 mb-2" data-lang-key="dest2City">Sharm el-Sheikh</h3>
+                            <p class="text-gray-600 mb-4" data-lang-key="dest2Desc">Discover ancient wonders and vibrant coral reefs by the Red Sea.</p>
+                            <a href="#contact" class="text-blue-600 font-semibold hover:text-blue-800" data-lang-key="bookNow">Book Now &rarr;</a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                        <img src="https://i.postimg.cc/dVVVgx77/nyachang-foto-shutterstock-2048x1152.webp" alt="Nha Trang" class="w-full h-60 object-cover">
+                        <div class="p-6">
+                            <span class="text-sm text-gray-500" data-lang-key="dest3Country">Vietnam</span>
+                            <h3 class="text-2xl font-bold mt-1 mb-2" data-lang-key="dest3City">Nha Trang</h3>
+                            <p class="text-gray-600 mb-4" data-lang-key="dest3Desc">Relax on pristine beaches and explore lush tropical islands.</p>
+                            <a href="#contact" class="text-blue-600 font-semibold hover:text-blue-800" data-lang-key="bookNow">Book Now &rarr;</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        
+        <!-- ========== WHY CHOOSE US (ABOUT) ========== --><section id="about" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="pr-0 md:pr-10">
+                    <span class="text-blue-600 font-semibold uppercase" data-lang-key="aboutTitle">Why Choose Us</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6" data-lang-key="aboutHeading">Your Trusted Travel Partner</h2>
+                    <p class="text-gray-600 text-lg mb-8 leading-relaxed" data-lang-key="aboutDesc">
+                        With over 8 years of experience, we are dedicated to crafting the perfect journey for you. Our mission is to make travel accessible, comfortable, and truly memorable. We handle all the details so you can focus on making memories.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center"><div class="bg-green-100 text-green-600 w-10 h-10 rounded-full flex items-center justify-center mr-4"><i data-lucide="check"></i></div><span class="text-lg text-gray-700" data-lang-key="aboutPoint1">8+ Years of Travel Expertise</span></li>
+                        <li class="flex items-center"><div class="bg-green-100 text-green-600 w-10 h-10 rounded-full flex items-center justify-center mr-4"><i data-lucide="check"></i></div><span class="text-lg text-gray-700" data-lang-key="aboutPoint2">Personalized, 1-on-1 Service</span></li>
+                        <li class="flex items-center"><div class="bg-green-100 text-green-600 w-10 h-10 rounded-full flex items-center justify-center mr-4"><i data-lucide="check"></i></div><span class="text-lg text-gray-700" data-lang-key="aboutPoint3">Best Price Guarantee</span></li>
+                    </ul>
+                </div>
+                <div><img src="https://i.postimg.cc/brqhkZky/sales-agent-greeting-customers-his-office-welcome-to-my-travel-agency-hispanic-couple-arriving-repre.webp" alt="DreamCo Travel Agency Team" class="rounded-xl shadow-2xl w-full h-auto object-cover"></div>
+            </div>
+        </section>
+        
+        <!-- ========== TESTIMONIALS ========== --><section id="testimonials" class="py-20 md:py-32 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang-key="testimonialHeading">What Our Clients Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial1Text">"The trip to Dubai was perfectly organized..."</p><div class="flex items-center"><img src="https://i.postimg.cc/3RFM836z/li-traveler-touring-beach-pdp.webp" alt="Aziza S." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial1Name">Aziza S. & Family</h4></div></div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial2Text">"We took a last-minute tour to Egypt, and it was a great value!..."</p><div class="flex items-center"><img src="https://i.postimg.cc/PxhcFBJs/scale-1200.jpg" alt="Rustam K." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial2Name">Rustam K.</h4></div></div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial3Text">"I love their custom tours. I've seen so many unusual places..."</p><div class="flex items-center"><img src="https://i.postimg.cc/d0cSLz8T/a0nro22epgggc00w48swk44o0.jpg" alt="Olga V." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial3Name">Olga V.</h4></div></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ========== CONTACT SECTION ========== --><section id="contact" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto bg-gray-50 p-8 md:p-12 rounded-xl shadow-2xl overflow-hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        
+                        <!-- Contact Info --><div>
+                            <span class="text-blue-600 font-semibold uppercase" data-lang-key="contactTitle">Get in Touch</span>
+                            <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6" data-lang-key="contactHeading">Plan Your Dream Trip</h2>
+                            <p class="text-gray-600 text-lg mb-8" data-lang-key="contactDesc">
+                                Have questions or ready to book? Fill out the form or contact us directly. Our team is excited to help you plan your next unforgettable journey.
+                            </p>
+                            <div class="space-y-4">
+                                <!-- Contact info is static, but you could add data-lang-keys if needed --><a href="tel:+998971234567" class="flex items-center group"><i data-lucide="phone" class="w-5 h-5 text-blue-600 mr-3"></i><span class="text-gray-700 group-hover:text-blue-600">+998 (97) 123-45-67</span></a>
+                                <a href="mailto:info@travelco.com" class="flex items-center group"><i data-lucide="mail" class="w-5 h-5 text-blue-600 mr-3"></i><span class="text-gray-700 group-hover:text-blue-600">info@travelco.com</span></a>
+                                <div class="flex items-center"><i data-lucide="map-pin" class="w-5 h-5 text-blue-600 mr-3"></i><span class="text-gray-700" data-lang-key="contactAddress">123 Travel St, Tashkent, Uzbekistan</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- 
+                          FORM ACTION
+                          Go to formspree.io to create a new form and get your unique URL.
+                        --><form action="https://formspree.io/f/YOUR_UNIQUE_FORM_ID" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1" data-lang-key="formName">Your Name *</label>
+                                <input type="text" id="name" name="name" required class="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" data-lang-placeholder="phName">
+                            </div>
+                            
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1" data-lang-key="formPhone">Your Phone *</label>
+                                <input type="tel" id="phone" name="phone" required class="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" data-lang-placeholder="phPhone">
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1" data-lang-key="formEmail">Your Email</label>
+                                <input type="email" id="email" name="email" class="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" data-lang-placeholder="phEmail">
+                            </div>
+
+                            <div>
+                                <label for="destination" class="block text-sm font-medium text-gray-700 mb-1" data-lang-key="formDestination">Desired Destination</label>
+                                <select id="destination" name="destination" class="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                                    <option value="" data-lang-key="formDestOption0">Select a destination</option>
+                                    <option value="Dubai, UAE" data-lang-key="formDestOption1">Dubai, UAE</option>
+                                    <option value="Sharm el-Sheikh, Egypt" data-lang-key="formDestOption2">Sharm el-Sheikh, Egypt</option>
+                                    <option value="Nha Trang, Vietnam" data-lang-key="formDestOption3">Nha Trang, Vietnam</option>
+                                    <option value="Istanbul, Turkey" data-lang-key="formDestOption4">Istanbul, Turkey</option>
+                                    <option value="Other" data-lang-key="formDestOption5">Other (specify below)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="date" class="block text-sm font-medium text-gray-700 mb-1" data-lang-key="formDate">Approximate Date</label>
+                                <input type="date" id="date" name="date" class="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" min="2024-01-01">
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1" data-lang-key="formMessage">Additional Information</label>
+                                <textarea id="message" name="message" rows="5" class="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" data-lang-placeholder="phMessage"></textarea>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 px-8 text-lg rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg transform hover:scale-105" data-lang-key="formButton">
+                                    Send Booking Request
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- ========== FOOTER ========== --><footer class="bg-gray-800 text-gray-300 py-16">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <a href="#" class="flex items-center space-x-2 text-2xl font-extrabold text-white mb-4">
+                    <!-- FIX: Replaced icon and text with your logo --><img src="https://i.postimg.cc/N0try4Lt/images.png" alt="DreamCo Travel Agency" class="h-10 w-auto">
+                </a>
+                <p class="text-gray-400" data-lang-key="footerDesc">Crafting your unforgettable travel stories. Your adventure starts here.</p>
+            </div>
+            
+            <div>
+                <h5 class="font-bold text-white text-lg mb-4" data-lang-key="footerLinks">Quick Links</h5>
+                <ul class="space-y-2">
+                    <li><a href="#services" class="hover:text-white" data-lang-key="navServices">Services</a></li>
+                    <li><a href="#destinations" class="hover:text-white" data-lang-key="navDestinations">Destinations</a></li>
+                    <li><a href="#about" class="hover:text-white" data-lang-key="navAbout">About Us</a></li>
+                    <li><a href="#contact" class="hover:text-white" data-lang-key="navContact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h5 class="font-bold text-white text-lg mb-4" data-lang-key="footerContact">Contact Us</h5>
+                <ul class="space-y-2 text-gray-400">
+                    <li data-lang-key="contactAddress">123 Travel St, Tashkent</li>
+                    <li>+998 (97) 123-45-67</li>
+                    <li>info@travelco.com</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h5 class="font-bold text-white text-lg mb-4" data-lang-key="footerFollow">Follow Us</h5>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-gray-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition" aria-label="Facebook"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    <a href="#" class="w-10 h-10 bg-gray-700 hover:bg-blue-400 rounded-full flex items-center justify-center transition" aria-label="Twitter"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                    <a href="#" class="w-10 h-10 bg-gray-700 hover:bg-pink-600 rounded-full flex items-center justify-center transition" aria-label="Instagram"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 text-center text-gray-500 border-t border-gray-700 mt-12 pt-8" data-lang-key="footerRights">
+            © 2025 TravelCo. All rights reserved.
+        </div>
+    </footer>
+    
+    <!-- 
+      ================================================================
+      PAGE SCRIPT - HANDLES LANGUAGE, MENU, AND HEADER SCROLL
+      ================================================================
+    --><script>
+        // --- TEXT TRANSLATIONS ---
+        // NOTE: You must fill this out with your own accurate translations.
+        // Placed at the top to ensure it is initialized before any function calls.
+        const translations = {
+            "ru": {
+                // NOTE: These are machine-translated. You should replace them with accurate translations.
+                "title": "DreamCo Travel Agency - Ваше следующее приключение",
+                "navHome": "Главная",
+                "navServices": "Услуги",
+                "navDestinations": "Направления",
+                "navAbout": "О нас",
+                "navContact": "Контакты",
+                "navQuote": "Получить расчет",
+                "heroTitle": "Откройте свое следующее приключение",
+                "heroSubtitle": "Мы создаем персонализированные, незабываемые путешествия специально для вас. Давайте спланируем поездку вашей мечты.",
+                "heroButton": "Начать исследование",
+                "servicesTitle": "Наши услуги",
+                "servicesHeading": "Что мы предлагаем",
+                "service1Title": "Авиабилеты",
+                "service1Desc": "Доступ к лучшим предложениям и гибким вариантам бронирования по всему миру.",
+                "service2Title": "Бронирование отелей",
+                "service2Desc": "Тщательно отобранные отели от уютных бутиков до роскошных курортов.",
+                "service3Title": "Индивидуальные туры",
+                "service3Desc": "Индивидуальные маршруты, основанные на ваших уникальных интересах и бюджете.",
+                "service4Title": "Визовая поддержка",
+                "service4Desc": "Помощь в оформлении виз и обработке документов без лишних хлопот.",
+                "destTitle": "Лидеры продаж",
+                "destHeading": "Популярные направления",
+                "dest1Country": "Объединенные Арабские Эмираты",
+                "dest1City": "Дубай",
+                "dest1Desc": "Ощутите будущее благодаря потрясающей архитектуре и роскошному шопингу.",
+                "dest2Country": "Египет",
+                "dest2City": "Шарм-эль-Шейх",
+                "dest2Desc": "Откройте для себя древние чудеса и яркие коралловые рифы у Красного моря.",
+                "dest3Country": "Вьетнам",
+                "dest3City": "Нячанг",
+                "dest3Desc": "Отдохните на нетронутых пляжах и исследуйте пышные тропические острова.",
+                "bookNow": "Забронировать →",
+                "aboutTitle": "Почему мы",
+                "aboutHeading": "Ваш надежный партнер",
+                "aboutDesc": "Имея более 8 лет опыта, мы стремимся создать для вас идеальное путешествие. Наша миссия - сделать путешествия доступными, комфортными и по-настоящему запоминающимися. Мы берем на себя все детали, чтобы вы могли сосредоточиться на создании воспоминаний.",
+                "aboutPoint1": "8+ лет опыта в туризме",
+                "aboutPoint2": "Персональный сервис 1 на 1",
+                "aboutPoint3": "Гарантия лучшей цены",
+                "testimonialHeading": "Что говорят наши клиенты",
+                "testimonial1Text": "\"Поездка в Дубай была организована идеально. Большое спасибо DreamCo Travel Agency! Все было на высшем уровне: отель, экскурсии, трансферы. Мы еще вернемся!\"",
+                "testimonial1Name": "Азиза С. и семья",
+                "testimonial2Text": "\"Взяли горящий тур в Египет, и это было очень выгодно! Отель соответствовал описанию, море фантастическое. Настоятельно рекомендую.\"",
+                "testimonial2Name": "Рустам К.",
+                "testimonial3Text": "\"Обожаю их авторские туры. Увидела столько необычных мест, которых нет в путеводителях. Спасибо за профессионализм и индивидуальный подход!\"",
+                "testimonial3Name": "Ольга В.",
+                "contactTitle": "Свяжитесь с нами",
+                "contactHeading": "Спланируйте поездку мечты",
+                "contactDesc": "Есть вопросы или готовы бронировать? Заполните форму или свяжитесь с нами напрямую. Наша команда с радостью поможет вам спланировать ваше следующее незабываемое путешествие.",
+                "contactAddress": "ул. Саёхат, 123, Ташкент, Узбекистан",
+                "formName": "Ваше имя *",
+                "formPhone": "Ваш телефон *",
+                "formEmail": "Ваш Email",
+                "formDestination": "Желаемое направление",
+                "formDate": "Примерная дата",
+                "formMessage": "Дополнительная информация",
+                "formButton": "Отправить заявку",
+                "formDestOption0": "Выберите направление",
+                "formDestOption1": "Дубай, ОАЭ",
+                "formDestOption2": "Шарм-эль-Шейх, Египет",
+                "formDestOption3": "Нячанг, Вьетнам",
+                "formDestOption4": "Стамбул, Турция",
+                "formDestOption5": "Другое (укажите ниже)",
+                "phName": "например, Иван Иванов",
+                "phPhone": "например, +998 90 123 45 67",
+                "phEmail": "например, ivan@gmail.com",
+                "phMessage": "например, Количество путешественников, бюджет, особые пожелания...",
+                "footerDesc": "Создаем ваши незабываемые истории путешествий. Ваше приключение начинается здесь.",
+                "footerLinks": "Быстрые ссылки",
+                "footerContact": "Контакты",
+                "footerFollow": "Следите за нами",
+                "footerRights": "© 2025 DreamCo Travel Agency. Все права защищены."
+            },
+            "uz": {
+                // NOTE: These are machine-translated. You should replace them with accurate translations.
+                "title": "DreamCo Travel Agency - Sizning keyingi sarguzashtingiz",
+                "navHome": "Bosh sahifa",
+                "navServices": "Xizmatlar",
+                "navDestinations": "Yo'nalishlar",
+                "navAbout": "Biz haqimizda",
+                "navContact": "Aloqa",
+                "navQuote": "Narx olish",
+                "heroTitle": "Keyingi sarguzashtingizni kashf eting",
+                "heroSubtitle": "Biz siz uchun shaxsiylashtirilgan, unutilmas sayohat tajribalarini yaratamiz. Keling, orzuingizdagi sayohatni rejalashtiramiz.",
+                "heroButton": "O'rganishni boshlash",
+                "servicesTitle": "Bizning xizmatlarimiz",
+                "servicesHeading": "Biz taklif qilamiz",
+                "service1Title": "Aviachiptalar",
+                "service1Desc": "Dunyo bo'ylab eng yaxshi takliflar va moslashuvchan bron qilish imkoniyatlari.",
+                "service2Title": "Mehmonxonalar",
+                "service2Desc": "Shinam butiklardan hashamatli kurortlargacha sinchkovlik bilan tanlangan mehmonxonalar.",
+                "service3Title": "Individual turlar",
+                "service3Desc": "Sizning noyob qiziqishlaringiz va byudjetingiz asosida tayyorlangan marshrutlar.",
+                "service4Title": "Viza yordami",
+                "service4Desc": "Viza olish uchun ariza berish va hujjatlarni rasmiylashtirishda muammosiz yordam.",
+                "destTitle": "Eng ko'p sotiladigan",
+                "destHeading": "Ommabop yo'nalishlar",
+                "dest1Country": "Birlashgan Arab Amirliklari",
+                "dest1City": "Dubay",
+                "dest1Desc": "Ajoyib arxitektura va hashamatli xaridlar bilan kelajakni his eting.",
+                "dest2Country": "Misr",
+                "dest2City": "Sharm al-Shayx",
+                "dest2Desc": "Qizil dengiz bo'yidagi qadimiy mo''jizalar va jonli marjon riflarini kashf eting.",
+                "dest3Country": "Vetnam",
+                "dest3City": "Nha Trang",
+                "dest3Desc": "Totilmagan plyajlarda dam oling va yam-yashil tropik orollarni o'rganing.",
+                "bookNow": "Bron qilish →",
+                "aboutTitle": "Nega bizni tanlaysiz",
+                "aboutHeading": "Sizning ishonchli hamkoringiz",
+                "aboutDesc": "8 yildan ortiq tajribaga ega bo'lgan holda, biz siz uchun mukammal sayohatni yaratishga bag'ishlanganmiz. Bizning vazifamiz sayohatni hamyonbop, qulay va haqiqatan ham unutilmas qilishdir. Xotiralar yaratishga e'tibor qaratishingiz uchun biz barcha tafsilotlarni hal qilamiz.",
+                "aboutPoint1": "8+ yillik sayohat tajribasi",
+                "aboutPoint2": "Shaxsiylashtirilgan, 1 ga 1 xizmat",
+                "aboutPoint3": "Eng yaxshi narx kafolati",
+                "testimonialHeading": "Mijozlarimiz nima deydi",
+                "testimonial1Text": "\"Dubayga sayohat a'lo darajada tashkil etilgan. DreamCo Travel Agency'ga katta rahmat! Hammasi yuqori darajada edi: mehmonxona, ekskursiyalar, transferlar. Yana qaytamiz!\"",
+                "testimonial1Name": "Aziza S. va oilasi",
+                "testimonial2Text": "\"Misrga so'nggi daqiqada tur oldik va bu juda foydali bo'ldi! Mehmonxona tavsifga mos edi, dengiz ajoyib. Tavsiya qilaman.\"",
+                "testimonial2Name": "Rustam K.",
+                "testimonial3Text": "\"Ularning individual turlarini yaxshi ko'raman. Yo'lboshchilarda yo'q bo'lgan ko'plab g'ayrioddiy joylarni ko'rdim. Professionallik va individual yondashuv uchun rahmat!\"",
+                "testimonial3Name": "Olga V.",
+                "contactTitle": "Aloqada bo'ling",
+                "contactHeading": "Orzuingizdagi sayohatni rejalashtiring",
+                "contactDesc": "Savollaringiz bormi yoki bron qilishga tayyormisiz? Shaklni to'ldiring yoki biz bilan bevosita bog'laning. Jamoamiz sizning keyingi unutilmas sayohatingizni rejalashtirishda yordam berishdan mamnun.",
+                "contactAddress": "Sayohat ko'chasi, 123, Toshkent, O'zbekiston",
+                "formName": "Ismingiz *",
+                "formPhone": "Telefoningiz *",
+                "formEmail": "Sizning Email",
+                "formDestination": "Sayohat manzili",
+                "formDate": "Taxminiy sana",
+                "formMessage": "Qo'shimcha ma'lumot",
+                "formButton": "So'rov yuborish",
+                "formDestOption0": "Yo'nalishni tanlang",
+                "formDestOption1": "Dubay, BAA",
+                "formDestOption2": "Sharm al-Shayx, Misr",
+                "formDestOption3": "Nha Trang, Vetnam",
+                "formDestOption4": "Istanbul, Turkiya",
+                "formDestOption5": "Boshqa (pastda ko'rsating)",
+                "phName": "masalan, Aziz Azizov",
+                "phPhone": "masalan, +998 90 123 45 67",
+                "phEmail": "masalan, aziz@gmail.com",
+                "phMessage": "masalan, Sayohatchilar soni, byudjet, maxsus so'rovlar...",
+                "footerDesc": "Sizning unutilmas sayohat hikoyalaringizni yaratamiz. Sizning sarguzashtingiz shu yerdan boshlanadi.",
+                "footerLinks": "Tezkor havolalar",
+                "footerContact": "Biz bilan bog'laning",
+                "footerFollow": "Bizni kuzatib boring",
+                "footerRights": "© 2025 DreamCo Travel Agency. Barcha huquqlar himoyalangan."
+            }
+        };
+
+        // --- LANGUAGE CHANGER FUNCTION ---
+        function changeLanguage(lang) {
+            if (!translations[lang]) {
+                console.error("Language not found:", lang);
+                return;
+            }
+
+            // 1. Set all text content
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.dataset.langKey;
+                const translation = translations[lang][key];
+                if (translation) {
+                    el.innerText = translation;
+                }
+            });
+
+            // 2. Set all placeholder text
+            document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+                const key = el.dataset.langPlaceholder;
+                const translation = translations[lang][key];
+                if (translation) {
+                    el.placeholder = translation;
+                }
+            });
+
+            // 3. Set page title
+            if (translations[lang].title) {
+                document.title = translations[lang].title;
+            }
+
+            // 4. Update "active" state for language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.langBtn === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // 5. Close mobile menu on language selection
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+
+        // --- ROBUST ICON INITIALIZATION ---
+        // FIX: This function is now called by the 'onload' event on the script tag.
+        // This guarantees 'lucide' is defined.
+        function initLucideIcons() {
+            if (typeof lucide !== 'undefined') {
+                try {
+                    lucide.createIcons();
+                    console.log("Lucide icons initialized successfully.");
+                } catch (e) {
+                    console.error("Error creating Lucide icons:", e);
+                }
+            } else {
+                console.error("initLucideIcons was called, but 'lucide' is still not defined.");
+            }
+        }
+
+
+        // --- ALL INITIALIZATION CODE ---
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- SET INITIAL LANGUAGE ---
+            changeLanguage('uz');
+        
+            // --- INITIALIZE LUCIDE ICONS ---
+            // This is now handled by the `onload` attribute on the <script> tag in the <head>.
+            // We leave this commented out as a reminder.
+            // initLucideIcons();
+
+            // --- MOBILE MENU TOGGLE ---
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                
+                // Close mobile menu when a nav link is clicked
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+
+            // --- HEADER STYLE ON SCROLL ---
+            const header = document.getElementById('header');
+            const logoText = document.getElementById('logo-text');
+            const navLinks = [
+                document.getElementById('nav-link-1'), document.getElementById('nav-link-2'),
+                document.getElementById('nav-link-3'), document.getElementById('nav-link-4'),
+                document.getElementById('nav-link-5')
+            ];
+            const navCta = document.getElementById('nav-cta');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const langSwitcherDesktop = document.getElementById('lang-switcher-desktop');
+
+            if (header && logoText && navCta && mobileMenuButton && langSwitcherDesktop) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('header-scrolled');
+                        logoText.classList.remove('text-white');
+                        logoText.classList.add('text-gray-800');
+                        navLinks.forEach(link => {
+                            if(link) {
+                                link.classList.remove('text-white', 'hover:text-gray-200');
+                                link.classList.add('text-gray-800', 'hover:text-blue-600');
+                            }
+                        });
+                        navCta.classList.remove('bg-white', 'text-blue-600', 'hover:bg-gray-100');
+                        navCta.classList.add('bg-blue-600', 'text-white', 'hover:bg-blue-700');
+                        mobileMenuButton.classList.remove('text-white');
+                        mobileMenuButton.classList.add('text-gray-800');
+                        langSwitcherDesktop.classList.remove('text-gray-300');
+                        langSwitcherDesktop.classList.add('text-gray-500');
+                    } else {
+                        header.classList.remove('header-scrolled');
+                        logoText.classList.add('text-white');
+                        logoText.classList.remove('text-gray-800');
+                        navLinks.forEach(link => {
+                            if(link) {
+                                link.classList.add('text-white', 'hover:text-gray-200');
+                                link.classList.remove('text-gray-800', 'hover:text-blue-600');
+                            }
+                        });
+                        navCta.classList.add('bg-white', 'text-blue-600', 'hover:bg-gray-100');
+                        navCta.classList.remove('bg-blue-600', 'text-white', 'hover:bg-blue-700');
+                        mobileMenuButton.classList.add('text-white');
+                        mobileMenuButton.classList.remove('text-gray-800');
+                        langSwitcherDesktop.classList.add('text-gray-300');
+                        langSwitcherDesktop.classList.remove('text-gray-500');
+                    }
+                });
+            }
+        });
+        
+    </script>
+
+</body>
+</html>
+
