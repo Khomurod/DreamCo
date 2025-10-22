@@ -125,12 +125,11 @@
             <div class="container mx-auto px-4 max-w-5xl">
                 
                 <!-- 
-                  Your Travelpayouts widget will go in here.
-                  It might create its own white background, or you
-                  can add `bg-white shadow-2xl rounded-2xl p-4` to this div.
-                  Start by just pasting the code.
+                  FIX: Removed padding (p-4) and added overflow-hidden.
+                  This makes the white card "shrink-wrap" the widget and
+                  forces the widget's corners to match the card's rounded shape.
                 -->
-                <div id="travelpayouts-widget-container" class="bg-white shadow-2xl rounded-2xl p-4 w-full mx-auto">
+                <div id="travelpayouts-widget-container" class="bg-white shadow-2xl rounded-2xl w-full mx-auto overflow-hidden">
                     
                     <!-- 
                     ***************************************************
