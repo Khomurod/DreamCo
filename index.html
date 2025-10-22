@@ -75,20 +75,12 @@
                     Get a Quote
                 </a>
 
-                <!-- 
-                  CHANGE: Language Switcher (Now visible on all sizes)
-                  Removed 'hidden' and 'md:flex'
-                -->
+                <!-- Language Switcher (All Sizes) -->
                 <div id="lang-switcher-desktop" class="flex items-center space-x-2 ml-4 text-gray-300">
                     <button onclick="changeLanguage('ru')" class="lang-btn" data-lang-btn="ru" id="lang-ru-desktop">RU</button>
                     <span>|</span>
                     <button onclick="changeLanguage('uz')" class="lang-btn" data-lang-btn="uz" id="lang-uz-desktop">UZ</button>
                 </div>
-
-                <!-- 
-                  CHANGE: Mobile Menu Button and Panel
-                  The entire hamburger menu and its dropdown panel have been removed.
-                -->
             </div>
         </div>
     </header>
@@ -221,7 +213,10 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang-key="testimonialHeading">What Our Clients Say</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial1Text">"The trip to Dubai was perfectly organized..."</p><div class="flex items-center"><img src="https://i.postimg.cc/3RFM836z/li-traveler-touring-beach-pdp.webp" alt="Aziza S." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial1Name">Aziza S. & Family</h4></div></div>
-                    <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial2Text">"We took a last-minute tour to Egypt, and it was a great value!..."</p<div class="flex items-center"><img src="https://i.postimg.cc/PxhcFBJs/scale-1200.jpg" alt="Rustam K." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial2Name">Rustam K.</h4></div></div>
+                    <!-- 
+                      FIX: Added the missing closing bracket to the </p> tag below.
+                    -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial2Text">"We took a last-minute tour to Egypt, and it was a great value!..."</p><div class="flex items-center"><img src="https://i.postimg.cc/PxhcFBJs/scale-1200.jpg" alt="Rustam K." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial2Name">Rustam K.</h4></div></div>
                     <div class="bg-white p-8 rounded-xl shadow-lg"><p class="text-gray-600 italic text-lg mb-6" data-lang-key="testimonial3Text">"I love their custom tours. I've seen so many unusual places..."</p><div class="flex items-center"><img src="https://i.postimg.cc/d0cSLz8T/a0nro22epgggc00w48swk44o0.jpg" alt="Olga V." class="w-14 h-14 rounded-full mr-4 object-cover"><h4 class="font-bold text-lg" data-lang-key="testimonial3Name">Olga V.</h4></div></div>
                 </div>
             </div>
@@ -350,7 +345,7 @@
     
     
     <!-- 
-      ========== NEW MOBILE BOTTOM NAVIGATION ==========
+      ========== MOBILE BOTTOM NAVIGATION (WITH CUSTOM ICONS) ==========
       This is the new "best practice" mobile navigation.
       It only appears on small screens (md:hidden).
     -->
@@ -358,28 +353,28 @@
         <div class="flex justify-around items-center max-w-xl mx-auto h-16">
             <!-- Nav Item 1: Home -->
             <a href="#home" class="bottom-nav-link flex flex-col items-center justify-center text-gray-600 hover:text-blue-600 w-full" data-nav-section="home">
-                <i data-lucide="home" class="w-5 h-5"></i>
-                <span class="text-xs font-medium" data-lang-key="navHome">Home</span>
+                <img src="https://i.postimg.cc/KzggWvq2/home.png" alt="Home" class="w-5 h-5">
+                <span class="text-xs font-medium mt-1" data-lang-key="navHome">Home</span>
             </a>
             <!-- Nav Item 2: Services -->
             <a href="#services" class="bottom-nav-link flex flex-col items-center justify-center text-gray-600 hover:text-blue-600 w-full" data-nav-section="services">
-                <i data-lucide="briefcase" class="w-5 h-5"></i>
-                <span class="text-xs font-medium" data-lang-key="navServices">Services</span>
+                <img src="https://i.postimg.cc/pVC2HMgS/tourist.png" alt="Services" class="w-5 h-5">
+                <span class="text-xs font-medium mt-1" data-lang-key="navServices">Services</span>
             </a>
             <!-- Nav Item 3: Destinations -->
             <a href="#destinations" class="bottom-nav-link flex flex-col items-center justify-center text-gray-600 hover:text-blue-600 w-full" data-nav-section="destinations">
-                <i data-lucide="map-pin" class="w-5 h-5"></i>
-                <span class="text-xs font-medium" data-lang-key="navDestinations">Destinations</span>
+                <img src="https://i.postimg.cc/7LSktF1H/plane.png" alt="Destinations" class="w-5 h-5">
+                <span class="text-xs font-medium mt-1" data-lang-key="navDestinations">Destinations</span>
             </a>
             <!-- Nav Item 4: About -->
             <a href="#about" class="bottom-nav-link flex flex-col items-center justify-center text-gray-600 hover:text-blue-600 w-full" data-nav-section="about">
-                <i data-lucide="users" class="w-5 h-5"></i>
-                <span class="text-xs font-medium" data-lang-key="navAbout">About</span>
+                <img src="https://i.postimg.cc/DwXkm9Mq/information-button.png" alt="About" class="w-5 h-5">
+                <span class="text-xs font-medium mt-1" data-lang-key="navAbout">About</span>
             </a>
             <!-- Nav Item 5: Contact (Main CTA) -->
             <a href="#contact" class="bottom-nav-link flex flex-col items-center justify-center text-blue-600 hover:text-blue-700 w-full" data-nav-section="contact">
-                <i data-lucide="send" class="w-5 h-5"></i>
-                <span class="text-xs font-bold" data-lang-key="navQuote">Get a Quote</span>
+                <img src="https://i.postimg.cc/QC9S035p/calculatoe.png" alt="Get a Quote" class="w-5 h-5">
+                <span class="text-xs font-bold mt-1" data-lang-key="navQuote">Get a Quote</span>
             </a>
         </div>
     </nav>
