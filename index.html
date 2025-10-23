@@ -3,298 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Page Title (Will be updated by JS) -->
-    <title>DreamCo Travel Agency</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
+    <title data-lang-key="pageTitle">DreamCo Travel Agency</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Playfair Display for headings, Inter for body -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/lucide.min.js" onload="initLucideIcons()"></script>
-    
-    <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            -webkit-font-smoothing: antialiased; 
-            -moz-osx-font-smoothing: grayscale; 
-            background-color: #f5f5f4; /* stone-100 */
-            color: #303030; /* Dark Charcoal */
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://unpkg.com/lucide-dev@latest"></script>
+
+    <script data-noptimize="1" data-cfasync="false" data-wpfc-render="false">(function () { var script = document.createElement("script"); script.async = 1; script.src = 'https://emrldco.com/NDY4MzA0.js?t=468304'; document.head.appendChild(script); })();</script>
+
+    <style type="text/tailwindcss">
+        @layer base {
+            html {
+                /* Sets the offset for smooth-scrolling to #hash links, accounting for the fixed header */
+                /* 5rem = 80px */
+                scroll-padding-top: 5rem; 
+            }
+            h1, h2, h3, h4, h5, h6 {
+                @apply font-['Playfair_Display'] text-[#303030];
+            }
+            body {
+                @apply font-['Inter'] text-[#303030] antialiased;
+            }
+            /* Style for the active mobile bottom nav link */
+            .mobile-nav-active {
+                @apply text-[#00798C] scale-105;
+            }
+            .mobile-nav-active img {
+                @apply opacity-100;
+            }
+            .mobile-nav-link img {
+                @apply opacity-70 transition-all;
+            }
         }
-        /* Define heading font */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', serif;
+        @layer components {
+            /* Main container styling for consistent padding */
+            .container-wrapper {
+                @apply container mx-auto px-6 py-16 md:py-24;
+            }
+            /* Reusable card styling */
+            .card {
+                @apply bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl;
+            }
+            /* Main CTA button style */
+            .btn-primary {
+                @apply inline-block bg-[#00798C] text-white font-['Inter'] font-semibold py-3 px-8 rounded-lg shadow-md transition-all duration-300 hover:bg-[#005f6e] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#00798C] focus:ring-offset-2;
+            }
+            /* Secondary/form button style */
+            .btn-secondary {
+                @apply inline-block w-full bg-[#00798C] text-white font-['Inter'] font-semibold py-3 px-8 rounded-lg shadow-md transition-all duration-300 hover:bg-[#005f6e] focus:outline-none focus:ring-2 focus:ring-[#00798C] focus:ring-offset-2;
+            }
         }
-        /* Custom Teal color */
-        .text-teal { color: #00798C; }
-        .bg-teal { background-color: #00798C; }
-        .hover\:bg-teal-dark:hover { background-color: #005f6e; } /* Darker teal for hover */
-        .border-teal { border-color: #00798C; }
-        .ring-teal:focus { --tw-ring-color: #00798C; }
-
-        /* Custom Sand color */
-        .bg-sand { background-color: #EDE7D9; }
-        .bg-light-sand { background-color: #f5f5f4; } /* stone-100 */
-
-        /* Custom Charcoal color */
-        .text-charcoal { color: #303030; }
-        .bg-charcoal { background-color: #303030; }
-
-
-        .hero-section { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; } 
-        
-        /* Header Styling */
-        #header { transition: all 0.3s ease-in-out; }
-        .header-scrolled {
-            background-color: rgba(255, 255, 255, 0.9); 
-            backdrop-filter: blur(10px); 
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            padding-top: 0.5rem; 
-            padding-bottom: 0.5rem;
-        }
-        .header-scrolled .nav-link { color: #303030; } /* Charcoal text */
-        .header-scrolled .nav-link:hover { color: #00798C; } /* Teal hover */
-        .header-scrolled #logo-container { color: #303030; } /* Charcoal logo text/container */
-        .header-scrolled #lang-globe-button { color: #4b5563; } /* gray-600 */
-        .header-scrolled #lang-globe-button:hover { color: #00798C; } /* Teal hover */
-        
-        /* Language Dropdown */
-        .lang-dropdown-btn.active { font-weight: 600; color: #00798C; background-color: #e0f2fe; /* sky-100 */}
-        
-        /* Bottom Nav Active State */
-        .bottom-nav-link.active > span { font-weight: 600; color: #00798C; }
-        .bottom-nav-link.active > img { /* Teal filter */
-            filter: brightness(0) saturate(100%) invert(35%) sepia(98%) saturate(1450%) hue-rotate(155deg) brightness(95%) contrast(101%);
-        }
-
-        .text-shadow { text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
-
-        .bottom-nav-link { /* Ensure vertical centering */
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            text-align: center; flex-grow: 1; padding-top: 0.375rem; padding-bottom: 0.25rem;
-        }
-        .bottom-nav-link > img { margin-bottom: 0.125rem; }
-
-        /* Card Styling */
-        .content-card {
-            background-color: white; border-radius: 0.75rem; 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden; /* Ensure image corners are clipped */
-        }
-        .content-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        }
-         /* Style date input placeholder color */
-        input[type="date"]:not(:valid) { color: #9ca3af; }
-        input[type="date"] { color: #303030; }
-
-        /* Angled Section Divider (Example using clip-path) */
-        .angled-top {
-            clip-path: polygon(0 0, 100% 4%, 100% 100%, 0% 100%);
-            margin-top: -4%; /* Adjust overlap based on angle */
-            padding-top: 6%; /* Add padding to compensate for clipped area */
-        }
-         .angled-bottom {
-             clip-path: polygon(0 0, 100% 0, 100% 96%, 0% 100%);
-             padding-bottom: 6%; 
-             margin-bottom: -4%; 
-         }
-
     </style>
-
-    <!-- Travelpayouts Helper Script -->
-    <script data-noptimize="1" data-cfasync="false" data-wpfc-render="false">
-      (function () { var script = document.createElement("script"); script.async = 1; script.src = 'https://emrldco.com/NDY4MzA0.js?t=468304'; document.head.appendChild(script); })();
-    </script>
 </head>
-<body class="bg-light-sand text-charcoal pb-16 md:pb-0"> 
 
-    
-    <!-- ========== HEADER ========== -->
-    <header id="header" class="fixed top-0 left-0 right-0 z-50 p-6 md:p-8"> 
-        <div class="container mx-auto px-4 flex justify-between items-center">
+<body class="bg-[#f5f5f4]">
+
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ease-in-out py-6">
+        <div class="container mx-auto px-6 flex justify-between items-center">
             
-            <a href="#home" class="flex items-center space-x-2 text-2xl font-extrabold text-white transition-colors duration-300" id="logo-container">
-                <img src="https://i.postimg.cc/63BwFBhW/bf5230f7-ea09-4a86-92d7-f1de75b77307-removalai-preview.png" alt="DreamCo Travel Agency Logo" 
-                     id="header-logo" class="w-auto transition-all duration-300 ease-in-out h-20"> 
+            <a href="#home" class="shrink-0" aria-label="DreamCo Home">
+                <img id="header-logo" src="https://i.postimg.cc/63BwFBhW/bf5230f7-ea09-4a86-92d7-f1de75b77307-removalai-preview.png" alt="DreamCo Logo" class="h-20 transition-all duration-300 ease-in-out">
             </a>
-            
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navHome"></a>
-                <a href="#services" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navServices"></a>
-                <a href="#destinations" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navDestinations"></a>
-                <a href="#about" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navAbout"></a>
-                <a href="#contact" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navContact"></a>
-            </nav>
-            
-            <div class="flex items-center space-x-4">
-                <a href="#contact" class="hidden md:inline-block bg-white text-teal font-bold py-2.5 px-5 rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-md transform hover:scale-105" id="nav-cta" data-lang-key="navQuote"></a>
 
-                 <div class="relative" id="language-selector">
-                    <button id="lang-globe-button" type="button" class="lang-globe-btn text-gray-300 hover:text-white focus:outline-none transition-colors duration-300 p-2 rounded-full hover:bg-white/10 focus:ring-2 focus:ring-white/50">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 block"> 
-                            <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                        </svg>
-                        <span class="sr-only" data-lang-key="selectLang"></span>
-                    </button>
-                    <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 z-[60]"> 
-                        <button onclick="selectLanguage('ru')" data-lang-btn="ru" class="lang-dropdown-btn text-left w-full px-4 py-2 text-sm text-gray-700 hover:bg-sky-50 transition-colors">
-                            Русский
-                        </button>
-                        <button onclick="selectLanguage('uz')" data-lang-btn="uz" class="lang-dropdown-btn text-left w-full px-4 py-2 text-sm text-gray-700 hover:bg-sky-50 transition-colors">
-                            O'zbekcha
-                        </button>
-                    </div>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-white font-medium hover:text-gray-200 transition-colors" data-lang-key="navHome">Bosh Sahifa</a>
+                <a href="#services" class="text-white font-medium hover:text-gray-200 transition-colors" data-lang-key="navServices">Xizmatlar</a>
+                <a href="#destinations" class="text-white font-medium hover:text-gray-200 transition-colors" data-lang-key="navDestinations">Yo'nalishlar</a>
+                <a href="#about" class="text-white font-medium hover:text-gray-200 transition-colors" data-lang-key="navAbout">Biz Haqimizda</a>
+                <a href="#contact" class="text-white font-medium hover:text-gray-200 transition-colors" data-lang-key="navContact">Bog'lanish</a>
+            </nav>
+
+            <div class="hidden md:block relative">
+                <button id="lang-toggle-desktop" type="button" class="flex items-center text-white hover:text-gray-200" aria-label="Tilni o'zgartirish">
+                    <i data-lucide="globe" class="w-5 h-5"></i>
+                    <i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i>
+                </button>
+                <div id="lang-menu-desktop" class="hidden absolute right-0 mt-2 w-28 bg-white rounded-lg shadow-xl z-10 overflow-hidden">
+                    <button class="lang-switcher w-full text-left px-4 py-2 text-sm text-[#303030] hover:bg-[#f5f5f4]" data-lang="uz">O'zbekcha</button>
+                    <button class="lang-switcher w-full text-left px-4 py-2 text-sm text-[#303030] hover:bg-[#f5f5f4]" data-lang="ru">Русский</button>
                 </div>
             </div>
+
+            <div class="md:hidden relative">
+                <button id="lang-toggle-mobile" type="button" class="flex items-center text-white hover:text-gray-200" aria-label="Tilni o'zgartirish">
+                    <i data-lucide="globe" class="w-6 h-6"></i>
+                </button>
+                <div id="lang-menu-mobile" class="hidden absolute right-0 mt-2 w-28 bg-white rounded-lg shadow-xl z-10 overflow-hidden">
+                    <button class="lang-switcher w-full text-left px-4 py-2 text-sm text-[#303030] hover:bg-[#f5f5f4]" data-lang="uz">O'zbekcha</button>
+                    <button class="lang-switcher w-full text-left px-4 py-2 text-sm text-[#303030] hover:bg-[#f5f5f4]" data-lang="ru">Русский</button>
+                </div>
+            </div>
+            
         </div>
     </header>
 
     <main>
-        
-        <!-- ========== HERO SECTION ========== -->
-        <section id="home" class="hero-section relative text-white p-4">
+
+        <section id="home" class="relative min-h-screen flex items-center justify-center text-center text-white bg-cover bg-center" style="background-image: url('https://i.postimg.cc/xTRKKBDT/Getty-Images-1267262818.avif');">
+            <div class="absolute inset-0 bg-black/50"></div>
             
-            <img src="https://i.postimg.cc/xTRKKBDT/Getty-Images-1267262818.avif" alt="Scenic tropical beach view" class="absolute inset-0 w-full h-full object-cover z-0">
-            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent z-0"></div> 
-            
-            <div class="relative z-10 container mx-auto px-4 flex flex-col items-start justify-center h-full text-left pt-24 md:pt-0 max-w-7xl"> 
-                
-                <!-- Main Text Box -->
-                <div class="max-w-xl md:max-w-2xl mb-8 md:mb-10 text-shadow">
-                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold mb-5 leading-tight" data-lang-key="heroTitle"></h1>
-                    <p class="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed" data-lang-key="heroSubtitle"></p>
-                    <a href="#destinations" class="inline-block bg-teal text-white font-semibold py-3 px-8 text-lg rounded-lg hover:bg-teal-dark transition-all duration-300 shadow-lg transform hover:scale-105" data-lang-key="heroButton"></a>
+            <div class="relative z-10 flex flex-col items-center justify-center pt-32 pb-16 px-6">
+                <div class="max-w-3xl">
+                    <h1 class="text-5xl md:text-7xl font-bold font-['Playfair_Display'] mb-4" data-lang-key="heroTitle">
+                        {heroTitle}
+                    </h1>
+                    <p class="text-lg md:text-xl mb-8" data-lang-key="heroSubtitle">
+                        {heroSubtitle}
+                    </p>
+                    <a href="#contact" class="btn-primary mb-12" data-lang-key="heroButton">
+                        {heroButton}
+                    </a>
                 </div>
 
-                <!-- Travelpayouts Widget Container -->
-                 <div id="travelpayouts-widget-container" class="bg-white/95 backdrop-blur-lg rounded-xl w-full max-w-4xl overflow-hidden shadow-2xl mt-4 md:mt-2"> 
-                    <!-- TRAVELPAYOUTS WIDGET SCRIPT -->
-                    <script async src="https://tpwdg.com/content?currency=uzs&trs=468304&shmarker=679985&show_hotels=true&powered_by=true&locale=ru&searchUrl=www.aviasales.ru%2Fsearch&primary_override=%2300798C&color_button=%2300798C&color_icons=%2300798C&dark=%23303030&light=%23FFFFFF&secondary=%23f5f5f4&special=%23C4C4C4&color_focused=%2300798C&border_radius=8&plain=false&promo_id=7879&campaign_id=100" charset="utf-8"></script> <!-- Updated colors and radius -->
+                <div id="travelpayouts-widget-container" class="w-full max-w-5xl bg-white/90 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden p-4 md:p-6">
+                    <script async src="https://tpwdg.com/content?currency=uzs&trs=468304&shmarker=679985&show_hotels=true&powered_by=true&locale=ru&searchUrl=www.aviasales.ru%2Fsearch&primary_override=%2300798C&color_button=%2300798C&color_icons=%2300798C&dark=%23303030&light=%23FFFFFF&secondary=%23f5f5f4&special=%23C4C4C4&color_focused=%2300798C&border_radius=8&plain=false&promo_id=7879&campaign_id=100" charset="utf-8"></script>
                 </div>
             </div>
         </section>
 
-        
-        <!-- ========== SERVICES SECTION ========== -->
-        <section id="services" class="py-24 md:py-32 bg-white angled-bottom"> 
-            <div class="container mx-auto px-4 text-center">
-                <span class="text-teal font-semibold uppercase tracking-wider text-sm" data-lang-key="servicesTitle"></span>
-                <h2 class="text-3xl md:text-5xl font-bold mt-2 mb-16 text-charcoal" data-lang-key="servicesHeading"></h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
-                    
-                    <div class="text-center p-6 md:p-8">
-                        <div class="bg-teal/10 text-teal w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i data-lucide="plane" class="w-9 h-9"></i></div>
-                        <h3 class="text-xl font-semibold mb-3 text-charcoal" data-lang-key="service1Title"></h3>
-                        <p class="text-gray-600 text-sm leading-relaxed" data-lang-key="service1Desc"></p>
+        <section id="services" class="container-wrapper bg-white">
+            <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+                <h2 class="text-sm font-semibold text-[#00798C] uppercase tracking-wider" data-lang-key="servicesTitle">
+                    {servicesTitle}
+                </h2>
+                <p class="text-4xl md:text-5xl font-bold mt-2" data-lang-key="servicesHeading">
+                    {servicesHeading}
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center p-6 border border-gray-200/50 rounded-xl shadow-lg bg-white">
+                    <div class="flex items-center justify-center w-16 h-16 bg-[#00798C]/10 text-[#00798C] rounded-full mx-auto mb-4">
+                        <i data-lucide="plane" class="w-8 h-8"></i>
                     </div>
-                    <div class="text-center p-6 md:p-8">
-                        <div class="bg-teal/10 text-teal w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i data-lucide="bed-double" class="w-9 h-9"></i></div>
-                        <h3 class="text-xl font-semibold mb-3 text-charcoal" data-lang-key="service2Title"></h3>
-                        <p class="text-gray-600 text-sm leading-relaxed" data-lang-key="service2Desc"></p>
+                    <h3 class="text-2xl font-bold mb-2" data-lang-key="service1Title">{service1Title}</h3>
+                    <p class="text-gray-600" data-lang-key="service1Desc">{service1Desc}</p>
+                </div>
+                <div class="text-center p-6 border border-gray-200/50 rounded-xl shadow-lg bg-white">
+                    <div class="flex items-center justify-center w-16 h-16 bg-[#00798C]/10 text-[#00798C] rounded-full mx-auto mb-4">
+                        <i data-lucide="hotel" class="w-8 h-8"></i>
                     </div>
-                    <div class="text-center p-6 md:p-8">
-                        <div class="bg-teal/10 text-teal w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i data-lucide="map" class="w-9 h-9"></i></div>
-                        <h3 class="text-xl font-semibold mb-3 text-charcoal" data-lang-key="service3Title"></h3>
-                        <p class="text-gray-600 text-sm leading-relaxed" data-lang-key="service3Desc"></p>
+                    <h3 class="text-2xl font-bold mb-2" data-lang-key="service2Title">{service2Title}</h3>
+                    <p class="text-gray-600" data-lang-key="service2Desc">{service2Desc}</p>
+                </div>
+                <div class="text-center p-6 border border-gray-200/50 rounded-xl shadow-lg bg-white">
+                    <div class="flex items-center justify-center w-16 h-16 bg-[#00798C]/10 text-[#00798C] rounded-full mx-auto mb-4">
+                        <i data-lucide="umbrella" class="w-8 h-8"></i>
                     </div>
-                    <div class="text-center p-6 md:p-8">
-                        <div class="bg-teal/10 text-teal w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm"><i data-lucide="stamp" class="w-9 h-9"></i></div>
-                        <h3 class="text-xl font-semibold mb-3 text-charcoal" data-lang-key="service4Title"></h3>
-                        <p class="text-gray-600 text-sm leading-relaxed" data-lang-key="service4Desc"></p>
+                    <h3 class="text-2xl font-bold mb-2" data-lang-key="service3Title">{service3Title}</h3>
+                    <p class="text-gray-600" data-lang-key="service3Desc">{service3Desc}</p>
+                </div>
+                <div class="text-center p-6 border border-gray-200/50 rounded-xl shadow-lg bg-white">
+                    <div class="flex items-center justify-center w-16 h-16 bg-[#00798C]/10 text-[#00798C] rounded-full mx-auto mb-4">
+                        <i data-lucide="file-check" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2" data-lang-key="service4Title">{service4Title}</h3>
+                    <p class="text-gray-600" data-lang-key="service4Desc">{service4Desc}</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="destinations" class="container-wrapper bg-[#f5f5f4]">
+            <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+                <h2 class="text-sm font-semibold text-[#00798C] uppercase tracking-wider" data-lang-key="destTitle">
+                    {destTitle}
+                </h2>
+                <p class="text-4xl md:text-5xl font-bold mt-2" data-lang-key="destHeading">
+                    {destHeading}
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card">
+                    <img src="https://i.postimg.cc/W4fF9PXT/be58b45467e405834a6582f6f245f750.jpg" alt="Dubai Skyline" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <p class="text-sm text-gray-500" data-lang-key="dest1Country">{dest1Country}</p>
+                        <h3 class="text-3xl font-bold mb-2" data-lang-key="dest1City">{dest1City}</h3>
+                        <p class="text-gray-600 mb-6" data-lang-key="dest1Desc">{dest1Desc}</p>
+                        <a href="#contact" class="font-semibold text-[#00798C] hover:text-[#005f6e] transition-colors" data-lang-key="bookNow">
+                            {bookNow} &rarr;
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://i.postimg.cc/4x6jbf4w/domina-coral-bay-03.jpg" alt="Sharm el-Sheikh Resort" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <p class="text-sm text-gray-500" data-lang-key="dest2Country">{dest2Country}</p>
+                        <h3 class="text-3xl font-bold mb-2" data-lang-key="dest2City">{dest2City}</h3>
+                        <p class="text-gray-600 mb-6" data-lang-key="dest2Desc">{dest2Desc}</p>
+                        <a href="#contact" class="font-semibold text-[#00798C] hover:text-[#005f6e] transition-colors" data-lang-key="bookNow">
+                            {bookNow} &rarr;
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://i.postimg.cc/dVVVgx77/nyachang-foto-shutterstock-2048x1152.webp" alt="Nha Trang Beach" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <p class="text-sm text-gray-500" data-lang-key="dest3Country">{dest3Country}</p>
+                        <h3 class="text-3xl font-bold mb-2" data-lang-key="dest3City">{dest3City}</h3>
+                        <p class="text-gray-600 mb-6" data-lang-key="dest3Desc">{dest3Desc}</p>
+                        <a href="#contact" class="font-semibold text-[#00798C] hover:text-[#005f6e] transition-colors" data-lang-key="bookNow">
+                            {bookNow} &rarr;
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <!-- ========== DESTINATIONS SECTION ========== -->
-        <section id="destinations" class="py-24 md:py-32 bg-light-sand angled-top angled-bottom"> 
-            <div class="container mx-auto px-4">
-                <span class="text-teal font-semibold uppercase tracking-wider text-sm block text-center" data-lang-key="destTitle"></span>
-                <h2 class="text-3xl md:text-5xl font-bold text-center mt-2 mb-16 text-charcoal" data-lang-key="destHeading"></h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-                    
-                    <div class="content-card">
-                        <img src="https://i.postimg.cc/W4fF9PXT/be58b45467e405834a6582f6f245f750.jpg" alt="Dubai skyline" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="text-xs text-gray-500 uppercase tracking-wider font-medium" data-lang-key="dest1Country"></span>
-                            <h3 class="text-2xl font-bold text-charcoal mt-1 mb-3" data-lang-key="dest1City"></h3>
-                            <p class="text-gray-600 mb-5 text-sm leading-relaxed" data-lang-key="dest1Desc"></p>
-                            <a href="#contact" class="inline-flex items-center text-teal font-semibold hover:text-teal-dark group text-sm" data-lang-key="bookNow"> 
-                                <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <img src="https://i.postimg.cc/4x6jbf4w/domina-coral-bay-03.jpg" alt="Sharm el-Sheikh beach" class="w-full h-64 object-cover">
-                         <div class="p-6">
-                            <span class="text-xs text-gray-500 uppercase tracking-wider font-medium" data-lang-key="dest2Country"></span>
-                            <h3 class="text-2xl font-bold text-charcoal mt-1 mb-3" data-lang-key="dest2City"></h3>
-                            <p class="text-gray-600 mb-5 text-sm leading-relaxed" data-lang-key="dest2Desc"></p>
-                             <a href="#contact" class="inline-flex items-center text-teal font-semibold hover:text-teal-dark group text-sm" data-lang-key="bookNow"> 
-                                <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <img src="https://i.postimg.cc/dVVVgx77/nyachang-foto-shutterstock-2048x1152.webp" alt="Nha Trang coast" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="text-xs text-gray-500 uppercase tracking-wider font-medium" data-lang-key="dest3Country"></span>
-                            <h3 class="text-2xl font-bold text-charcoal mt-1 mb-3" data-lang-key="dest3City"></h3>
-                            <p class="text-gray-600 mb-5 text-sm leading-relaxed" data-lang-key="dest3Desc"></p>
-                             <a href="#contact" class="inline-flex items-center text-teal font-semibold hover:text-teal-dark group text-sm" data-lang-key="bookNow"> 
-                                <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- ========== ABOUT SECTION ========== -->
-        <section id="about" class="py-24 md:py-32 bg-white angled-top angled-bottom">
-            <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-                <div class="pr-0 md:pr-10 order-2 md:order-1">
-                    <span class="text-teal font-semibold uppercase tracking-wider text-sm" data-lang-key="aboutTitle"></span>
-                    <h2 class="text-3xl md:text-5xl font-bold text-charcoal mt-2 mb-6" data-lang-key="aboutHeading"></h2>
-                    <p class="text-gray-600 text-lg mb-10 leading-relaxed" data-lang-key="aboutDesc"></p>
+
+        <section id="about" class="container-wrapper bg-white">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div>
+                    <h2 class="text-sm font-semibold text-[#00798C] uppercase tracking-wider" data-lang-key="aboutTitle">
+                        {aboutTitle}
+                    </h2>
+                    <p class="text-4xl md:text-5xl font-bold mt-2 mb-6" data-lang-key="aboutHeading">
+                        {aboutHeading}
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8" data-lang-key="aboutDesc">
+                        {aboutDesc}
+                    </p>
                     <ul class="space-y-6">
                         <li class="flex items-start">
-                            <div class="bg-teal/10 text-teal w-10 h-10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0 mt-0.5 shadow-sm"><i data-lucide="award" class="w-5 h-5"></i></div>
+                            <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-[#00798C]/10 text-[#00798C] rounded-full mr-4">
+                                <i data-lucide="check" class="w-6 h-6"></i>
+                            </div>
                             <div>
-                                <h4 class="font-semibold text-lg mb-1 text-charcoal" data-lang-key="aboutPoint1"></h4>
-                                <p class="text-gray-500 text-sm leading-relaxed">Deep knowledge in crafting perfect trips.</p>
+                                <h4 class="text-xl font-bold" data-lang-key="aboutPoint1">{aboutPoint1}</h4>
+                                <p class="text-gray-600" data-lang-key="aboutPoint1Desc">{aboutPoint1Desc}</p>
                             </div>
                         </li>
                         <li class="flex items-start">
-                           <div class="bg-teal/10 text-teal w-10 h-10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0 mt-0.5 shadow-sm"><i data-lucide="user-check" class="w-5 h-5"></i></div>
+                            <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-[#00798C]/10 text-[#00798C] rounded-full mr-4">
+                                <i data-lucide="users" class="w-6 h-6"></i>
+                            </div>
                             <div>
-                                <h4 class="font-semibold text-lg mb-1 text-charcoal" data-lang-key="aboutPoint2"></h4>
-                                <p class="text-gray-500 text-sm leading-relaxed">Dedicated support tailored to your needs.</p>
-                           </div>
+                                <h4 class="text-xl font-bold" data-lang-key="aboutPoint2">{aboutPoint2}</h4>
+                                <p class="text-gray-600" data-lang-key="aboutPoint2Desc">{aboutPoint2Desc}</p>
+                            </div>
                         </li>
                         <li class="flex items-start">
-                           <div class="bg-teal/10 text-teal w-10 h-10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0 mt-0.5 shadow-sm"><i data-lucide="tag" class="w-5 h-5"></i></div>
-                           <div>
-                                <h4 class="font-semibold text-lg mb-1 text-charcoal" data-lang-key="aboutPoint3"></h4>
-                                <p class="text-gray-500 text-sm leading-relaxed">Competitive pricing for your dream vacation.</p>
-                           </div>
+                            <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-[#00798C]/10 text-[#00798C] rounded-full mr-4">
+                                <i data-lucide="compass" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold" data-lang-key="aboutPoint3">{aboutPoint3}</h4>
+                                <p class="text-gray-600" data-lang-key="aboutPoint3Desc">{aboutPoint3Desc}</p>
+                            </div>
                         </li>
                     </ul>
                 </div>
-                <div class="order-1 md:order-2">
-                    <img src="https://i.postimg.cc/brqhkZky/sales-agent-greeting-customers-his-office-welcome-to-my-travel-agency-hispanic-couple-arriving-repre.webp" alt="Travel agent helping clients" class="rounded-xl shadow-xl w-full h-auto object-cover aspect-[4/3]">
+                <div class="mt-8 lg:mt-0">
+                    <img src="https://i.postimg.cc/brqhkZky/sales-agent-greeting-customers-his-office-welcome-to-my-travel-agency-hispanic-couple-arriving-repre.webp" alt="Travel agent meeting clients" class="w-full h-full object-cover rounded-xl shadow-xl">
                 </div>
             </div>
         </section>
-        
-        <!-- ========== TESTIMONIALS SECTION ========== -->
-       
+
+        <section id="testimonials" class="container-wrapper bg-[#f5f5f4]">
+            <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+                <p class="text-4xl md:text-5xl font-bold" data-lang-key="testimonialHeading">
+                    {testimonialHeading}
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-8">
+                    <i data-lucide="quote" class="w-10 h-10 text-[#00798C]/50 mb-4"></i>
+                    <p class="text-lg text-gray-700 italic mb-6" data-lang-key="testimonial1Text">
+                        {testimonial1Text}
+                    </p>
+                    <div class="flex items-center">
+                        <img src="https://i.postimg.cc/3RFM836z/li-traveler-touring-beach-pdp.webp" alt="Aziza S." class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold text-lg" data-lang-key="testimonial1Name">{testimonial1Name}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-8">
+                    <i data-lucide="quote" class="w-10 h-10 text-[#00798C]/50 mb-4"></i>
+                    <p class="text-lg text-gray-700 italic mb-6" data-lang-key="testimonial2Text">
+                        {testimonial2Text}
+                    </p>
+                    <div class="flex items-center">
+                        <img src="https://i.postimg.cc/PxhcFBJs/scale-1200.jpg" alt="Rustam K." class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold text-lg" data-lang-key="testimonial2Name">{testimonial2Name}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-8">
+                    <i data-lucide="quote" class="w-10 h-10 text-[#00798C]/50 mb-4"></i>
+                    <p class="text-lg text-gray-700 italic mb-6" data-lang-key="testimonial3Text">
+                        {testimonial3Text}
+                    </p>
+                    <div class="flex items-center">
+                        <img src="https://i.postimg.cc/d0cSLz8T/a0nro22epgggc00w48swk44o0.jpg" alt="Olga V." class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold text-lg" data-lang-key="testimonial3Name">{testimonial3Name}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container-wrapper bg-white">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16">
+                <div>
+                    <h2 class="text-sm font-semibold text-[#00798C] uppercase tracking-wider" data-lang-key="contactTitle">
+                        {contactTitle}
+                    </h2>
+                    <p class="text-4xl md:text-5xl font-bold mt-2 mb-6" data-lang-key="contactHeading">
+                        {contactHeading}
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8" data-lang-key="contactDesc">
+                        {contactDesc}
+                    </p>
+                    <h3 class="text-2xl font-bold mb-4" data-lang-key="contactInfoHeading">{contactInfoHeading}</h3>
+                    <ul class="space-y-4 text-gray-700">
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-[#00798C] mt-1 mr-4 flex-shrink-0">
