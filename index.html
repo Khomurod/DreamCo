@@ -3,63 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <!-- Page Title (Will be updated by JS) -->
     <title>DreamCo Travel Agency</title>
-
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Lucide Icons Script REMOVED -->
+    
+    <!-- Yandex Maps API -->
+    <!-- API Key has been inserted -->
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=4b723f22-b2c9-4a8d-b907-9d7fcafdf4ad&lang=ru_RU" type="text/javascript"></script>
 
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale; 
             background-color: #f8fafc; /* slate-50 */
             color: #1f2937; /* gray-800 */
         }
-        .hero-section { min-height: 100vh; display: flex; align-items: center; position:relative; overflow:hidden;}
+        .hero-section { min-height: 100vh; display: flex; align-items: center; position:relative; overflow:hidden;} 
         #header {
             transition: padding 0.3s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
         .header-scrolled {
             background-color: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07);
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
+            padding-top: 0.75rem; 
+            padding-bottom: 0.75rem; 
         }
         .lang-dropdown-btn.active {
-            font-weight: 700;
-            color: #2563EB;
-            background-color: #EFF6FF;
+            font-weight: 700; 
+            color: #2563EB; 
+            background-color: #EFF6FF; 
         }
-         .bottom-nav-link.active > span {
-             font-weight: 700;
-             color: #2563EB;
+         .bottom-nav-link.active > span { 
+             font-weight: 700; 
+             color: #2563EB; 
         }
         .bottom-nav-link.active > img {
              filter: brightness(0) saturate(100%) invert(39%) sepia(80%) saturate(1487%) hue-rotate(200deg) brightness(96%) contrast(92%);
         }
         .text-shadow { text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
         .bottom-nav-link {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
             text-align: center; flex-grow: 1; padding-top: 0.375rem; padding-bottom: 0.25rem;
         }
         .bottom-nav-link > img { margin-bottom: 0.125rem; }
         input[type="date"]:not(:valid) { color: #9ca3af; }
         input[type="date"] { color: #1f2937; }
         .content-card {
-            background-color: white; border-radius: 0.75rem;
+            background-color: white; border-radius: 0.75rem; 
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
+            overflow: hidden; 
         }
         .content-card:hover {
             transform: translateY(-4px);
@@ -71,27 +73,18 @@
         .icon-sm { width: 1rem; height: 1rem; } /* 16px */
     </style>
 
-    <!-- Travelpayouts Helper Script -->
-    <script data-noptimize="1" data-cfasync="false" data-wpfc-render="false">
-      (function () {
-         var script = document.createElement("script");
-         script.async = 1;
-         script.src = 'https://emrldco.com/NDY4MzA0.js?t=468304';
-         document.head.appendChild(script);
-       })();
-    </script>
 </head>
-<body class="bg-slate-50 text-gray-800 pb-16 md:pb-0">
+<body class="bg-slate-50 text-gray-800 pb-16 md:pb-0"> 
 
     <!-- ========== HEADER ========== -->
-    <header id="header" class="fixed top-0 left-0 right-0 z-50 p-6 md:p-8">
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 p-6 md:p-8"> 
         <div class="container mx-auto px-4 flex justify-between items-center">
-
+            
             <a href="#home" class="flex items-center space-x-2 text-2xl font-extrabold text-white transition-colors duration-300" id="logo-container">
-                <img src="https://i.postimg.cc/63BwFBhW/bf5230f7-ea09-4a86-92d7-f1de75b77307-removalai-preview.png" alt="DreamCo Travel Agency Logo"
-                     id="header-logo" class="w-auto transition-all duration-300 ease-in-out h-20">
+                <img src="https://i.postimg.cc/63BwFBhW/bf5230f7-ea09-4a86-92d7-f1de75b77307-removalai-preview.png" alt="DreamCo Travel Agency Logo" 
+                     id="header-logo" class="w-auto transition-all duration-300 ease-in-out h-20"> 
             </a>
-
+            
             <nav class="hidden md:flex items-center space-x-8">
                 <a href="#home" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navHome"></a>
                 <a href="#services" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navServices"></a>
@@ -99,18 +92,19 @@
                 <a href="#about" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navAbout"></a>
                 <a href="#contact" class="nav-link text-white hover:text-gray-200 font-medium transition-colors duration-300" data-lang-key="navContact"></a>
             </nav>
-
+            
             <div class="flex items-center space-x-4">
                 <a href="#contact" class="hidden md:inline-block bg-white text-blue-600 font-bold py-2.5 px-5 rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-md transform hover:scale-105" id="nav-cta" data-lang-key="navQuote"></a>
 
                  <div class="relative" id="language-selector">
                     <button id="lang-globe-button" type="button" class="lang-globe-btn text-gray-300 hover:text-white focus:outline-none transition-colors duration-300 p-2 rounded-full hover:bg-white/10 focus:ring-2 focus:ring-white/50">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 block">
+                        <!-- ICON: Globe (Inline SVG) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 block"> 
                             <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                         </svg>
                         <span class="sr-only" data-lang-key="selectLang"></span>
                     </button>
-                    <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 z-[60]">
+                    <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 z-[60]"> 
                         <button onclick="selectLanguage('ru')" data-lang-btn="ru" class="lang-dropdown-btn text-left w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 transition-colors">
                             Русский
                         </button>
@@ -124,38 +118,36 @@
     </header>
 
     <main>
-
+        
         <!-- ========== HERO SECTION ========== -->
         <section id="home" class="hero-section relative text-center text-white p-4">
-
+            
             <img src="https://i.postimg.cc/xTRKKBDT/Getty-Images-1267262818.avif" alt="Scenic tropical beach view" class="absolute inset-0 w-full h-full object-cover z-0">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-black/30 z-0"></div>
-
-            <div class="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center h-full pt-24 md:pt-0">
-
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-black/30 z-0"></div> 
+            
+            <div class="relative z-10 container mx-auto px-4 flex flex-col items-center pt-28 md:pt-32"> 
+                
+                <!-- Text Box -->
                 <div class="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 mb-8 md:mb-10 max-w-3xl w-full text-shadow shadow-xl text-center">
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight" data-lang-key="heroTitle"></h1>
                     <p class="text-lg md:text-xl text-gray-100 mb-8 max-w-xl mx-auto leading-relaxed" data-lang-key="heroSubtitle"></p>
                     <a href="#destinations" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 text-lg rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg transform hover:scale-105" data-lang-key="heroButton"></a>
                 </div>
-
-                 <div id="travelpayouts-widget-container" class="bg-white/90 backdrop-blur-md rounded-xl w-full max-w-4xl overflow-hidden shadow-2xl mt-4 md:mt-0">
-                    <!-- TRAVELPAYOUTS WIDGET SCRIPT -->
-                    <script async src="https://tpwdg.com/content?currency=uzs&trs=468304&shmarker=679985&show_hotels=true&powered_by=true&locale=ru&searchUrl=www.aviasales.ru%2Fsearch&primary_override=%232563EB&color_button=%232563EB&color_icons=%232563EB&dark=%231f2937&light=%23FFFFFF&secondary=%23f8fafc&special=%23d1d5db&color_focused=%232563EB&border_radius=8&plain=false&promo_id=7879&campaign_id=100" charset="utf-8"></script>
-                </div>
+                 
             </div>
         </section>
 
-
+        
         <!-- ========== SERVICES SECTION ========== -->
-        <section id="services" class="py-24 md:py-32 bg-white">
+        <section id="services" class="py-24 md:py-32 bg-white"> 
             <div class="container mx-auto px-4 text-center">
                 <span class="text-blue-600 font-semibold uppercase tracking-wider text-sm" data-lang-key="servicesTitle"></span>
                 <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-16 text-gray-900" data-lang-key="servicesHeading"></h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
-
+                    
                     <div class="bg-slate-50 p-8 rounded-xl content-card">
                         <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+                            <!-- ICON: Plane -->
                             <svg class="icon-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>
                         </div>
                         <h3 class="text-xl font-semibold mb-3 text-gray-900" data-lang-key="service1Title"></h3>
@@ -163,6 +155,7 @@
                     </div>
                     <div class="bg-slate-50 p-8 rounded-xl content-card">
                         <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+                            <!-- ICON: Bed/Hotel -->
                             <svg class="icon-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3v18h20V3H2zm20 16H4V7h16v12zM6 11h2v2H6zm4 0h8v2h-8z"></path></svg>
                         </div>
                         <h3 class="text-xl font-semibold mb-3 text-gray-900" data-lang-key="service2Title"></h3>
@@ -170,6 +163,7 @@
                     </div>
                     <div class="bg-slate-50 p-8 rounded-xl content-card">
                         <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+                           <!-- ICON: Map/Tour -->
                            <svg class="icon-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
                         </div>
                         <h3 class="text-xl font-semibold mb-3 text-gray-900" data-lang-key="service3Title"></h3>
@@ -177,6 +171,7 @@
                     </div>
                     <div class="bg-slate-50 p-8 rounded-xl content-card">
                         <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+                             <!-- ICON: Stamp/Visa -->
                             <svg class="icon-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v2M8 18L12 22l4-4M12 11v11M11 2h10a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-1"></path></svg>
                         </div>
                         <h3 class="text-xl font-semibold mb-3 text-gray-900" data-lang-key="service4Title"></h3>
@@ -185,14 +180,14 @@
                 </div>
             </div>
         </section>
-
+        
         <!-- ========== DESTINATIONS SECTION ========== -->
-        <section id="destinations" class="py-24 md:py-32 bg-slate-50">
+        <section id="destinations" class="py-24 md:py-32 bg-slate-50"> 
             <div class="container mx-auto px-4">
                 <span class="text-blue-600 font-semibold uppercase tracking-wider text-sm block text-center" data-lang-key="destTitle"></span>
                 <h2 class="text-3xl md:text-4xl font-bold text-center mt-2 mb-16 text-gray-900" data-lang-key="destHeading"></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-
+                    
                     <div class="content-card">
                         <img src="https://i.postimg.cc/W4fF9PXT/be58b45467e405834a6582f6f245f750.jpg" alt="Dubai skyline" class="w-full h-64 object-cover">
                         <div class="p-6">
@@ -200,7 +195,7 @@
                             <h3 class="text-2xl font-bold text-gray-900 mt-1 mb-3" data-lang-key="dest1City"></h3>
                             <p class="text-gray-600 mb-5 text-sm leading-relaxed" data-lang-key="dest1Desc"></p>
                             <a href="#contact" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 group text-sm">
-                                <span data-lang-key="bookNowText"></span>
+                                <span data-lang-key="bookNowText"></span> 
                                 <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                             </a>
                         </div>
@@ -212,7 +207,7 @@
                             <h3 class="text-2xl font-bold text-gray-900 mt-1 mb-3" data-lang-key="dest2City"></h3>
                             <p class="text-gray-600 mb-5 text-sm leading-relaxed" data-lang-key="dest2Desc"></p>
                              <a href="#contact" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 group text-sm">
-                                <span data-lang-key="bookNowText"></span>
+                                <span data-lang-key="bookNowText"></span> 
                                 <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                             </a>
                         </div>
@@ -224,7 +219,7 @@
                             <h3 class="text-2xl font-bold text-gray-900 mt-1 mb-3" data-lang-key="dest3City"></h3>
                             <p class="text-gray-600 mb-5 text-sm leading-relaxed" data-lang-key="dest3Desc"></p>
                              <a href="#contact" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 group text-sm">
-                                <span data-lang-key="bookNowText"></span>
+                                <span data-lang-key="bookNowText"></span> 
                                 <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                             </a>
                         </div>
@@ -232,7 +227,7 @@
                 </div>
             </div>
         </section>
-
+        
         <!-- ========== ABOUT SECTION ========== -->
         <section id="about" class="py-24 md:py-32 bg-white">
             <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
@@ -275,14 +270,14 @@
                 </div>
             </div>
         </section>
-
+        
         <!-- ========== TESTIMONIALS SECTION ========== -->
         <section id="testimonials" class="py-24 md:py-32 bg-slate-50">
             <div class="container mx-auto px-4">
                  <span class="text-blue-600 font-semibold uppercase tracking-wider text-sm block text-center" data-lang-key="testimonialSubheading"></span>
                 <h2 class="text-3xl md:text-4xl font-bold text-center mt-2 mb-16 text-gray-900" data-lang-key="testimonialHeading"></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-
+                    
                     <div class="bg-white p-8 rounded-xl shadow-lg relative content-card flex flex-col">
                         <div class="absolute top-0 left-8 -mt-6 bg-blue-500 text-white rounded-full p-3 shadow-md">
                            <svg class="w-6 h-6 fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l-.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.816-2.317-5.816-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l-.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.816-2.317-5.816-6.275z"/></svg>
@@ -324,15 +319,16 @@
                     <span class="text-blue-600 font-semibold uppercase tracking-wider text-sm" data-lang-key="contactTitle"></span>
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2" data-lang-key="contactHeading"></h2>
                     <p class="text-gray-600 text-lg mt-4 max-w-2xl mx-auto leading-relaxed" data-lang-key="contactDesc"></p>
+
                 </div>
                 <div class="max-w-4xl mx-auto bg-slate-50 p-8 md:p-12 rounded-xl shadow-xl overflow-hidden">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
 
                         <div class="space-y-6">
                             <h3 class="text-2xl font-bold mb-4 text-gray-900" data-lang-key="contactInfoHeading"></h3>
-                            <a href="tel:+998971234567" class="flex items-center group">
+                            <a href="tel:+998781132526" class="flex items-center group">
                                 <svg class="w-5 h-5 text-blue-600 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                                <span class="text-gray-700 group-hover:text-blue-600 transition">+998 (97) 123-45-67</span>
+                                <span class="text-gray-700 group-hover:text-blue-600 transition">+998 (78) 113-25-26</span>
                             </a>
                             <a href="mailto:info@dreamco.uz" class="flex items-center group">
                                 <svg class="w-5 h-5 text-blue-600 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -344,7 +340,7 @@
                             </div>
                         </div>
 
-                        <form action="https://formspree.io/f/YOUR_UNIQUE_FORM_ID" method="POST" class="space-y-5">
+                        <form action="https://formsubmit.co/info@dreamco.uz" method="POST" class="space-y-5">
                             <div>
                                 <label for="name" class="sr-only" data-lang-key="formName"></label>
                                 <input type="text" id="name" name="name" required class="w-full p-3.5 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 text-sm" data-lang-placeholder="phName">
@@ -384,6 +380,20 @@
                 </div>
             </div>
         </section>
+
+        <!-- ========== MAP SECTION ========== -->
+        <section id="map-location" class="py-24 md:py-32 bg-slate-50 -mt-12 md:-mt-16">
+             <div class="container mx-auto px-4">
+                 <div class="max-w-4xl mx-auto text-center mb-16">
+                    <span class="text-blue-600 font-semibold uppercase tracking-wider text-sm" data-lang-key="mapTitle"></span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2" data-lang-key="mapHeading"></h2>
+                </div>
+                <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden p-2">
+                    <!-- Map container -->
+                    <div id="yandex-map" class="w-full h-80 md:h-96 rounded-lg overflow-hidden"></div>
+                </div>
+            </div>
+        </section>
     </main>
 
 
@@ -411,26 +421,28 @@
                 <h5 class="font-semibold text-white text-md mb-4 uppercase tracking-wider" data-lang-key="footerContact"></h5>
                 <ul class="space-y-2 text-sm text-gray-400">
                     <li data-lang-key="contactAddress"></li>
-                    <li>+998 (97) 123-45-67</li>
+                    <li>+998 (78) 113-25-26</li>
                     <li>info@dreamco.uz</li>
                 </ul>
             </div>
 
             <div>
                 <h5 class="font-semibold text-white text-md mb-4 uppercase tracking-wider" data-lang-key="footerFollow"></h5>
-                <!-- UPDATED Social Icons and Links -->
                 <div class="flex space-x-3">
                     <a href="https://t.me/dream_consultinguz" target="_blank" rel="noopener noreferrer" class="w-9 h-9 bg-gray-700 hover:bg-sky-500 rounded-full flex items-center justify-center transition group" aria-label="Telegram">
+                       <!-- ICON: Telegram -->
                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-4 h-4 text-gray-300 group-hover:text-white" viewBox="0 0 16 16">
                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8 8 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.4 1.4 0 0 0-.013-.315.3.3 0 0 0-.114-.217.5.5 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09Z"/>
                        </svg>
                     </a>
                     <a href="https://www.instagram.com/dream_consulting.uz?igsh=MWdwNWtkbnYxOGp3Yg==" target="_blank" rel="noopener noreferrer" class="w-9 h-9 bg-gray-700 hover:bg-pink-600 rounded-full flex items-center justify-center transition group" aria-label="Instagram">
+                       <!-- ICON: Instagram -->
                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-4 h-4 text-gray-300 group-hover:text-white" viewBox="0 0 16 16">
                            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.85.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.85-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.85-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.231s.008-2.389.046-3.232c.035-.78.166-1.204.275-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.843-.038 1.096-.047 3.232-.047M8 4.908a3.09 3.09 0 1 0 0 6.184A3.09 3.09 0 0 0 8 4.908m0 5.083a2 2 0 1 1 0-4 2 2 0 0 1 0 4m4.965-5.547a.8.8 0 1 0 0 1.59.8.8 0 0 0 0-1.59"/>
                        </svg>
                     </a>
                      <a href="mailto:info@dreamco.uz" class="w-9 h-9 bg-gray-700 hover:bg-red-500 rounded-full flex items-center justify-center transition group" aria-label="Email">
+                        <!-- ICON: Mail -->
                         <svg class="w-4 h-4 text-gray-300 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                      </a>
                 </div>
@@ -471,11 +483,33 @@
     <script>
         // --- TEXT TRANSLATIONS ---
         const translations = {
-            "ru": { /* ... Your COMPLETE Russian Translations ... */
-                "title": "DreamCo Travel Agency - Ваше следующее приключение", "navHome": "Главная", "navServices": "Услуги", "navDestinations": "Направления", "navAbout": "О нас", "navContact": "Контакты", "navQuote": "Расчет", "selectLang": "Выбрать язык", "heroTitle": "Откройте свое следующее приключение", "heroSubtitle": "Мы создаем персонализированные, незабываемые путешествия специально для вас. Давайте спланируем поездку вашей мечты.", "heroButton": "Начать исследование", "servicesTitle": "Наши услуги", "servicesHeading": "Что мы предлагаем", "service1Title": "Авиабилеты", "service1Desc": "Доступ к лучшим предложениям и гибким вариантам бронирования по всему миру.", "service2Title": "Бронирование отелей", "service2Desc": "Тщательно отобранные отели от уютных бутиков до роскошных курортов.", "service3Title": "Индивидуальные туры", "service3Desc": "Индивидуальные маршруты, основанные на ваших уникальных интересах и бюджете.", "service4Title": "Визовая поддержка", "service4Desc": "Помощь в оформлении виз и обработке документов без лишних хлопот.", "destTitle": "Лидеры продаж", "destHeading": "Популярные направления", "dest1Country": "Объединенные Арабские Эмираты", "dest1City": "Дубай", "dest1Desc": "Ощутите будущее благодаря потрясающей архитектуре и роскошному шопингу.", "dest2Country": "Египет", "dest2City": "Шарм-эль-Шейх", "dest2Desc": "Откройте для себя древние чудеса и яркие коралловые рифы у Красного моря.", "dest3Country": "Вьетнам", "dest3City": "Нячанг", "dest3Desc": "Отдохните на нетронутых пляжах и исследуйте пышные тропические острова.", "bookNow": "Забронировать", "bookNowText": "Забронировать", "aboutTitle": "Почему мы", "aboutHeading": "Ваш надежный партнер", "aboutDesc": "Имея более 8 лет опыта, мы стремимся создать для вас идеальное путешествие. Наша миссия - сделать путешествия доступными, комфортными и по-настоящему запоминающимися. Мы берем на себя все детали, чтобы вы могли сосредоточиться на создании воспоминаний.", "aboutPoint1": "8+ лет опыта", "aboutPoint2": "Персональный сервис", "aboutPoint3": "Гарантия лучшей цены", "aboutPoint1Desc": "Глубокие знания в создании идеальных поездок.", "aboutPoint2Desc": "Специализированная поддержка с учетом ваших потребностей.", "aboutPoint3Desc": "Конкурентоспособные цены для отпуска вашей мечты.", "testimonialSubheading": "Отзывы", "testimonialHeading": "Что говорят наши клиенты", "testimonial1Text": "\"Поездка в Дубай была организована идеально. Большое спасибо DreamCo Travel Agency! Все было на высшем уровне: отель, экскурсии, трансферы. Мы еще вернемся!\"", "testimonial1Name": "Азиза С. и семья", "testimonial2Text": "\"Взяли горящий тур в Египет, и это было очень выгодно! Отель соответствовал описанию, море фантастическое. Настоятельно рекомендую.\"", "testimonial2Name": "Рустам К.", "testimonial3Text": "\"Обожаю их авторские туры. Увидела столько необычных мест, которых нет в путеводителях. Спасибо за профессионализм и индивидуальный подход!\"", "testimonial3Name": "Ольга В.", "contactTitle": "Свяжитесь с нами", "contactHeading": "Спланируйте поездку мечты сегодня", "contactInfoHeading": "Контактная информация", "contactDesc": "Готовы бронировать или есть вопросы? Заполните форму ниже или свяжитесь с нами напрямую. Наша команда с радостью поможет вам спланировать ваше следующее незабываемое путешествие.", "contactAddress": "ул. Саёхат, 123, Ташкент, Узбекистан", "formName": "Ваше имя *", "formPhone": "Ваш телефон *", "formEmail": "Ваш Email", "formDestination": "Желаемое направление", "formDate": "Примерная дата", "formMessage": "Дополнительная информация", "formButton": "Отправить заявку", "formDestOption0": "Выберите направление", "formDestOption1": "Дубай, ОАЭ", "formDestOption2": "Шарм-эль-Шейх, Египет", "formDestOption3": "Нячанг, Вьетнам", "formDestOption4": "Стамбул, Турция", "formDestOption5": "Другое (укажите ниже)", "phName": "Ваше имя", "phPhone": "Ваш телефон", "phEmail": "Ваш Email", "phMessage": "Сообщение (путешественники, бюджет...)", "footerDesc": "Создаем ваши незабываемые истории путешествий. Ваше приключение начинается здесь.", "footerLinks": "Ссылки", "footerContact": "Контакты", "footerFollow": "Следите за нами", "footerRights": "© 2025 DreamCo Travel Agency. Все права защищены."
+            "ru": { 
+                "title": "DreamCo Travel Agency - Ваше следующее приключение", "navHome": "Главная", "navServices": "Услуги", "navDestinations": "Направления", "navAbout": "О нас", "navContact": "Контакты", "navQuote": "Расчет", "selectLang": "Выбрать язык", 
+                "heroTitle": "Откройте свое следующее приключение", "heroSubtitle": "Мы создаем персонализированные, незабываемые путешествия специально для вас. Давайте спланируем поездку вашей мечты.", "heroButton": "Выбрать тур", 
+                "servicesTitle": "Наши услуги", "servicesHeading": "Что мы предлагаем", "service1Title": "Авиабилеты", "service1Desc": "Доступ к лучшим предложениям и гибким вариантам бронирования по всему миру.", "service2Title": "Бронирование отелей", "service2Desc": "Тщательно отобранные отели от уютных бутиков до роскошных курортов.", "service3Title": "Индивидуальные туры", "service3Desc": "Индивидуальные маршруты, основанные на ваших уникальных интересах и бюджете.", "service4Title": "Визовая поддержка", "service4Desc": "Помощь в оформлении виз и обработке документов без лишних хлопот.", 
+                "destTitle": "Лидеры продаж", "destHeading": "Популярные направления", "dest1Country": "Объединенные Арабские Эмираты", "dest1City": "Дубай", "dest1Desc": "Ощутите будущее благодаря потрясающей архитектуре и роскошному шопингу.", "dest2Country": "Египет", "dest2City": "Шарм-эль-Шейх", "dest2Desc": "Откройте для себя древние чудеса и яркие коралловые рифы у Красного моря.", "dest3Country": "Вьетнам", "dest3City": "Нячанг", "dest3Desc": "Отдохните на нетронутых пляжах и исследуйте пышные тропические острова.", "bookNow": "Забронировать", "bookNowText": "Забронировать", 
+                "aboutTitle": "Почему мы", "aboutHeading": "Ваш надежный партнер", "aboutDesc": "Имея более 6 лет опыта, мы стремимся создать для вас идеальное путешествие. Наша миссия - сделать путешествия доступными, комфортными и по-настоящему запоминающимися. Мы берем на себя все детали, чтобы вы могли сосредоточиться на создании воспоминаний.", 
+                "aboutPoint1": "6+ лет опыта", "aboutPoint2": "Персональный сервис", "aboutPoint3": "Гарантия лучшей цены", "aboutPoint1Desc": "Глубокие знания в создании идеальных поездок.", "aboutPoint2Desc": "Специализированная поддержка с учетом ваших потребностей.", "aboutPoint3Desc": "Конкурентоспособные цены для отпуска вашей мечты.", 
+                "testimonialSubheading": "Отзывы", "testimonialHeading": "Что говорят наши клиенты", "testimonial1Text": "\"Поездка в Дубай была организована идеально. Большое спасибо DreamCo Travel Agency! Все было на высшем уровне: отель, экскурсии, трансферы. Мы еще вернемся!\"", "testimonial1Name": "Азиза С. и семья", "testimonial2Text": "\"Взяли горящий тур в Египет, и это было очень выгодно! Отель соответствовал описанию, море фантастическое. Настоятельно рекомендую.\"", "testimonial2Name": "Рустам К.", "testimonial3Text": "\"Обожаю их авторские туры. Увидела столько необычных мест, которых нет в путеводителях. Спасибо за профессионализм и индивидуальный подход!\"", "testimonial3Name": "Ольга В.", 
+                "contactTitle": "Свяжитесь с нами", "contactHeading": "Спланируйте поездку мечты сегодня", "contactInfoHeading": "Контактная информация", "contactDesc": "Готовы бронировать или есть вопросы? Заполните форму ниже или свяжитесь с нами напрямую. Наша команда с радостью поможет вам спланировать ваше следующее незабываемое путешествие.", 
+                "contactAddress": "ул. Махмуда Кашгари 49, г. Самарканд, Узбекистан", 
+                "formName": "Ваше имя *", "formPhone": "Ваш телефон *", "formEmail": "Ваш Email", "formDestination": "Желаемое направление", "formDate": "Примерная дата", "formMessage": "Дополнительная информация", "formButton": "Отправить заявку", "formDestOption0": "Выберите направление", "formDestOption1": "Дубай, ОАЭ", "formDestOption2": "Шарм-эль-Шейх, Египет", "formDestOption3": "Нячанг, Вьетнам", "formDestOption4": "Стамбул, Турция", "formDestOption5": "Другое (укажите ниже)", "phName": "Ваше имя", "phPhone": "Ваш телефон", "phEmail": "Ваш Email", "phMessage": "Сообщение (путешественники, бюджет...)", 
+                "mapTitle": "Наше местоположение", "mapHeading": "Как нас найти",
+                "footerDesc": "Создаем ваши незабываемые истории путешествий. Ваше приключение начинается здесь.", "footerLinks": "Ссылки", "footerContact": "Контакты", "footerFollow": "Следите за нами", "footerRights": "© 2025 DreamCo Travel Agency. Все права защищены."
             },
-            "uz": {
-                "title": "DreamCo Travel Agency - Sizning keyingi sarguzashtingiz", "navHome": "Bosh sahifa", "navServices": "Xizmatlar", "navDestinations": "Yo'nalishlar", "navAbout": "Biz haqimizda", "navContact": "Aloqa", "navQuote": "Narx olish", "selectLang": "Tilni tanlang", "heroTitle": "Keyingi sarguzashtingizni kashf eting", "heroSubtitle": "Biz siz uchun shaxsiylashtirilgan, unutilmas sayohat tajribalarini yaratamiz. Keling, orzuingizdagi sayohatni rejalashtiramiz.", "heroButton": "O'rganishni boshlash", "servicesTitle": "Bizning xizmatlarimiz", "servicesHeading": "Biz taklif qilamiz", "service1Title": "Aviachiptalar", "service1Desc": "Dunyo bo'ylab eng yaxshi takliflar va moslashuvchan bron qilish imkoniyatlari.", "service2Title": "Mehmonxonalar", "service2Desc": "Shinam butiklardan hashamatli kurortlargacha sinchkovlik bilan tanlangan mehmonxonalar.", "service3Title": "Individual turlar", "service3Desc": "Sizning noyob qiziqishlaringiz va byudjetingiz asosida tayyorlangan marshrutlar.", "service4Title": "Viza yordami", "service4Desc": "Viza olish uchun ariza berish va hujjatlarni rasmiylashtirishda muammosiz yordam.", "destTitle": "Eng ko'p sotiladigan", "destHeading": "Ommabop yo'nalishlar", "dest1Country": "Birlashgan Arab Amirliklari", "dest1City": "Dubay", "dest1Desc": "Ajoyib arxitektura va hashamatli xaridlar bilan kelajakni his eting.", "dest2Country": "Misr", "dest2City": "Sharm al-Shayx", "dest2Desc": "Qizil dengiz bo'yidagi qadimiy mo''jizalar va jonli marjon riflarini kashf eting.", "dest3Country": "Vetnam", "dest3City": "Nha Trang", "dest3Desc": "Totilmagan plyajlarda dam oling va yam-yashil tropik orollarni o'rganing.", "bookNow": "Bron qilish", "bookNowText": "Bron qilish", "aboutTitle": "Nega bizni tanlaysiz", "aboutHeading": "Sizning ishonchli hamkoringiz", "aboutDesc": "8 yildan ortiq tajribaga ega bo'lgan holda, biz siz uchun mukammal sayohatni yaratishga bag'ishlanganmiz. Bizning vazifamiz sayohatni hamyonbop, qulay va haqiqatan ham unutilmas qilishdir. Xotiralar yaratishga e'tibor qaratishingiz uchun biz barcha tafsilotlarni hal qilamiz.", "aboutPoint1": "8+ yillik tajriba", "aboutPoint2": "Shaxsiy xizmat", "aboutPoint3": "Eng yaxshi narx kafolati", "aboutPoint1Desc": "Mukammal sayohatlarni yaratishda chuqur bilim.", "aboutPoint2Desc": "Sizning ehtiyojlaringizga moslashtirilgan maxsus yordam.", "aboutPoint3Desc": "Orzuingizdagi ta'til uchun raqobatbardosh narxlar.", "testimonialSubheading": "Fikrlar", "testimonialHeading": "Mijozlarimiz nima deydi", "testimonial1Text": "\"Dubayga sayohat a'lo darajada tashkil etilgan. DreamCo Travel Agency'ga katta rahmat! Hammasi yuqori darajada edi: mehmonxona, ekskursiyalar, transferlar. Yana qaytamiz!\"", "testimonial1Name": "Aziza S. va oilasi", "testimonial2Text": "\"Misrga so'nggi daqiqada tur oldik va bu juda foydali bo'ldi! Mehmonxona tavsifga mos edi, dengiz ajoyib. Tavsiya qilaman.\"", "testimonial2Name": "Rustam K.", "testimonial3Text": "\"Ularning individual turlarini yaxshi ko'raman. Yo'lboshchilarda yo'q bo'lgan ko'plab g'ayrioddiy joylarni ko'rdim. Professionallik va individual yondashuv uchun rahmat!\"", "testimonial3Name": "Olga V.", "contactTitle": "Aloqada bo'ling", "contactHeading": "Orzuingizdagi sayohatni bugun rejalashtiring", "contactInfoHeading": "Aloqa ma'lumotlari", "contactDesc": "Bron qilishga tayyormisiz yoki savollaringiz bormi? Quyidagi shaklni to'ldiring yoki biz bilan bevosita bog'laning. Jamoamiz sizning keyingi unutilmas sayohatingizni rejalashtirishda yordam berishdan mamnun.", "contactAddress": "Sayohat ko'chasi, 123, Toshkent, O'zbekiston", "formName": "Ismingiz *", "formPhone": "Telefoningiz *", "formEmail": "Sizning Email", "formDestination": "Sayohat manzili", "formDate": "Taxminiy sana", "formMessage": "Qo'shimcha ma'lumot", "formButton": "So'rov yuborish", "formDestOption0": "Yo'nalishni tanlang", "formDestOption1": "Dubay, BAA", "formDestOption2": "Sharm al-Shayx, Misr", "formDestOption3": "Nha Trang, Vetnam", "formDestOption4": "Istanbul, Turkiya", "formDestOption5": "Boshqa (pastda ko'rsating)", "phName": "Ismingiz", "phPhone": "Telefoningiz", "phEmail": "Sizning Email", "phMessage": "Xabar (sayohatchilar, byudjet...)", "footerDesc": "Sizning unutilmas sayohat hikoyalaringizni yaratamiz. Sizning sarguzashtingiz shu yerdan boshlanadi.", "footerLinks": "Havolalar", "footerContact": "Aloqa", "footerFollow": "Bizni kuzatib boring", "footerRights": "© 2025 DreamCo Travel Agency. Barcha huquqlar himoyalangan."
+            "uz": { 
+                "title": "DreamCo Travel Agency - Sizning keyingi sarguzashtingiz", "navHome": "Bosh sahifa", "navServices": "Xizmatlar", "navDestinations": "Yo'nalishlar", "navAbout": "Biz haqimizda", "navContact": "Aloqa", "navQuote": "Narx olish", "selectLang": "Tilni tanlang", 
+                "heroTitle": "Keyingi sarguzashtingizni kashf eting", "heroSubtitle": "Biz siz uchun shaxsiylashtirilgan, unutilmas sayohat tajribalarini yaratamiz. Keling, orzuingizdagi sayohatni rejalashtiramiz.", "heroButton": "Tur paketni tanlash", 
+                "servicesTitle": "Bizning xizmatlarimiz", "servicesHeading": "Biz taklif qilamiz", "service1Title": "Aviachiptalar", "service1Desc": "Dunyo bo'ylab eng yaxshi takliflar va moslashuvchan bron qilish imkoniyatlari.", "service2Title": "Mehmonxonalar", "service2Desc": "Shinam butiklardan hashamatli kurortlargacha sinchkovlik bilan tanlangan mehmonxonalar.", "service3Title": "Individual turlar", "service3Desc": "Sizning noyob qiziqishlaringiz va byudjetingiz asosida tayyorlangan marshrutlar.", "service4Title": "Viza yordami", "service4Desc": "Viza olish uchun ariza berish va hujjatlarni rasmiylashtirishda muammosiz yordam.", 
+                "destTitle": "Eng ko'p sotiladigan", "destHeading": "Ommabop yo'nalishlar", "dest1Country": "Birlashgan Arab Amirliklari", "dest1City": "Dubay", "dest1Desc": "Ajoyib arxitektura va hashamatli xaridlar bilan kelajakni his eting.", "dest2Country": "Misr", "dest2City": "Sharm al-Shayx", "dest2Desc": "Qizil dengiz bo'yidagi qadimiy mo''jizalar va jonli marjon riflarini kashf eting.", "dest3Country": "Vetnam", "dest3City": "Nha Trang", "dest3Desc": "Totilmagan plyajlarda dam oling va yam-yashil tropik orollarni o'rganing.", "bookNow": "Bron qilish", "bookNowText": "Bron qilish", 
+                "aboutTitle": "Nega bizni tanlaysiz", "aboutHeading": "Sizning ishonchli hamkoringiz", "aboutDesc": "6 yildan ortiq tajribaga ega bo'lgan holda, biz siz uchun mukammal sayohatni yaratishga bag'ishlanganmiz. Bizning vazifamiz sayohatni hamyonbop, qulay va haqiqatan ham unutilmas qilishdir. Xotiralar yaratishga e'tibor qaratishingiz uchun biz barcha tafsilotlarni hal qilamiz.", 
+                "aboutPoint1": "6+ yillik tajriba", "aboutPoint2": "Shaxsiy xizmat", "aboutPoint3": "Eng yaxshi narx kafolati", "aboutPoint1Desc": "Mukammal sayohatlarni yaratishda chuqur bilim.", "aboutPoint2Desc": "Sizning ehtiyojlaringizga moslashtirilgan maxsus yordam.", "aboutPoint3Desc": "Orzuingizdagi ta'til uchun raqobatbardosh narxlar.", 
+                "testimonialSubheading": "Fikrlar", "testimonialHeading": "Mijozlarimiz nima deydi", "testimonial1Text": "\"Dubayga sayohat a'lo darajada tashkil etilgan. DreamCo Travel Agency'ga katta rahmat! Hammasi yuqori darajada edi: mehmonxona, ekskursiyalar, transferlar. Yana qaytamiz!\"", "testimonial1Name": "Aziza S. va oilasi", "testimonial2Text": "\"Misrga so'nggi daqiqada tur oldik va bu juda foydali bo'ldi! Mehmonxona tavsifga mos edi, dengiz ajoyib. Tavsiya qilaman.\"", "testimonial2Name": "Rustam K.", "testimonial3Text": "\"Ularning individual turlarini yaxshi ko'raman. Yo'lboshchilarda yo'q bo'lgan ko'plab g'ayrioddiy joylarni ko'rdim. Professionallik va individual yondashuv uchun rahmat!\"", "testimonial3Name": "Olga V.", 
+                "contactTitle": "Aloqada bo'ling", "contactHeading": "Orzuingizdagi sayohatni bugun rejalashtiring", "contactInfoHeading": "Aloqa ma'lumotlari", "contactDesc": "Bron qilishga tayyormisiz yoki savollaringiz bormi? Quyidagi shaklni to'ldiring yoki biz bilan bevosita bog'laning. Jamoamiz sizning keyingi unutilmas sayohatingizni rejalashtirishda yordam berishdan mamnun.", 
+                "contactAddress": "Mahmud Qoshg'ariy 49, Samarqand sh., O'zbekiston", 
+                "formName": "Ismingiz *", "formPhone": "Telefoningiz *", "formEmail": "Sizning Email", "formDestination": "Sayohat manzili", "formDate": "Taxminiy sana", "formMessage": "Qo'shimcha ma'lumot", "formButton": "So'rov yuborish", "formDestOption0": "Yo'nalishni tanlang", "formDestOption1": "Dubay, BAA", "formDestOption2": "Sharm al-Shayx, Misr", "formDestOption3": "Nha Trang, Vetnam", "formDestOption4": "Istanbul, Turkiya", "formDestOption5": "Boshqa (pastda ko'rsating)", "phName": "Ismingiz", "phPhone": "Telefoningiz", "phEmail": "Sizning Email", "phMessage": "Xabar (sayohatchilar, byudjet...)", 
+                "mapTitle": "Bizning manzilimiz", "mapHeading": "Bizni qanday topish mumkin",
+                "footerDesc": "Sizning unutilmas sayohat hikoyalaringizni yaratamiz. Sizning sarguzashtingiz shu yerdan boshlanadi.", "footerLinks": "Havolalar", "footerContact": "Aloqa", "footerFollow": "Bizni kuzatib boring", "footerRights": "© 2025 DreamCo Travel Agency. Barcha huquqlar himoyalangan."
             }
         };
 
@@ -486,7 +520,7 @@
             catch (e) { console.warn("Could not save language preference:", e); }
         }
 
-        // --- CORE LANGUAGE UPDATE FUNCTION ---
+        // --- CORE LANGUAGE UPDATE FUNCTION (SAFE VERSION) ---
         function changeLanguage(lang) {
             const langData = translations[lang];
             if (!langData) { console.warn("Language not found:", lang); return; }
@@ -494,17 +528,10 @@
 
             document.querySelectorAll('[data-lang-key]').forEach(el => {
                 const key = el.dataset.langKey;
-                // Safely update text content, ensuring child nodes aren't overwritten if key is for container
-                if (el.children.length === 0 || el.hasAttribute('data-lang-placeholder') || el.closest('select')) { // Update if no children, is placeholder element, or select option
-                    el.textContent = langData[key] !== undefined ? langData[key] : '';
-                } else if (el.childNodes.length > 0 && el.childNodes[0].nodeType === Node.TEXT_NODE) { // Update only first text node if children exist (like in bookNow links)
-                    el.childNodes[0].nodeValue = langData[key] !== undefined ? langData[key] + ' ' : '';
-                } else { // Fallback for complex elements, just log warning
-                    if (langData[key] === undefined) console.warn(`Key "${key}" missing for "${lang}" on complex element`);
-                }
-                 if (langData[key] === undefined) console.warn(`Key "${key}" missing for "${lang}"`);
+                const translation = langData[key];
+                
+                el.textContent = translation !== undefined ? translation : ''; 
             });
-
 
             document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
                 const key = el.dataset.langPlaceholder;
@@ -522,8 +549,6 @@
              });
              document.getElementById('lang-dropdown')?.classList.add('hidden');
         }
-
-        // --- ICON INITIALIZATION (REMOVED) ---
 
         // --- ALL INITIALIZATION CODE ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -596,33 +621,35 @@
             const sections = document.querySelectorAll('main section[id]');
             const navLinksBottom = document.querySelectorAll('.bottom-nav-link');
             if (sections.length > 0 && navLinksBottom.length > 0) {
-                const observerOptions = { root: null, rootMargin: '-10% 0px -60% 0px', threshold: 0 };
-                let currentActiveSectionId = null;
-                const observer = new IntersectionObserver(entries => {
-                    let bestVisibleEntry = null;
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            if (!bestVisibleEntry || entry.boundingClientRect.top < bestVisibleEntry.boundingClientRect.top) {
-                                bestVisibleEntry = entry;
+                setTimeout(() => {
+                    const observerOptions = { root: null, rootMargin: '-10% 0px -60% 0px', threshold: 0 };
+                    let currentActiveSectionId = null;
+                    const observer = new IntersectionObserver(entries => {
+                        let bestVisibleEntry = null;
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                if (!bestVisibleEntry || entry.boundingClientRect.top < bestVisibleEntry.boundingClientRect.top) {
+                                    bestVisibleEntry = entry;
+                                }
                             }
-                        }
-                    });
-                    // Fallback to first section if nothing is technically intersecting in the target zone
-                    const newActiveSectionId = bestVisibleEntry ? bestVisibleEntry.target.id : ( (window.scrollY < 200) ? sections[0]?.id : null );
+                        });
+                        const firstSection = sections[0];
+                        let newActiveSectionId = bestVisibleEntry ? bestVisibleEntry.target.id : ( (window.scrollY < window.innerHeight / 2) ? firstSection.id : null );
 
-                    if (newActiveSectionId !== currentActiveSectionId) {
-                         currentActiveSectionId = newActiveSectionId;
-                         navLinksBottom.forEach(link => {
-                            const sectionId = link.dataset.navSection;
-                            const isActive = sectionId === currentActiveSectionId;
-                            link.classList.toggle('active', isActive);
-                         });
-                    }
-                }, observerOptions);
-                sections.forEach(section => {
-                    if (section?.id) observer.observe(section);
-                    else console.warn("Section missing ID:", section);
-                });
+                        if (newActiveSectionId !== currentActiveSectionId) {
+                             currentActiveSectionId = newActiveSectionId;
+                             navLinksBottom.forEach(link => {
+                                const sectionId = link.dataset.navSection;
+                                const isActive = sectionId === currentActiveSectionId;
+                                link.classList.toggle('active', isActive);
+                             });
+                        }
+                    }, observerOptions);
+                    sections.forEach(section => {
+                        if (section?.id) observer.observe(section);
+                        else console.warn("Section missing ID:", section);
+                    });
+                }, 100); 
 
                 // --- SMOOTH SCROLL FOR ALL INTERNAL LINKS ---
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -652,6 +679,48 @@
                  });
              });
 
+             // --- YANDEX MAP INITIALIZATION ---
+             function initMap() {
+                try {
+                    // Coordinates for Mahmud Qoshg'ariy 49, Samarqand
+                    const mapCenter = [39.655411, 66.951645]; // User provided coordinates
+                    
+                    const myMap = new ymaps.Map("yandex-map", {
+                        center: mapCenter,
+                        zoom: 17, // Increased zoom for precision
+                        controls: ['zoomControl', 'fullscreenControl']
+                    });
+
+                    const myPlacemark = new ymaps.Placemark(mapCenter, {
+                        hintContent: 'DreamCo Travel Agency',
+                        balloonContent: 'Mahmud Qoshg\'ariy 49, Samarqand'
+                    }, {
+                        preset: 'islands#blueBusinessIcon'
+                    });
+
+                    myMap.geoObjects.add(myPlacemark);
+                    myMap.behaviors.disable('scrollZoom'); // Disable scroll zoom
+                
+                } catch (e) {
+                    console.error("Yandex Map initialization failed:", e);
+                    const mapContainer = document.getElementById('yandex-map');
+                    if(mapContainer) {
+                        mapContainer.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-200 text-gray-600 p-4 text-center">Xaritani yuklashda xatolik yuz berdi. Iltimos, API kalitini tekshiring. <br> Ошибка загрузки карты. Пожалуйста, проверьте ваш API ключ.</div>';
+                    }
+                }
+             }
+             
+             // Check if ymaps is loaded and ready
+             if (typeof ymaps !== 'undefined') {
+                 ymaps.ready(initMap);
+             } else {
+                 console.warn("Yandex Maps API script not loaded or failed. Map will not display.");
+                 const mapContainer = document.getElementById('yandex-map');
+                 if(mapContainer) {
+                    mapContainer.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-200 text-gray-600 p-4 text-center">Yandex Maps API yuklanmadi. <br> Yandex Maps API не загружен.</div>';
+                 }
+             }
+
              // --- END DOMContentLoaded ---
         });
 
@@ -659,4 +728,5 @@
 
 </body>
 </html>
+
 
